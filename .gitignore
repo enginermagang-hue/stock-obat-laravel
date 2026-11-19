@@ -1,0 +1,26 @@
+# Flowmark backups
+*.orig
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# PHP / Laravel (used via laravel-boost MCP)
+/vendor/
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Logs / caches
+*.log
+.flowmark-cache/

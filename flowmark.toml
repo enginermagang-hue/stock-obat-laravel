@@ -1,0 +1,6 @@
+[formatting]
+width = 88
+list-spacing = "preserve"
+
+[file-discovery]
+extend-include = ["*.md"]

@@ -1,0 +1,8 @@
+# Flowmark ignore file (gitignore syntax).
+# Add paths here that must stay byte-exact, for example:
+# docs/generated/
+# vendor/
+
+# BLUEPRINT.md is formatted with markdown-table-formatter (aligned tables).
+# Flowmark re-renders tables and would undo the alignment.
+BLUEPRINT.md

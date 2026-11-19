@@ -1,0 +1,21 @@
+#!/bin/sh
+# Flowmark pre-commit hook: auto-format staged Markdown files.
+# Uses the same version-pinned runner as the rest of the project.
+
+set -e
+
+FLOWMARK="uvx --from flowmark-rs==0.4.0 flowmark"
+
+staged_md=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(md|mdx)$' || true)
+
+if [ -z "$staged_md" ]; then
+  exit 0
+fi
+
+printf '%s\n' "$staged_md" | sed 's/^/[flowmark] /'
+
+printf '%s\n' "$staged_md" | while IFS= read -r file; do
+  [ -z "$file" ] && continue
+  $FLOWMARK --auto --nobackup --force-exclude "$file"
+  git add -- "$file"
+done

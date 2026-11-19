@@ -1,0 +1,3 @@
+# Flowmark emits LF; keep Markdown byte-stable across checkouts.
+*.md text eol=lf
+*.mdx text eol=lf
