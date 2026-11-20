@@ -33,6 +33,7 @@ abstract class MasterIndex extends Component
 
     public function mount(): void
     {
+        $this->search = (string) request('search', '');
         $this->resetForm();
     }
 

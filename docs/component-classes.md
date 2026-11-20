@@ -8,11 +8,14 @@ tanpa mengulang utilitas Tailwind.
 
 | Token | Nilai |
 | --- | --- |
-| Font | Inter, fallback ke font sistem lewat `--font-sans` |
+| Font | Inter via Google Fonts, fallback font sistem lewat `--font-sans` |
 | Ukuran teks dasar | 15px |
+| Skin | **Bordered** — permukaan putih, pemisah garis 1px, tanpa shadow |
 | Primary | `#666cff` (`--color-primary`), varian gelap `#5c61e6`, lembut `#e7e8ff` |
-| Surface | `#f7f7f9` (`--color-surface`) |
-| Teks | `#3b4055` (`--color-ink`), sekunder `#676a7b`, lemah `#a8aab4` |
+| Halaman | `#ffffff` (`--color-page`), permukaan sekunder `#f7f7f9` |
+| Garis | `#e5e6e8` (`--color-line`) |
+| Teks | `#33374d` (`--color-heading`), `#3b4055` (`--color-ink`), sekunder `#676a7b`, lemah `#a8aab4` |
+| Status | success `#72e128`, danger `#ff4d49`, warning `#fdb528`, info `#26c6f9` |
 | Radius | Card `10px` (`--radius-card`), kontrol `8px` (`--radius-control`), input `8px` (`--radius-input`) |
 | Border input | `#d1d0d5` (`--color-control-border`), disabled `#c5c7cf` |
 | Disabled bg | `#f0f1f3` (`--color-input-disabled-bg`) |
@@ -28,12 +31,13 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
   `os-status-pill--danger`.
 - Class dikelompokkan per fungsi: shell, card, KPI, filter, tabel, form, feedback, dan
   modal.
-- Visual mengikuti pola Materialize admin: Inter 15px, primary `#666cff`, kartu radius
-  10px dengan shadow `0 4px 14px rgba(38,43,67,.16)`, kontrol 8px, input 8px/48px, dan
+- Visual mengikuti skin **Bordered** dari Materialize admin: permukaan putih, kartu dan
+  menu dipisah garis 1px `#e5e6e8`, tanpa shadow pada kartu, tombol, maupun dropdown.
+- Inter 15px, primary `#666cff`, radius kartu 10px, kontrol 8px, input 8px/48px, dan
   label 13px/400 di atas input sebagai default.
   Floating label hanya varian.
-  Fokus input hanya mengubah warna border, tanpa ring atau shadow.
-  Aset serta kode template pihak ketiga tidak disalin.
+- Fokus input hanya mengubah warna border, tanpa ring atau shadow.
+- Ikon, logo, dan ilustrasi dibuat sendiri; aset template pihak ketiga tidak disalin.
 
 ## Shell
 
@@ -81,7 +85,7 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 
 | Class | Fungsi |
 | --- | --- |
-| `os-card` | Kartu dasar: radius 10px, shadow `0 4px 14px rgba(38,43,67,.16)`, shadow hover lebih dalam. |
+| `os-card` | Kartu dasar: radius 10px, garis 1px `#e5e6e8` (tanpa shadow), sesuai skin Bordered. |
 | `os-card--flush` | Kartu tanpa padding, untuk tabel. |
 | `os-card-head`, `os-card-body`, `os-card-footer` | Bagian kartu. |
 | `os-card-title`, `os-card-subtitle` | Judul dan keterangan kartu. |
@@ -91,16 +95,22 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 | Class | Fungsi |
 | --- | --- |
 | `os-kpi-grid` | Grid kartu ringkasan. |
-| `os-kpi-card` | Kartu KPI dengan garis bawah berwarna. |
-| `os-kpi-card--primary`, `--warning`, `--danger`, `--info` | Warna garis bawah. |
-| `os-kpi-value`, `os-kpi-label` | Angka dan label. |
-| `os-kpi-trend`, `os-kpi-trend--up`, `os-kpi-trend--down` | Indikator tren. |
+| `os-kpi-card` | Kartu KPI putih bergaris 1px. |
+| `os-kpi-head` | Baris ikon dan tren. |
+| `os-kpi-icon`, `os-kpi-icon--success`, `--warning`, `--info` | Kotak ikon 40px dengan latar lembut. |
+| `os-kpi-value`, `os-kpi-label` | Angka 18px/500 dan label 15px. |
+| `os-kpi-trend`, `os-kpi-trend--down` | Tren 15px hijau (`--down` merah). |
+| `os-kpi-chip` | Pill abu 13px di bawah label. |
 
 ```blade
-<div class="os-kpi-card os-kpi-card--warning">
+<div class="os-kpi-card">
+    <div class="os-kpi-head">
+        <div class="os-kpi-icon">✚</div>
+        <span class="os-kpi-trend">+5 ↑</span>
+    </div>
     <div class="os-kpi-value">37</div>
-    <div class="os-kpi-label">Obat di bawah stok minimum</div>
-    <div class="os-kpi-trend os-kpi-trend--down">-4.2%</div>
+    <div class="os-kpi-label">Jenis obat</div>
+    <span class="os-kpi-chip">Data aktif</span>
 </div>
 ```
 
@@ -112,7 +122,7 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 | `os-filter` | Pembungkus select filter. |
 | `os-filter-select`, `os-search`, `os-per-page` | Input filter, pencarian, dan jumlah baris. |
 | `os-btn` | Tombol dasar: padding `7.7×22px`, radius 8px, font 15px/500, letter-spacing `.4px`. |
-| `os-btn--primary`, `--secondary`, `--danger`, `--ghost` | Varian tombol; primary memakai shadow `0 2px 6px rgba(primary,.14)`. |
+| `os-btn--primary`, `--secondary`, `--danger`, `--ghost` | Varian tombol; sesuai skin Bordered semua tombol tanpa shadow. |
 | `os-btn--sm` | Tombol kecil: font 13px, padding `7×15.5px`, radius 6px. |
 | `os-btn-icon` | Tombol berupa ikon teks. |
 | `os-toolbar` | Baris kumpulan tombol. |
@@ -226,4 +236,22 @@ Dipakai untuk konfirmasi hapus, pembatalan opname, dan peringatan mode buta.
 | `os-pagination`, `os-pagination-info` | Area pagination dan keterangan entri. |
 | `os-timeline`, `os-timeline-item`, `os-timeline-dot`, `os-timeline-time` | Linimasa aktivitas. |
 | `os-avatar` | Inisial pengguna. |
+| `os-avatar-online` | Avatar dengan titik hijau di pojok. |
 | `os-badge-count` | Badge angka 24×24 lingkaran merah `#ff4d49`. |
+| `os-search-field`, `os-search-shortcut` | Kolom pencarian global dan penanda shortcuts. |
+| `os-icon-btn` | Tombol ikon bundar 38px di topbar. |
+| `os-menu-dot`, `os-menu-badge` | Bullet menu dan badge jumlah. |
+| `os-dropdown`, `os-dropdown-item` | Menu dropdown bergaris tanpa shadow. |
+
+## Layout dashboard
+
+| Class | Fungsi |
+| --- | --- |
+| `os-container` | Konten centered dengan maksimum 1392px. |
+| `os-dash-grid` | Grid dashboard 12 kolom dengan gap 24px. |
+| `os-col-2` s.d. `os-col-8` | Span kolom pada layar menengah ke atas. |
+| `os-banner`, `os-banner-art` | Banner sambutan dan dekorasi CSS. |
+| `os-chart` | Placeholder grafik bergaris putus-putus. |
+| `os-progress` | Bar progres dengan span warna primary. |
+| `os-metric-value`, `os-metric-label` | Angka metrik 24px dan label 13px. |
+| `os-footer` | Footer aplikasi. |
