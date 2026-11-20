@@ -10,7 +10,7 @@
                     <h2 class="text-[24px] font-medium text-heading">Selamat datang di ObatStock 🎉</h2>
                     <p class="mt-2 text-[15px] text-muted">Pantau stok batch, kedaluwarsa, dan distribusi obat dari satu tempat.</p>
                     <p class="text-[15px] text-muted">{{ $mutasiHariIni }} mutasi stok tercatat hari ini.</p>
-                    <a href="{{ route('stok.batch') }}" class="os-btn os-btn--primary os-section-tight">
+                    <a href="{{ route('stok.batch') }}" wire:navigate class="os-btn os-btn--primary os-section-tight">
                         <x-icon name="archive-2-line" :size="16" /> Lihat Batch
                     </a>
                 </div>
@@ -81,7 +81,7 @@
                     <div class="os-card-title">Data obat terbaru</div>
                     <div class="os-card-subtitle">Lima master obat pertama</div>
                 </div>
-                <a class="os-btn os-btn--sm os-btn--ghost" href="{{ route('master.obat') }}">Lihat semua</a>
+                <a class="os-btn os-btn--sm os-btn--ghost" href="{{ route('master.obat') }}" wire:navigate>Lihat semua</a>
             </div>
             <div class="os-table-wrap">
                 <table class="os-table">

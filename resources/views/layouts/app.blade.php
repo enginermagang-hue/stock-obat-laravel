@@ -46,11 +46,13 @@
      :class="{ 'os-shell--collapsed': collapsed }">
     <aside class="os-sidebar">
         <div class="os-sidebar-brand">
-            <div class="os-sidebar-logo">OS</div>
-            <div class="os-sidebar-brand-text">
-                <div class="os-sidebar-brand-name">ObatStock</div>
-                <div class="os-sidebar-brand-caption">Manajemen stok obat</div>
-            </div>
+            <a href="{{ route('dashboard') }}" wire:navigate class="flex min-w-0 flex-1 items-center gap-2">
+                <div class="os-sidebar-logo">OS</div>
+                <div class="os-sidebar-brand-text">
+                    <div class="os-sidebar-brand-name">ObatStock</div>
+                    <div class="os-sidebar-brand-caption">Manajemen stok obat</div>
+                </div>
+            </a>
             <button type="button" class="os-icon-btn !h-8 !w-8"
                     @click="collapsed = !collapsed; localStorage.setItem('os-sidebar-collapsed', collapsed)"
                     :aria-label="collapsed ? 'Perbesar menu' : 'Perkecil menu'"
@@ -78,7 +80,7 @@
                         </span>
                     </div>
                     @foreach ($visible as $item)
-                        <a href="{{ route($item['route']) }}"
+                        <a href="{{ route($item['route']) }}" wire:navigate
                            class="os-nav-link os-nav-link--sub {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
                             <span class="os-nav-label">{{ $item['label'] }}</span>
                         </a>

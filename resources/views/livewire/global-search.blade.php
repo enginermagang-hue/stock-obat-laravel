@@ -12,7 +12,7 @@
             @forelse ($results as $group => $items)
                 <div class="px-2 py-1 text-[11px] font-semibold uppercase tracking-wide text-faint">{{ $group }}</div>
                 @foreach ($items as $item)
-                    <a class="os-dropdown-item" href="{{ route('master.'.($group === 'Puskesmas' ? 'facilities' : ($group === 'Sumber Dana' ? 'sumber-dana' : ($group === 'Supplier' ? 'supplier' : 'obat'))), ['search' => $group === 'Obat' ? $item->nama : $item->nama]) }}">
+                    <a class="os-dropdown-item" wire:navigate href="{{ route('master.'.($group === 'Puskesmas' ? 'facilities' : ($group === 'Sumber Dana' ? 'sumber-dana' : ($group === 'Supplier' ? 'supplier' : 'obat'))), ['search' => $item->nama]) }}">
                         {{ $item->nama }}
                         <span class="text-faint">{{ $item->kode ?? $item->kode_obat }}</span>
                     </a>

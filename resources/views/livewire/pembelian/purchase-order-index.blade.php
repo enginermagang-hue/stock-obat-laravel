@@ -114,7 +114,7 @@
                                     @endif
                                 @endcan
                                 @if (in_array($order->status->value, ['dikirim', 'diterima_sebagian']))
-                                    <a href="{{ route('pembelian.penerimaan', ['po' => $order->id]) }}" class="os-btn os-btn--sm os-btn--primary">Terima</a>
+                                    <a href="{{ route('pembelian.penerimaan', ['po' => $order->id]) }}" wire:navigate class="os-btn os-btn--sm os-btn--primary">Terima</a>
                                 @endif
                             </div>
                         </td>
