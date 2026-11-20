@@ -55,6 +55,20 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="os-field">
+                    <label class="os-label">Metode</label>
+                    <select wire:model.live="metode" class="os-select">
+                        <option value="historis">Historis</option>
+                        <option value="ai">AI (prediksi)</option>
+                        <option value="kombinasi">Kombinasi</option>
+                    </select>
+                </div>
+                @if ($metode === 'kombinasi')
+                    <div class="os-field">
+                        <label class="os-label">Bobot AI (0–1)</label>
+                        <input type="number" step="0.1" min="0" max="1" wire:model="bobot_ai" class="os-input">
+                    </div>
+                @endif
             </div>
             <div class="os-floating os-section-tight">
                 <input type="text" wire:model="catatan" placeholder=" " class="os-floating-input">
@@ -127,12 +141,13 @@
             <div class="os-table-wrap">
                 <table class="os-table">
                     <thead>
-                    <tr><th>Obat</th><th class="os-td-right">Rata²</th><th class="os-td-right">Estimasi</th><th class="os-td-right">Stok akhir</th><th class="os-td-right">Dalam pesanan</th><th class="os-td-right">Pengaman</th><th class="os-td-right">Kebutuhan</th><th class="os-td-right">Total</th></tr>
+                    <tr><th>Obat</th><th>Sumber</th><th class="os-td-right">Rata²</th><th class="os-td-right">Estimasi</th><th class="os-td-right">Stok akhir</th><th class="os-td-right">Dalam pesanan</th><th class="os-td-right">Pengaman</th><th class="os-td-right">Kebutuhan</th><th class="os-td-right">Total</th></tr>
                     </thead>
                     <tbody>
                     @foreach ($selected->items as $item)
                         <tr>
                             <td>{{ $item->obat?->nama }}</td>
+                            <td><span class="os-badge">{{ $item->sumber ?? 'historis' }}</span></td>
                             <td class="os-td-right">{{ $item->pemakaian_rata_rata }}</td>
                             <td class="os-td-right">{{ $item->estimasi_pemakaian }}</td>
                             <td class="os-td-right">{{ $item->stok_akhir }}</td>

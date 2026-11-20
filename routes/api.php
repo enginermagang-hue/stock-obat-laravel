@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\BatchObatController;
 use App\Http\Controllers\Api\V1\LplpoController;
 use App\Http\Controllers\Api\V1\PermintaanController;
+use App\Http\Controllers\Api\V1\PrediksiController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
 use App\Http\Controllers\Api\V1\RkoController;
 use App\Http\Controllers\Api\V1\StockAdjustmentController;
@@ -36,6 +37,12 @@ Route::prefix('v1')->group(function () {
         Route::put('/opname/{opname}/stok-fisik', [StockOpnameController::class, 'inputFisik']);
         Route::post('/opname/{opname}/verify', [StockOpnameController::class, 'verify']);
         Route::post('/opname/{opname}/approve', [StockOpnameController::class, 'approve']);
+
+        Route::get('/prediksi', [PrediksiController::class, 'index']);
+        Route::post('/prediksi', [PrediksiController::class, 'store']);
+        Route::get('/prediksi/akurasi', [PrediksiController::class, 'akurasi']);
+        Route::get('/prediksi/{prediksi}', [PrediksiController::class, 'show']);
+        Route::post('/prediksi/{prediksi}/validasi', [PrediksiController::class, 'validatePrediction']);
 
         Route::get('/rko', [RkoController::class, 'index']);
         Route::post('/rko', [RkoController::class, 'store']);

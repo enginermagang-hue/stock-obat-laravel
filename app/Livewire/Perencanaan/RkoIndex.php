@@ -24,6 +24,8 @@ class RkoIndex extends Component
     public float $faktor_pengaman = 1.0;
     public ?int $sumber_dana_id = null;
     public ?int $supplier_id = null;
+    public string $metode = 'historis';
+    public float $bobot_ai = 0.5;
     public string $catatan = '';
 
     public function mount(): void
@@ -43,6 +45,8 @@ class RkoIndex extends Component
             'faktor_pengaman' => 'required|numeric|min:0.5|max:5',
             'sumber_dana_id' => 'nullable|exists:sumber_dana,id',
             'supplier_id' => 'nullable|exists:supplier,id',
+            'metode' => 'required|in:historis,ai,kombinasi',
+            'bobot_ai' => 'nullable|numeric|min:0|max:1',
         ]);
 
         $rko = app(BuildRko::class)->handle($data['tahun'], $data['periode'], [
@@ -50,6 +54,8 @@ class RkoIndex extends Component
             'faktor_pengaman' => $data['faktor_pengaman'],
             'sumber_dana_id' => $data['sumber_dana_id'] ?? null,
             'supplier_id' => $data['supplier_id'] ?? null,
+            'metode' => $data['metode'],
+            'bobot_ai' => $data['bobot_ai'] ?? 0.5,
             'catatan' => $this->catatan ?: null,
         ], auth()->id());
 

@@ -12,6 +12,7 @@ use App\Livewire\Pembelian\PurchaseOrderIndex;
 use App\Livewire\Perencanaan\LplpoIndex;
 use App\Livewire\Perencanaan\PermintaanIndex;
 use App\Livewire\Perencanaan\RkoIndex;
+use App\Livewire\Prediksi\PrediksiIndex;
 use App\Livewire\Stok\AdjustmentIndex;
 use App\Livewire\Stok\BatchIndex;
 use App\Livewire\Stok\LedgerIndex;
@@ -42,4 +43,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/lplpo', LplpoIndex::class)->middleware('can:view-lplpo')->name('lplpo.index');
     Route::get('/permintaan', PermintaanIndex::class)->middleware('can:view-permintaan')->name('permintaan.index');
     Route::get('/rko', RkoIndex::class)->middleware('can:manage-rko')->name('rko.index');
+    Route::get('/prediksi', PrediksiIndex::class)->middleware('can:manage-prediksi')->name('prediksi.index');
 });

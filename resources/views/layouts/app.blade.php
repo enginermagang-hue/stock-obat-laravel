@@ -44,6 +44,7 @@
             ['label' => 'LPLPO', 'route' => 'lplpo.index', 'permission' => 'view-lplpo'],
             ['label' => 'Permintaan', 'route' => 'permintaan.index', 'permission' => 'view-permintaan'],
             ['label' => 'RKO', 'route' => 'rko.index', 'permission' => 'manage-rko'],
+            ['label' => 'Prediksi', 'route' => 'prediksi.index', 'permission' => 'manage-prediksi'],
         ],
     ];
 @endphp
