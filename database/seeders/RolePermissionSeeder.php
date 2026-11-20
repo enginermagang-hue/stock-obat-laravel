@@ -15,8 +15,10 @@ class RolePermissionSeeder extends Seeder
             'view-own-data',
             'view-master',
             'manage-master',
+            'view-lplpo',
             'create-lplpo',
             'verify-lplpo',
+            'view-permintaan',
             'create-permintaan',
             'verify-permintaan',
             'receive-goods',
@@ -43,7 +45,8 @@ class RolePermissionSeeder extends Seeder
 
         $map = [
             'puskesmas' => [
-                'view-own-data', 'create-lplpo', 'create-permintaan',
+                'view-own-data', 'view-lplpo', 'create-lplpo',
+                'view-permintaan', 'create-permintaan',
                 'confirm-distribution', 'view-reports', 'manage-prediksi',
             ],
             'gudang' => [
@@ -55,6 +58,7 @@ class RolePermissionSeeder extends Seeder
             ],
             'apoteker' => [
                 'view-own-data', 'view-master', 'manage-master',
+                'view-lplpo', 'view-permintaan',
                 'verify-lplpo', 'verify-permintaan', 'receive-goods',
                 'create-distribution', 'approve-distribution', 'manage-stock',
                 'input-opname', 'verify-opname', 'manage-rko', 'manage-anggaran',

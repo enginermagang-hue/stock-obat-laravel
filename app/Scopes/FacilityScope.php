@@ -14,7 +14,7 @@ class FacilityScope implements Scope
 
     public function apply(Builder $builder, Model $model): void
     {
-        $user = Auth::user();
+        $user = Auth::guard('sanctum')->user() ?? Auth::user();
 
         if (! $user) {
             return;
