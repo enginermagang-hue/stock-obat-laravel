@@ -70,13 +70,12 @@
                             </select>
                         </div>
                     @else
-                        <div class="os-floating">
+                        <div class="os-field">
+                            <label for="field-{{ $key }}" class="os-label">{{ $field['label'] }}</label>
                             <input id="field-{{ $key }}"
                                    type="{{ $type === 'number' ? 'number' : 'text' }}"
-                                   placeholder=" "
                                    wire:model="form.{{ $key }}"
-                                   class="os-floating-input">
-                            <label class="os-floating-label" for="field-{{ $key }}">{{ $field['label'] }}</label>
+                                   class="os-input">
                         </div>
                     @endif
                     @error('form.'.$key) <span class="os-error">{{ $message }}</span> @enderror

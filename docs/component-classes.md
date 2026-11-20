@@ -13,7 +13,9 @@ tanpa mengulang utilitas Tailwind.
 | Primary | `#666cff` (`--color-primary`), varian gelap `#585ce5`, lembut `#e7e8ff` |
 | Surface | `#f7f7f9` (`--color-surface`) |
 | Teks | `#3b4055` (`--color-ink`), sekunder `#676a7b`, lemah `#a8aab4` |
-| Radius | Card `10px` (`--radius-card`), kontrol `8px` (`--radius-control`) |
+| Radius | Card `10px` (`--radius-card`), kontrol `8px` (`--radius-control`), input `6px` (`--radius-input`) |
+| Border input | `#d1d0d5` (`--color-control-border`) |
+| Tinggi input | `38px` (default), `46px` (`--lg`), `32px` (`--sm`) |
 
 Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 `rounded-card` tersedia untuk `@apply`.
@@ -25,8 +27,9 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
   `os-status-pill--danger`.
 - Class dikelompokkan per fungsi: shell, card, KPI, filter, tabel, form, feedback, dan
   modal.
-- Visual mengikuti pola Materialize admin: Inter 15px, primary `#666cff`, kartu radius
-  10px, kontrol radius 8px, dan padding lega.
+- Visual mengikuti pola Materialize/Vuexy admin: Inter 15px, primary `#666cff`, kartu
+  radius 10px, kontrol 8px, input 6px/38px, dan label 13px di atas input sebagai
+  default. Floating label hanya varian.
   Aset serta kode template pihak ketiga tidak disalin.
 
 ## Shell
@@ -167,11 +170,25 @@ Untuk Fase 2, komponen ini dipakai sebagai “Komposisi stok per status batch”
 | `os-form-grid` | Grid dua kolom. |
 | `os-field`, `os-field--inline` | Field dan variasi sejajar. |
 | `os-label`, `os-help`, `os-error` | Label, bantuan, dan pesan error. |
-| `os-input`, `os-select`, `os-textarea` | Kontrol input. |
-| `os-checkbox`, `os-toggle` | Kontrol pilihan. |
-| `os-floating` | Pembungkus input dengan floating label. |
-| `os-floating-input` | Input dengan placeholder kosong agar label bisa naik. |
-| `os-floating-label` | Label yang naik saat fokus atau field berisi. |
+| `os-input`, `os-select`, `os-textarea` | Kontrol dasar 38px / radius 6px. |
+| `os-input--lg`, `os-select--lg`, `os-input--sm`, `os-select--sm` | Varian ukuran 46px / 32px. |
+| `os-input--rounded`, `os-input--plaintext`, `os-select--plaintext` | Varian bentuk dan tampilan tanpa border. |
+| `os-select--multiple` | Select multiple dengan tinggi minimum 80px. |
+| `:disabled`, `os-input--disabled` | State nonaktif. |
+| `os-checkbox`, `os-radio`, `os-switch`, `os-toggle` | Kontrol pilihan. |
+| `os-floating`, `os-floating-input`, `os-floating-label` | Varian floating label (bukan default). |
+
+Default memakai label 13px di atas input:
+
+```blade
+<div class="os-field">
+    <label for="email" class="os-label">Email</label>
+    <input id="email" type="email" class="os-input" wire:model="email">
+    <span class="os-help">Kami tidak akan membagikan detail Anda.</span>
+</div>
+```
+
+Floating label dipakai hanya jika diinginkan:
 
 ```blade
 <div class="os-floating">

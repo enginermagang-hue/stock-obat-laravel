@@ -17,9 +17,11 @@
     --color-muted: #676a7b;
     --color-faint: #a8aab4;
     --color-line: #dcdfe7;
+    --color-control-border: #d1d0d5;
 
     --radius-card: 10px;
     --radius-control: 8px;
+    --radius-input: 6px;
 }
 
 /* -------------------------------------------------------------------------
@@ -213,7 +215,11 @@
     .os-filter-select,
     .os-search,
     .os-per-page {
-        @apply h-12 rounded-control border border-line bg-white px-4 text-[15px] text-ink placeholder:text-faint focus:border-primary focus:ring-2 focus:ring-primary/15;
+        @apply h-[38px] rounded-input border border-control-border bg-white px-[14px] text-[15px] text-ink placeholder:text-faint focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/20;
+    }
+
+    .os-filter-select {
+        @apply pr-[41px];
     }
 
     .os-per-page {
@@ -372,19 +378,66 @@
     .os-input,
     .os-select,
     .os-textarea {
-        @apply w-full rounded-control border border-line bg-white px-4 py-3 text-[15px] text-ink placeholder:text-faint focus:border-primary focus:ring-2 focus:ring-primary/15;
+        @apply w-full rounded-input border border-control-border bg-white px-[14px] py-[6px] text-[15px] leading-6 text-ink placeholder:text-faint focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/20;
+    }
+
+    .os-input,
+    .os-select {
+        @apply h-[38px];
+    }
+
+    .os-select {
+        @apply pr-[41px];
     }
 
     .os-textarea {
-        @apply min-h-28 resize-y;
+        @apply min-h-24 resize-y py-2;
+    }
+
+    .os-input--lg,
+    .os-select--lg {
+        @apply h-[46px] py-2 text-[15px];
+    }
+
+    .os-input--sm,
+    .os-select--sm {
+        @apply h-[32px] py-1 text-[13px];
+    }
+
+    .os-input--rounded {
+        @apply rounded-full px-4;
+    }
+
+    .os-input--plaintext,
+    .os-select--plaintext {
+        @apply border-transparent bg-transparent px-0 font-medium focus:ring-0;
+    }
+
+    .os-select--multiple {
+        @apply h-auto min-h-[80px] py-2 pr-[14px];
+    }
+
+    .os-input:disabled,
+    .os-select:disabled,
+    .os-textarea:disabled,
+    .os-input--disabled {
+        @apply cursor-not-allowed border-control-border bg-surface text-faint;
     }
 
     .os-checkbox {
-        @apply h-4 w-4 rounded border-line text-primary focus:ring-primary/30;
+        @apply h-[18px] w-[18px] rounded-[4px] border-control-border text-primary focus:ring-1 focus:ring-primary/30;
+    }
+
+    .os-radio {
+        @apply h-[18px] w-[18px] rounded-full border-control-border text-primary focus:ring-1 focus:ring-primary/30;
+    }
+
+    .os-switch {
+        @apply h-5 w-9 cursor-pointer appearance-none rounded-full bg-slate-300 transition-colors checked:bg-primary disabled:cursor-not-allowed disabled:opacity-50;
     }
 
     .os-toggle {
-        @apply h-5 w-9 cursor-pointer appearance-none rounded-full bg-slate-300 transition-colors checked:bg-primary;
+        @apply h-5 w-9 cursor-pointer appearance-none rounded-full bg-slate-300 transition-colors checked:bg-primary disabled:cursor-not-allowed disabled:opacity-50;
     }
 
     .os-help {
@@ -401,16 +454,16 @@
     }
 
     .os-floating-input {
-        @apply h-12 w-full rounded-control border border-line bg-white px-4 pb-1 pt-4 text-[15px] text-ink placeholder:text-transparent focus:border-primary focus:ring-2 focus:ring-primary/15;
+        @apply h-[38px] w-full rounded-input border border-control-border bg-white px-[14px] pb-0 pt-3 text-[15px] leading-5 text-ink placeholder:text-transparent focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/20;
     }
 
     .os-floating-label {
-        @apply pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] text-faint transition-all;
+        @apply pointer-events-none absolute left-[14px] top-1/2 -translate-y-1/2 text-[15px] text-faint transition-all;
     }
 
     .os-floating-input:focus + .os-floating-label,
     .os-floating-input:not(:placeholder-shown) + .os-floating-label {
-        @apply top-2 translate-y-0 text-[11px] text-primary;
+        @apply top-[7px] translate-y-0 text-[11px] text-primary;
     }
 
     /* Alert, tab, empty -------------------------------------------------- */
