@@ -13,15 +13,19 @@
 <body>
 @php
     $user = auth()->user();
+    $groupIcons = [
+        'Utama' => 'home-smile-line',
+        'Master Data' => 'apps-2-line',
+    ];
     $menu = [
         'Utama' => [
-            ['label' => 'Dashboard', 'route' => 'dashboard', 'permission' => null, 'icon' => 'home-smile-line'],
+            ['label' => 'Dashboard', 'route' => 'dashboard', 'permission' => null],
         ],
         'Master Data' => [
-            ['label' => 'Obat', 'route' => 'master.obat', 'permission' => 'view-master', 'icon' => 'capsule-line'],
-            ['label' => 'Supplier', 'route' => 'master.supplier', 'permission' => 'view-master', 'icon' => 'store-2-line'],
-            ['label' => 'Sumber Dana', 'route' => 'master.sumber-dana', 'permission' => 'view-master', 'icon' => 'wallet-3-line'],
-            ['label' => 'Puskesmas', 'route' => 'master.facilities', 'permission' => 'view-master', 'icon' => 'hospital-line'],
+            ['label' => 'Obat', 'route' => 'master.obat', 'permission' => 'view-master'],
+            ['label' => 'Supplier', 'route' => 'master.supplier', 'permission' => 'view-master'],
+            ['label' => 'Sumber Dana', 'route' => 'master.sumber-dana', 'permission' => 'view-master'],
+            ['label' => 'Puskesmas', 'route' => 'master.facilities', 'permission' => 'view-master'],
         ],
     ];
 @endphp
@@ -38,56 +42,63 @@
             </button>
         </div>
 
-        @foreach ($menu as $group => $items)
-            @php
-                $visible = array_filter($items, fn ($item) => $item['permission'] === null || $user->can($item['permission']));
-            @endphp
-            @if (count($visible) > 0)
-                <div class="os-nav-parent">
-                    {{ $group }}
-                    <span class="flex items-center gap-2">
-                        <span class="os-menu-badge">{{ count($visible) }}</span>
-                        <x-icon name="arrow-down-s-line" :size="14" class="os-nav-caret" />
-                    </span>
-                </div>
-                @foreach ($visible as $item)
-                    <a href="{{ route($item['route']) }}"
-                       class="os-nav-link os-nav-link--sub {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
-                        <span class="os-menu-dot"></span>
-                        <x-icon :name="$item['icon']" :size="18" />
-                        {{ $item['label'] }}
-                    </a>
-                @endforeach
-            @endif
-        @endforeach
+        <div class="os-sidebar-nav">
+            @foreach ($menu as $group => $items)
+                @php
+                    $visible = array_filter($items, fn ($item) => $item['permission'] === null || $user->can($item['permission']));
+                    $groupActive = collect($visible)->contains(fn ($item) => request()->routeIs($item['route']));
+                @endphp
+                @if (count($visible) > 0)
+                    <div class="os-nav-parent {{ $groupActive ? 'os-nav-parent--open' : '' }}">
+                        <span class="flex items-center gap-2">
+                            <x-icon :name="$groupIcons[$group] ?? 'apps-2-line'" :size="22" />
+                            {{ $group }}
+                        </span>
+                        <span class="flex items-center gap-2">
+                            <span class="os-menu-badge">{{ count($visible) }}</span>
+                            <x-icon name="arrow-down-s-line" :size="14" class="os-nav-caret" />
+                        </span>
+                    </div>
+                    @foreach ($visible as $item)
+                        <a href="{{ route($item['route']) }}"
+                           class="os-nav-link os-nav-link--sub {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
+                            <span class="os-menu-dot"></span>
+                            {{ $item['label'] }}
+                        </a>
+                    @endforeach
+                @endif
+            @endforeach
+        </div>
     </aside>
 
     <div class="os-content">
         <header class="os-topbar">
-            <livewire:global-search />
-            <div class="os-topbar-spacer"></div>
-            <button type="button" class="os-icon-btn" aria-label="Notifikasi">
-                <span class="relative">
-                    <x-icon name="notification-3-line" :size="18" />
-                    <span class="os-menu-badge absolute -right-2 -top-2">3</span>
-                </span>
-            </button>
-            <button type="button" class="os-icon-btn" aria-label="Tema">
-                <x-icon name="sun-line" :size="18" />
-            </button>
-            <div class="relative" x-data="{ open: false }">
-                <button type="button" class="os-avatar-online" @click="open = !open" aria-label="Menu pengguna">
-                    {{ strtoupper(substr($user->name, 0, 2)) }}
+            <div class="os-container flex items-center gap-4">
+                <livewire:global-search />
+                <div class="os-topbar-spacer"></div>
+                <button type="button" class="os-icon-btn" aria-label="Notifikasi">
+                    <span class="relative">
+                        <x-icon name="notification-3-line" :size="18" />
+                        <span class="os-menu-badge absolute -right-2 -top-2">3</span>
+                    </span>
                 </button>
-                <div x-show="open" @click.outside="open = false" class="os-dropdown absolute right-0 top-12 z-40 w-44">
-                    <div class="border-b border-line px-4 py-2">
-                        <div class="text-[13px] font-medium text-heading">{{ $user->name }}</div>
-                        <div class="text-[11px] text-faint">{{ $user->email }}</div>
+                <button type="button" class="os-icon-btn" aria-label="Tema">
+                    <x-icon name="sun-line" :size="18" />
+                </button>
+                <div class="relative" x-data="{ open: false }">
+                    <button type="button" class="os-avatar-online" @click="open = !open" aria-label="Menu pengguna">
+                        {{ strtoupper(substr($user->name, 0, 2)) }}
+                    </button>
+                    <div x-show="open" @click.outside="open = false" class="os-dropdown absolute right-0 top-12 z-40 w-44">
+                        <div class="border-b border-line px-4 py-2">
+                            <div class="text-[13px] font-medium text-heading">{{ $user->name }}</div>
+                            <div class="text-[11px] text-faint">{{ $user->email }}</div>
+                        </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="os-dropdown-item w-full">Keluar</button>
+                        </form>
                     </div>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="os-dropdown-item w-full">Keluar</button>
-                    </form>
                 </div>
             </div>
         </header>
@@ -97,7 +108,9 @@
                 {{ $slot }}
             </div>
         </main>
-        <footer class="os-footer">© {{ date('Y') }} Manajemen Stok Obat</footer>
+        <footer class="os-footer">
+            <div class="os-container">© {{ date('Y') }} Manajemen Stok Obat</div>
+        </footer>
     </div>
 </div>
 @livewireScripts

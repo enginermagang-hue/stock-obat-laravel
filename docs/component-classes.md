@@ -44,8 +44,9 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 | Class | Fungsi |
 | --- | --- |
 | `os-shell` | Kontainer utama satu halaman. |
-| `os-sidebar` | Panel navigasi kiri. |
-| `os-sidebar-brand` | Area logo di atas sidebar. |
+| `os-sidebar` | Panel navigasi kiri **fixed 260px** (`z-index 1080`). |
+| `os-sidebar-nav` | Area menu yang scroll, tinggi `calc(100vh - 64px)`. |
+| `os-sidebar-brand` | Area logo 64px di atas sidebar. |
 | `os-sidebar-brand-name`, `os-sidebar-brand-caption` | Nama aplikasi dan deskripsi kecil. |
 | `os-nav-parent` | Menu tingkat pertama beserta caret. |
 | `os-nav-parent--open` | Menu induk saat grup terbuka (latar abu). |
@@ -54,11 +55,13 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 | `os-nav-link` | Item menu tingkat kedua, tinggi 38px. |
 | `os-nav-link--sub` | Indentasi item menu 40.8px. |
 | `os-nav-link--active` | Item menu aktif dengan latar primary dan teks putih. |
-| `os-topbar` | Header kanan atas. |
+| `os-topbar` | Header **fixed** mulai dari 260px, tinggi 64px, `z-index 1075`. |
 | `os-topbar-crumb` | Breadcrumb; elemen `strong` di dalamnya ditebalkan. |
 | `os-topbar-spacer` | Mengisi ruang kosong di topbar. |
 | `os-role-badge` | Badge role pengguna. |
-| `os-content`, `os-main` | Area konten dan paddingnya. |
+| `os-content` | Area konten dengan `margin-left 260px` dan `padding-top 64px`. |
+| `os-main` | Area utama dengan padding vertikal 24px. |
+| `os-container` | Konten centered max **1440px** (inner 1392px). |
 | `os-page-title`, `os-page-subtitle` | Judul dan subjudul halaman. |
 | `os-section`, `os-section-tight` | Spasi vertikal antar bagian (20px / 16px). |
 | `os-grid-2` | Grid dua kolom untuk kartu. |
@@ -71,8 +74,15 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
             <div class="os-sidebar-brand-name">ObatStock</div>
             <div class="os-sidebar-brand-caption">Manajemen stok obat</div>
         </div>
-        <div class="os-nav-parent">Utama <span class="os-nav-caret">▾</span></div>
-        <a class="os-nav-link os-nav-link--sub os-nav-link--active" href="{{ route('dashboard') }}">Dashboard</a>
+        <div class="os-sidebar-nav">
+            <div class="os-nav-parent">
+                <x-icon name="home-smile-line" :size="22" /> Utama
+                <span class="os-menu-badge">1</span>
+            </div>
+            <a class="os-nav-link os-nav-link--sub os-nav-link--active" href="{{ route('dashboard') }}">
+                <span class="os-menu-dot"></span> Dashboard
+            </a>
+        </div>
     </aside>
     <div class="os-content">
         <header class="os-topbar">...</header>

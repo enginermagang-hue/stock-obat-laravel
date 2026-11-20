@@ -41,11 +41,11 @@
 @layer components {
     /* Shell ------------------------------------------------------------- */
     .os-shell {
-        @apply flex min-h-screen bg-page font-sans text-[15px] text-muted;
+        @apply min-h-screen bg-page font-sans text-[15px] text-muted;
     }
 
     .os-container {
-        @apply mx-auto w-full max-w-[1392px] px-6;
+        @apply mx-auto w-full max-w-[1440px] px-6;
     }
 
     .os-section {
@@ -87,11 +87,26 @@
     }
 
     .os-sidebar {
-        @apply w-[260px] shrink-0 border-r border-line bg-page px-4 py-5;
+        @apply fixed inset-y-0 left-0 z-[1080] w-[260px] border-r border-line bg-page px-3;
+    }
+
+    .os-sidebar-nav {
+        @apply h-[calc(100vh-64px)] overflow-y-auto pb-4;
+        scrollbar-width: thin;
+        scrollbar-color: #d1d3dc transparent;
+    }
+
+    .os-sidebar-nav::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .os-sidebar-nav::-webkit-scrollbar-thumb {
+        background: #d1d3dc;
+        border-radius: 999px;
     }
 
     .os-sidebar-brand {
-        @apply mb-3 flex h-16 items-center gap-2 border-b border-line px-2;
+        @apply flex h-16 items-center gap-2 px-2;
     }
 
     .os-sidebar-logo {
@@ -107,7 +122,11 @@
     }
 
     .os-nav-parent {
-        @apply mt-5 flex items-center justify-between px-3 text-[15px] font-medium text-ink;
+        @apply mt-5 flex h-[38px] items-center justify-between rounded-control px-3 text-[15px] text-ink hover:bg-surface;
+    }
+
+    .os-nav-parent:first-of-type {
+        @apply mt-1;
     }
 
     .os-nav-caret {
@@ -135,7 +154,7 @@
     }
 
     .os-topbar {
-        @apply flex h-16 items-center gap-4 rounded-b-card bg-page px-6;
+        @apply fixed left-[260px] right-0 top-0 z-[1075] flex h-16 items-center rounded-b-card bg-page;
     }
 
     .os-topbar-crumb {
@@ -155,11 +174,11 @@
     }
 
     .os-content {
-        @apply min-w-0 flex-1;
+        @apply ml-[260px] min-h-screen pt-16;
     }
 
     .os-main {
-        @apply p-6;
+        @apply py-6;
     }
 
     .os-page-title {
@@ -776,7 +795,7 @@
     }
 
     .os-menu-badge {
-        @apply grid h-5 min-w-5 place-items-center rounded-full bg-danger px-1 text-[11px] font-medium text-white;
+        @apply grid h-6 min-w-6 place-items-center rounded-full bg-danger px-1 text-[13px] font-medium text-white;
     }
 
     .os-dropdown {
@@ -811,7 +830,7 @@
     }
 
     .os-footer {
-        @apply mt-6 border-t border-line py-4 text-center text-[13px] text-faint;
+        @apply border-t border-line py-4 text-center text-[13px] text-faint;
     }
 
     .os-banner {
@@ -832,5 +851,19 @@
 
     .os-progress > span {
         @apply block h-full bg-primary;
+    }
+
+    @media (max-width: 1199.98px) {
+        .os-sidebar {
+            display: none;
+        }
+
+        .os-content {
+            margin-left: 0;
+        }
+
+        .os-topbar {
+            left: 0;
+        }
     }
 }
