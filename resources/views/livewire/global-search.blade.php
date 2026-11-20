@@ -1,6 +1,6 @@
 <div class="relative" x-data="{ open: false }" @keydown.escape.window="open = false">
     <div class="os-search-field">
-        <span aria-hidden="true">⌕</span>
+        <x-icon name="search-line" :size="18" />
         <input type="text" wire:model.live.debounce.250ms="query" placeholder="Search [CTRL + K]"
                @focus="open = true" @keydown.ctrl.k.prevent="$refs.input.focus()"
                x-ref="input" aria-label="Cari data master">

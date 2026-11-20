@@ -15,13 +15,13 @@
     $user = auth()->user();
     $menu = [
         'Utama' => [
-            ['label' => 'Dashboard', 'route' => 'dashboard', 'permission' => null, 'icon' => '◫'],
+            ['label' => 'Dashboard', 'route' => 'dashboard', 'permission' => null, 'icon' => 'home-smile-line'],
         ],
         'Master Data' => [
-            ['label' => 'Obat', 'route' => 'master.obat', 'permission' => 'view-master', 'icon' => '✚'],
-            ['label' => 'Supplier', 'route' => 'master.supplier', 'permission' => 'view-master', 'icon' => '▣'],
-            ['label' => 'Sumber Dana', 'route' => 'master.sumber-dana', 'permission' => 'view-master', 'icon' => '◈'],
-            ['label' => 'Puskesmas', 'route' => 'master.facilities', 'permission' => 'view-master', 'icon' => '⌂'],
+            ['label' => 'Obat', 'route' => 'master.obat', 'permission' => 'view-master', 'icon' => 'capsule-line'],
+            ['label' => 'Supplier', 'route' => 'master.supplier', 'permission' => 'view-master', 'icon' => 'store-2-line'],
+            ['label' => 'Sumber Dana', 'route' => 'master.sumber-dana', 'permission' => 'view-master', 'icon' => 'wallet-3-line'],
+            ['label' => 'Puskesmas', 'route' => 'master.facilities', 'permission' => 'view-master', 'icon' => 'hospital-line'],
         ],
     ];
 @endphp
@@ -33,7 +33,9 @@
                 <div class="os-sidebar-brand-name">ObatStock</div>
                 <div class="os-sidebar-brand-caption">Manajemen stok obat</div>
             </div>
-            <button type="button" class="os-icon-btn !h-8 !w-8 text-[16px]" aria-label="Perkecil menu">‹</button>
+            <button type="button" class="os-icon-btn !h-8 !w-8" aria-label="Perkecil menu">
+                <x-icon name="menu-fold-line" :size="18" />
+            </button>
         </div>
 
         @foreach ($menu as $group => $items)
@@ -45,14 +47,14 @@
                     {{ $group }}
                     <span class="flex items-center gap-2">
                         <span class="os-menu-badge">{{ count($visible) }}</span>
-                        <span class="os-nav-caret">▾</span>
+                        <x-icon name="arrow-down-s-line" :size="14" class="os-nav-caret" />
                     </span>
                 </div>
                 @foreach ($visible as $item)
                     <a href="{{ route($item['route']) }}"
                        class="os-nav-link os-nav-link--sub {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
                         <span class="os-menu-dot"></span>
-                        <span class="w-4 text-center text-[13px]">{{ $item['icon'] }}</span>
+                        <x-icon :name="$item['icon']" :size="18" />
                         {{ $item['label'] }}
                     </a>
                 @endforeach
@@ -65,9 +67,14 @@
             <livewire:global-search />
             <div class="os-topbar-spacer"></div>
             <button type="button" class="os-icon-btn" aria-label="Notifikasi">
-                <span class="relative">♢<span class="os-menu-badge absolute -right-2 -top-2">3</span></span>
+                <span class="relative">
+                    <x-icon name="notification-3-line" :size="18" />
+                    <span class="os-menu-badge absolute -right-2 -top-2">3</span>
+                </span>
             </button>
-            <button type="button" class="os-icon-btn" aria-label="Tema">☀</button>
+            <button type="button" class="os-icon-btn" aria-label="Tema">
+                <x-icon name="sun-line" :size="18" />
+            </button>
             <div class="relative" x-data="{ open: false }">
                 <button type="button" class="os-avatar-online" @click="open = !open" aria-label="Menu pengguna">
                     {{ strtoupper(substr($user->name, 0, 2)) }}

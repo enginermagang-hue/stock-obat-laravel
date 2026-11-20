@@ -10,7 +10,10 @@
 
     <div class="os-section os-card os-card--flush">
         <div class="os-filter-bar">
-            <input type="text" wire:model.live="search" placeholder="Cari data..." class="os-search">
+            <div class="os-search-wrap">
+                <x-icon name="search-line" :size="18" class="text-faint" />
+                <input type="text" wire:model.live="search" placeholder="Cari data..." class="os-search">
+            </div>
         </div>
         <div class="os-table-wrap">
             <table class="os-table os-table--striped os-table--hover">
@@ -31,9 +34,13 @@
                         <td class="os-td-right">
                             @can('manage-master')
                                 <div class="os-table-actions">
-                                    <button wire:click="edit({{ $row->id }})" class="os-btn os-btn--sm os-btn--ghost">Edit</button>
+                                    <button wire:click="edit({{ $row->id }})" class="os-btn os-btn--sm os-btn--ghost">
+                                        <x-icon name="edit-line" :size="14" /> Edit
+                                    </button>
                                     <button wire:click="delete({{ $row->id }})" wire:confirm="Hapus data ini?"
-                                            class="os-btn os-btn--sm os-btn--danger">Hapus</button>
+                                            class="os-btn os-btn--sm os-btn--danger">
+                                        <x-icon name="delete-bin-line" :size="14" /> Hapus
+                                    </button>
                                 </div>
                             @endcan
                         </td>
@@ -82,8 +89,12 @@
                 @endforeach
             </div>
             <div class="os-section os-toolbar">
-                <button wire:click="save" class="os-btn os-btn--primary">Simpan</button>
-                <button wire:click="resetForm" class="os-btn os-btn--secondary">Batal</button>
+                <button wire:click="save" class="os-btn os-btn--primary">
+                    <x-icon name="save-line" :size="16" /> Simpan
+                </button>
+                <button wire:click="resetForm" class="os-btn os-btn--secondary">
+                    <x-icon name="close-line" :size="16" /> Batal
+                </button>
             </div>
         </div>
     @endcan

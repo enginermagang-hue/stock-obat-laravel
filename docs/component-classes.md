@@ -255,3 +255,28 @@ Dipakai untuk konfirmasi hapus, pembatalan opname, dan peringatan mode buta.
 | `os-progress` | Bar progres dengan span warna primary. |
 | `os-metric-value`, `os-metric-label` | Angka metrik 24px dan label 13px. |
 | `os-footer` | Footer aplikasi. |
+
+## Ikon
+
+Ikon memakai **Remix Icon v4.9.1** (Remix Icon License v1.0, bebas untuk penggunaan
+personal dan komersial).
+CSS diimpor dari `remixicon/fonts/remixicon.css` sehingga file font dibundel Vite secara
+lokal.
+
+| Class | Fungsi |
+| --- | --- |
+| `os-icon` | Dasar ikon inline. |
+| `os-icon-16`, `os-icon-18`, `os-icon-20`, `os-icon-24` | Ukuran ikon dalam px. |
+| `os-search-wrap` | Pembungkus input dengan ikon di dalam. |
+
+Komponen Blade `x-icon` menyederhanakan pemakaian:
+
+```blade
+<x-icon name="capsule-line" :size="20" />
+```
+
+Ikon yang dipakai: `home-smile-line`, `capsule-line`, `store-2-line`, `wallet-3-line`,
+`hospital-line`, `menu-fold-line`, `arrow-down-s-line`, `search-line`,
+`notification-3-line`, `sun-line`, `heart-pulse-line`, `arrow-up-line`,
+`arrow-right-line`, `add-line`, `edit-line`, `delete-bin-line`, `save-line`, dan
+`close-line`.

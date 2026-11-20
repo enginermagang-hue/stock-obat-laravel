@@ -10,17 +10,21 @@
                     <h2 class="text-[24px] font-medium text-heading">Selamat datang di ObatStock 🎉</h2>
                     <p class="mt-2 text-[15px] text-muted">Pantau stok batch, kedaluwarsa, dan distribusi obat dari satu tempat.</p>
                     <p class="text-[15px] text-muted">Data master sudah siap untuk digunakan.</p>
-                    <a href="{{ route('master.obat') }}" class="os-btn os-btn--primary os-section-tight">Kelola Obat</a>
+                    <a href="{{ route('master.obat') }}" class="os-btn os-btn--primary os-section-tight">
+                        <x-icon name="add-line" :size="16" /> Kelola Obat
+                    </a>
                 </div>
-                <div class="os-banner-art hidden w-48 sm:grid"><span class="text-[32px] text-primary">✚</span></div>
+                <div class="os-banner-art hidden w-48 sm:grid">
+                    <x-icon name="heart-pulse-line" :size="40" class="text-primary" />
+                </div>
             </div>
         </div>
 
         {{-- KPI --}}
         <div class="os-col-2 os-card os-kpi-card">
             <div class="os-kpi-head">
-                <div class="os-kpi-icon">✚</div>
-                <span class="os-kpi-trend">+5 ↑</span>
+                <div class="os-kpi-icon"><x-icon name="capsule-line" :size="20" /></div>
+                <span class="os-kpi-trend">+5 <x-icon name="arrow-up-line" :size="14" /></span>
             </div>
             <div class="os-kpi-value">{{ $totalObat }}</div>
             <div class="os-kpi-label">Jenis obat</div>
@@ -28,8 +32,8 @@
         </div>
         <div class="os-col-2 os-card os-kpi-card">
             <div class="os-kpi-head">
-                <div class="os-kpi-icon os-kpi-icon--info">▣</div>
-                <span class="os-kpi-trend">+3 ↑</span>
+                <div class="os-kpi-icon os-kpi-icon--info"><x-icon name="store-2-line" :size="20" /></div>
+                <span class="os-kpi-trend">+3 <x-icon name="arrow-up-line" :size="14" /></span>
             </div>
             <div class="os-kpi-value">{{ $totalSupplier }}</div>
             <div class="os-kpi-label">Supplier</div>
@@ -49,7 +53,9 @@
                 <div class="os-metric-value">0</div>
                 <div class="os-metric-label">Belum ada data (Fase 3)</div>
             </div>
-            <button class="os-btn os-btn--primary os-section-tight">Lihat Detail</button>
+            <button class="os-btn os-btn--primary os-section-tight">
+                <x-icon name="arrow-right-line" :size="16" /> Lihat Detail
+            </button>
         </div>
         <div class="os-col-3 os-card os-card-body">
             <h2 class="os-card-title">Komposisi stok</h2>
