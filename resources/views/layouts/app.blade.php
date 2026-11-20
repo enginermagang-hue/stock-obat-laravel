@@ -16,6 +16,8 @@
     $groupIcons = [
         'Utama' => 'home-smile-line',
         'Master Data' => 'apps-2-line',
+        'Stok' => 'archive-2-line',
+        'Pembelian' => 'shopping-cart-2-line',
     ];
     $menu = [
         'Utama' => [
@@ -26,6 +28,16 @@
             ['label' => 'Supplier', 'route' => 'master.supplier', 'permission' => 'view-master'],
             ['label' => 'Sumber Dana', 'route' => 'master.sumber-dana', 'permission' => 'view-master'],
             ['label' => 'Puskesmas', 'route' => 'master.facilities', 'permission' => 'view-master'],
+        ],
+        'Stok' => [
+            ['label' => 'Batch Obat', 'route' => 'stok.batch', 'permission' => 'manage-stock'],
+            ['label' => 'Stock Ledger', 'route' => 'stok.ledger', 'permission' => 'manage-stock'],
+            ['label' => 'Penyesuaian', 'route' => 'stok.adjustment', 'permission' => 'manage-stock'],
+            ['label' => 'Stok Opname', 'route' => 'stok.opname', 'permission' => 'input-opname'],
+        ],
+        'Pembelian' => [
+            ['label' => 'Purchase Order', 'route' => 'pembelian.purchase-order', 'permission' => 'receive-goods'],
+            ['label' => 'Penerimaan', 'route' => 'pembelian.penerimaan', 'permission' => 'receive-goods'],
         ],
     ];
 @endphp

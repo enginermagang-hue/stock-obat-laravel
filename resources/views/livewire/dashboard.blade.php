@@ -1,20 +1,20 @@
 <div>
     <h1 class="os-page-title">Dashboard</h1>
-    <p class="os-page-subtitle">Ringkasan data fondasi. Widget stok dan anggaran tersedia pada Fase 2 dan Fase 6.</p>
+    <p class="os-page-subtitle">Ringkasan stok, batch, dan aktivitas gudang hari ini.</p>
 
     <div class="os-section os-dash-grid">
         {{-- Banner --}}
-        <div class="os-col-8 os-card os-card-body">
+        <div class="os-col-6 os-card os-card-body">
             <div class="os-banner">
                 <div>
                     <h2 class="text-[24px] font-medium text-heading">Selamat datang di ObatStock 🎉</h2>
                     <p class="mt-2 text-[15px] text-muted">Pantau stok batch, kedaluwarsa, dan distribusi obat dari satu tempat.</p>
-                    <p class="text-[15px] text-muted">Data master sudah siap untuk digunakan.</p>
-                    <a href="{{ route('master.obat') }}" class="os-btn os-btn--primary os-section-tight">
-                        <x-icon name="add-line" :size="16" /> Kelola Obat
+                    <p class="text-[15px] text-muted">{{ $mutasiHariIni }} mutasi stok tercatat hari ini.</p>
+                    <a href="{{ route('stok.batch') }}" class="os-btn os-btn--primary os-section-tight">
+                        <x-icon name="archive-2-line" :size="16" /> Lihat Batch
                     </a>
                 </div>
-                <div class="os-banner-art hidden w-48 sm:grid">
+                <div class="os-banner-art hidden w-40 sm:grid">
                     <x-icon name="heart-pulse-line" :size="40" class="text-primary" />
                 </div>
             </div>
@@ -24,20 +24,26 @@
         <div class="os-col-2 os-card os-kpi-card">
             <div class="os-kpi-head">
                 <div class="os-kpi-icon"><x-icon name="capsule-line" :size="20" /></div>
-                <span class="os-kpi-trend">+5 <x-icon name="arrow-up-line" :size="14" /></span>
             </div>
-            <div class="os-kpi-value">{{ $totalObat }}</div>
-            <div class="os-kpi-label">Jenis obat</div>
-            <span class="os-kpi-chip">Data aktif</span>
+            <div class="os-kpi-value">{{ $totalBatch }}</div>
+            <div class="os-kpi-label">Batch stok</div>
+            <span class="os-kpi-chip">{{ $totalObat }} jenis obat</span>
         </div>
         <div class="os-col-2 os-card os-kpi-card">
             <div class="os-kpi-head">
-                <div class="os-kpi-icon os-kpi-icon--info"><x-icon name="store-2-line" :size="20" /></div>
-                <span class="os-kpi-trend">+3 <x-icon name="arrow-up-line" :size="14" /></span>
+                <div class="os-kpi-icon os-kpi-icon--warning"><x-icon name="alert-line" :size="20" /></div>
             </div>
-            <div class="os-kpi-value">{{ $totalSupplier }}</div>
-            <div class="os-kpi-label">Supplier</div>
-            <span class="os-kpi-chip">Terdaftar</span>
+            <div class="os-kpi-value">{{ $stokMenipis }}</div>
+            <div class="os-kpi-label">Stok menipis</div>
+            <span class="os-kpi-chip">≤ stok minimum</span>
+        </div>
+        <div class="os-col-2 os-card os-kpi-card">
+            <div class="os-kpi-head">
+                <div class="os-kpi-icon os-kpi-icon--danger"><x-icon name="time-line" :size="20" /></div>
+            </div>
+            <div class="os-kpi-value">{{ $expiring }}</div>
+            <div class="os-kpi-label">Mendekati expired</div>
+            <span class="os-kpi-chip">90 hari</span>
         </div>
 
         {{-- Baris kedua --}}

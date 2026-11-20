@@ -332,6 +332,10 @@
         @apply bg-sky-50 text-sky-600;
     }
 
+    .os-kpi-icon--danger {
+        @apply bg-red-50 text-danger;
+    }
+
     .os-kpi-trend {
         @apply flex items-center gap-1 text-[15px] text-success;
     }
