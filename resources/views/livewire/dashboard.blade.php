@@ -56,12 +56,12 @@
             <h2 class="os-card-title">Menunggu verifikasi</h2>
             <p class="os-card-subtitle">LPLPO dan permintaan obat</p>
             <div class="os-section-tight">
-                <div class="os-metric-value">0</div>
-                <div class="os-metric-label">Belum ada data (Fase 3)</div>
+                <div class="os-metric-value">{{ $menungguVerifikasi }}</div>
+                <div class="os-metric-label">LPLPO / permintaan</div>
             </div>
-            <button class="os-btn os-btn--primary os-section-tight">
+            <a href="{{ route('lplpo.index') }}" wire:navigate class="os-btn os-btn--primary os-section-tight">
                 <x-icon name="arrow-right-line" :size="16" /> Lihat Detail
-            </button>
+            </a>
         </div>
         <div class="os-col-3 os-card os-card-body">
             <h2 class="os-card-title">Komposisi stok</h2>

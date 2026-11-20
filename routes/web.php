@@ -9,6 +9,8 @@ use App\Livewire\Master\SumberDanaIndex;
 use App\Livewire\Master\SupplierIndex;
 use App\Livewire\Pembelian\GoodsReceiptForm;
 use App\Livewire\Pembelian\PurchaseOrderIndex;
+use App\Livewire\Perencanaan\LplpoIndex;
+use App\Livewire\Perencanaan\PermintaanIndex;
 use App\Livewire\Stok\AdjustmentIndex;
 use App\Livewire\Stok\BatchIndex;
 use App\Livewire\Stok\LedgerIndex;
@@ -35,4 +37,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pembelian/purchase-order', PurchaseOrderIndex::class)->middleware('can:receive-goods')->name('pembelian.purchase-order');
     Route::get('/pembelian/penerimaan', GoodsReceiptForm::class)->middleware('can:receive-goods')->name('pembelian.penerimaan');
+
+    Route::get('/lplpo', LplpoIndex::class)->middleware('can:view-lplpo')->name('lplpo.index');
+    Route::get('/permintaan', PermintaanIndex::class)->middleware('can:view-permintaan')->name('permintaan.index');
 });

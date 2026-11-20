@@ -2,9 +2,13 @@
 
 namespace App\Livewire;
 
+use App\Enums\StatusLplpo;
+use App\Enums\StatusPermintaan;
 use App\Models\BatchObat;
 use App\Models\Facility;
+use App\Models\Lplpo;
 use App\Models\Obat;
+use App\Models\PermintaanObat;
 use App\Models\StockLedger;
 use App\Models\SumberDana;
 use App\Models\Supplier;
@@ -27,6 +31,8 @@ class Dashboard extends Component
             'stokMenipis' => $stokMenipis,
             'expiring' => BatchObat::expiring(90)->count(),
             'mutasiHariIni' => StockLedger::whereDate('tanggal_transaksi', today())->count(),
+            'menungguVerifikasi' => Lplpo::where('status', StatusLplpo::Dikirim)->count()
+                + PermintaanObat::whereIn('status', [StatusPermintaan::Dikirim, StatusPermintaan::Diterima])->count(),
             'obatTerbaru' => Obat::latest()->take(4)->get(),
         ])->layout('layouts.app', ['title' => 'Dashboard']);
     }

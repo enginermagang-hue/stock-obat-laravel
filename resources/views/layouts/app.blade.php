@@ -18,6 +18,7 @@
         'Master Data' => 'apps-2-line',
         'Stok' => 'archive-2-line',
         'Pembelian' => 'shopping-cart-2-line',
+        'Perencanaan' => 'file-list-3-line',
     ];
     $menu = [
         'Utama' => [
@@ -38,6 +39,10 @@
         'Pembelian' => [
             ['label' => 'Purchase Order', 'route' => 'pembelian.purchase-order', 'permission' => 'receive-goods'],
             ['label' => 'Penerimaan', 'route' => 'pembelian.penerimaan', 'permission' => 'receive-goods'],
+        ],
+        'Perencanaan' => [
+            ['label' => 'LPLPO', 'route' => 'lplpo.index', 'permission' => 'view-lplpo'],
+            ['label' => 'Permintaan', 'route' => 'permintaan.index', 'permission' => 'view-permintaan'],
         ],
     ];
 @endphp
