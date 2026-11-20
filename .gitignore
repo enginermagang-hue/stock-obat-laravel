@@ -24,3 +24,9 @@ node_modules/
 # Logs / caches
 *.log
 .flowmark-cache/
+.phpunit.result.cache
+
+# Laravel build output
+/public/build/
+/public/hot
+/bootstrap/ssr/
