@@ -10,7 +10,7 @@
     --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
     --color-primary: #666cff;
-    --color-primary-dark: #585ce5;
+    --color-primary-dark: #5c61e6;
     --color-primary-soft: #e7e8ff;
     --color-surface: #f7f7f9;
     --color-ink: #3b4055;
@@ -18,10 +18,12 @@
     --color-faint: #a8aab4;
     --color-line: #dcdfe7;
     --color-control-border: #d1d0d5;
+    --color-input-disabled-bg: #f0f1f3;
+    --color-input-disabled-border: #c5c7cf;
 
     --radius-card: 10px;
     --radius-control: 8px;
-    --radius-input: 6px;
+    --radius-input: 8px;
 }
 
 /* -------------------------------------------------------------------------
@@ -82,11 +84,15 @@
     }
 
     .os-nav-link {
-        @apply mt-1 flex items-center gap-2 rounded-control px-3 py-2.5 text-[15px] text-muted hover:bg-slate-200/70 hover:text-ink;
+        @apply mt-1 flex items-center gap-2 rounded-control px-3 py-[7px] text-[15px] text-muted hover:bg-slate-200/70 hover:text-ink;
     }
 
     .os-nav-link--sub {
-        @apply pl-[40px];
+        @apply pl-[40.8px];
+    }
+
+    .os-nav-parent--open {
+        @apply bg-slate-200/70;
     }
 
     .os-nav-link--active {
@@ -131,7 +137,11 @@
 
     /* Card --------------------------------------------------------------- */
     .os-card {
-        @apply rounded-card bg-white shadow-sm shadow-slate-900/5;
+        @apply rounded-card bg-white shadow-[0_4px_14px_rgba(38,43,67,0.16)] transition-shadow;
+    }
+
+    .os-card:hover {
+        @apply shadow-[0_6px_20px_rgba(38,43,67,0.18)];
     }
 
     .os-card--flush {
@@ -215,7 +225,7 @@
     .os-filter-select,
     .os-search,
     .os-per-page {
-        @apply h-[38px] rounded-input border border-control-border bg-white px-[14px] text-[15px] text-ink placeholder:text-faint focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/20;
+        @apply h-12 rounded-input border border-control-border bg-white px-4 py-[14px] text-[15px] text-ink placeholder:text-faint focus:border-primary focus:outline-none;
     }
 
     .os-filter-select {
@@ -227,11 +237,19 @@
     }
 
     .os-btn {
-        @apply inline-flex items-center justify-center gap-2 rounded-control px-6 py-2.5 text-[15px] font-medium;
+        @apply inline-flex items-center justify-center gap-2 rounded-control px-[22px] py-[7.7px] text-[15px] font-medium tracking-[0.4px];
     }
 
     .os-btn--primary {
-        @apply bg-primary text-white shadow-md shadow-primary/30 hover:bg-primary-dark;
+        @apply bg-primary text-white shadow-[0_2px_6px_rgba(102,108,255,0.14)] hover:bg-primary-dark;
+    }
+
+    .os-btn--primary:active {
+        @apply bg-primary-dark shadow-[0_1px_2px_rgba(102,108,255,0.14)];
+    }
+
+    .os-btn:disabled {
+        @apply opacity-[0.45];
     }
 
     .os-btn--secondary {
@@ -247,7 +265,7 @@
     }
 
     .os-btn--sm {
-        @apply px-3 py-1.5 text-[13px];
+        @apply rounded-input px-[15.5px] py-[7px] text-[13px];
     }
 
     .os-btn-icon {
@@ -372,18 +390,18 @@
     }
 
     .os-label {
-        @apply text-[13px] font-medium text-ink;
+        @apply text-[13px] font-normal text-ink;
     }
 
     .os-input,
     .os-select,
     .os-textarea {
-        @apply w-full rounded-input border border-control-border bg-white px-[14px] py-[6px] text-[15px] leading-6 text-ink placeholder:text-faint focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/20;
+        @apply w-full rounded-input border border-control-border bg-white px-4 py-[14px] text-[15px] text-ink placeholder:text-faint focus:border-primary focus:outline-none;
     }
 
     .os-input,
     .os-select {
-        @apply h-[38px];
+        @apply h-12;
     }
 
     .os-select {
@@ -391,17 +409,17 @@
     }
 
     .os-textarea {
-        @apply min-h-24 resize-y py-2;
+        @apply min-h-28 resize-y py-3;
     }
 
     .os-input--lg,
     .os-select--lg {
-        @apply h-[46px] py-2 text-[15px];
+        @apply h-[54px] rounded-card py-[15px];
     }
 
     .os-input--sm,
     .os-select--sm {
-        @apply h-[32px] py-1 text-[13px];
+        @apply h-[38px] rounded-[6px] py-[6px] text-[13px];
     }
 
     .os-input--rounded {
@@ -421,19 +439,19 @@
     .os-select:disabled,
     .os-textarea:disabled,
     .os-input--disabled {
-        @apply cursor-not-allowed border-control-border bg-surface text-faint;
+        @apply cursor-not-allowed border-input-disabled-border bg-input-disabled-bg text-faint;
     }
 
     .os-checkbox {
-        @apply h-[18px] w-[18px] rounded-[4px] border-control-border text-primary focus:ring-1 focus:ring-primary/30;
+        @apply h-[18px] w-[18px] rounded-input border-2 border-[#676a7b] text-primary focus:border-[#676a7b] focus:outline-none focus:shadow-[0_4px_0.8px_rgba(102,108,255,0.1)];
     }
 
     .os-radio {
-        @apply h-[18px] w-[18px] rounded-full border-control-border text-primary focus:ring-1 focus:ring-primary/30;
+        @apply h-[18px] w-[18px] rounded-full border-2 border-[#676a7b] text-primary focus:border-[#676a7b] focus:outline-none focus:shadow-[0_4px_0.8px_rgba(102,108,255,0.1)];
     }
 
     .os-switch {
-        @apply h-5 w-9 cursor-pointer appearance-none rounded-full bg-slate-300 transition-colors checked:bg-primary disabled:cursor-not-allowed disabled:opacity-50;
+        @apply h-5 w-9 cursor-pointer appearance-none rounded-full border-0 bg-slate-300 transition-colors checked:bg-primary disabled:cursor-not-allowed disabled:opacity-50;
     }
 
     .os-toggle {
@@ -454,16 +472,16 @@
     }
 
     .os-floating-input {
-        @apply h-[38px] w-full rounded-input border border-control-border bg-white px-[14px] pb-0 pt-3 text-[15px] leading-5 text-ink placeholder:text-transparent focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/20;
+        @apply h-12 w-full rounded-input border border-control-border bg-white px-4 pb-[10px] pt-[26px] text-[15px] text-ink placeholder:text-transparent focus:border-primary focus:outline-none;
     }
 
     .os-floating-label {
-        @apply pointer-events-none absolute left-[14px] top-1/2 -translate-y-1/2 text-[15px] text-faint transition-all;
+        @apply pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] text-faint transition-all;
     }
 
     .os-floating-input:focus + .os-floating-label,
     .os-floating-input:not(:placeholder-shown) + .os-floating-label {
-        @apply top-[7px] translate-y-0 text-[11px] text-primary;
+        @apply top-[8px] translate-x-[2.4px] translate-y-0 scale-[0.85] text-primary;
     }
 
     /* Alert, tab, empty -------------------------------------------------- */
@@ -554,7 +572,7 @@
     }
 
     .os-login-submit {
-        @apply w-full rounded-control bg-primary px-6 py-3 text-[15px] font-medium text-white shadow-md shadow-primary/30 hover:bg-primary-dark;
+        @apply w-full rounded-control bg-primary px-[22px] py-[7.7px] text-[15px] font-medium tracking-[0.4px] text-white shadow-[0_2px_6px_rgba(102,108,255,0.14)] hover:bg-primary-dark;
     }
 
     .os-login-hint {
@@ -591,6 +609,6 @@
     }
 
     .os-badge-count {
-        @apply rounded-full bg-red-500 px-1.5 text-[10px] font-semibold text-white;
+        @apply grid h-6 w-6 place-items-center rounded-full bg-[#ff4d49] text-[10px] font-semibold text-white;
     }
 }

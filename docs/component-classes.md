@@ -10,12 +10,13 @@ tanpa mengulang utilitas Tailwind.
 | --- | --- |
 | Font | Inter, fallback ke font sistem lewat `--font-sans` |
 | Ukuran teks dasar | 15px |
-| Primary | `#666cff` (`--color-primary`), varian gelap `#585ce5`, lembut `#e7e8ff` |
+| Primary | `#666cff` (`--color-primary`), varian gelap `#5c61e6`, lembut `#e7e8ff` |
 | Surface | `#f7f7f9` (`--color-surface`) |
 | Teks | `#3b4055` (`--color-ink`), sekunder `#676a7b`, lemah `#a8aab4` |
-| Radius | Card `10px` (`--radius-card`), kontrol `8px` (`--radius-control`), input `6px` (`--radius-input`) |
-| Border input | `#d1d0d5` (`--color-control-border`) |
-| Tinggi input | `38px` (default), `46px` (`--lg`), `32px` (`--sm`) |
+| Radius | Card `10px` (`--radius-card`), kontrol `8px` (`--radius-control`), input `8px` (`--radius-input`) |
+| Border input | `#d1d0d5` (`--color-control-border`), disabled `#c5c7cf` |
+| Disabled bg | `#f0f1f3` (`--color-input-disabled-bg`) |
+| Tinggi input | `48px` (default), `54px` (`--lg`), `38px` (`--sm`) |
 
 Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 `rounded-card` tersedia untuk `@apply`.
@@ -27,9 +28,11 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
   `os-status-pill--danger`.
 - Class dikelompokkan per fungsi: shell, card, KPI, filter, tabel, form, feedback, dan
   modal.
-- Visual mengikuti pola Materialize/Vuexy admin: Inter 15px, primary `#666cff`, kartu
-  radius 10px, kontrol 8px, input 6px/38px, dan label 13px di atas input sebagai
-  default. Floating label hanya varian.
+- Visual mengikuti pola Materialize admin: Inter 15px, primary `#666cff`, kartu radius
+  10px dengan shadow `0 4px 14px rgba(38,43,67,.16)`, kontrol 8px, input 8px/48px, dan
+  label 13px/400 di atas input sebagai default.
+  Floating label hanya varian.
+  Fokus input hanya mengubah warna border, tanpa ring atau shadow.
   Aset serta kode template pihak ketiga tidak disalin.
 
 ## Shell
@@ -41,10 +44,11 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 | `os-sidebar-brand` | Area logo di atas sidebar. |
 | `os-sidebar-brand-name`, `os-sidebar-brand-caption` | Nama aplikasi dan deskripsi kecil. |
 | `os-nav-parent` | Menu tingkat pertama beserta caret. |
+| `os-nav-parent--open` | Menu induk saat grup terbuka (latar abu). |
 | `os-nav-caret` | Panah pada menu induk. |
 | `os-nav-group` | Judul grup menu (opsional). |
-| `os-nav-link` | Item menu tingkat kedua. |
-| `os-nav-link--sub` | Indentasi item menu 40px. |
+| `os-nav-link` | Item menu tingkat kedua, tinggi 38px. |
+| `os-nav-link--sub` | Indentasi item menu 40.8px. |
 | `os-nav-link--active` | Item menu aktif dengan latar primary dan teks putih. |
 | `os-topbar` | Header kanan atas. |
 | `os-topbar-crumb` | Breadcrumb; elemen `strong` di dalamnya ditebalkan. |
@@ -77,7 +81,7 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 
 | Class | Fungsi |
 | --- | --- |
-| `os-card` | Kartu dasar. |
+| `os-card` | Kartu dasar: radius 10px, shadow `0 4px 14px rgba(38,43,67,.16)`, shadow hover lebih dalam. |
 | `os-card--flush` | Kartu tanpa padding, untuk tabel. |
 | `os-card-head`, `os-card-body`, `os-card-footer` | Bagian kartu. |
 | `os-card-title`, `os-card-subtitle` | Judul dan keterangan kartu. |
@@ -107,9 +111,9 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 | `os-filter-bar` | Baris filter atas kartu tabel. |
 | `os-filter` | Pembungkus select filter. |
 | `os-filter-select`, `os-search`, `os-per-page` | Input filter, pencarian, dan jumlah baris. |
-| `os-btn` | Tombol dasar. |
-| `os-btn--primary`, `--secondary`, `--danger`, `--ghost` | Varian tombol. |
-| `os-btn--sm` | Tombol ukuran kecil. |
+| `os-btn` | Tombol dasar: padding `7.7×22px`, radius 8px, font 15px/500, letter-spacing `.4px`. |
+| `os-btn--primary`, `--secondary`, `--danger`, `--ghost` | Varian tombol; primary memakai shadow `0 2px 6px rgba(primary,.14)`. |
+| `os-btn--sm` | Tombol kecil: font 13px, padding `7×15.5px`, radius 6px. |
 | `os-btn-icon` | Tombol berupa ikon teks. |
 | `os-toolbar` | Baris kumpulan tombol. |
 
@@ -170,8 +174,8 @@ Untuk Fase 2, komponen ini dipakai sebagai “Komposisi stok per status batch”
 | `os-form-grid` | Grid dua kolom. |
 | `os-field`, `os-field--inline` | Field dan variasi sejajar. |
 | `os-label`, `os-help`, `os-error` | Label, bantuan, dan pesan error. |
-| `os-input`, `os-select`, `os-textarea` | Kontrol dasar 38px / radius 6px. |
-| `os-input--lg`, `os-select--lg`, `os-input--sm`, `os-select--sm` | Varian ukuran 46px / 32px. |
+| `os-input`, `os-select`, `os-textarea` | Kontrol dasar 48px / radius 8px; fokus hanya mengubah border, tanpa ring/shadow. |
+| `os-input--lg`, `os-select--lg`, `os-input--sm`, `os-select--sm` | Varian ukuran 54px / 38px. |
 | `os-input--rounded`, `os-input--plaintext`, `os-select--plaintext` | Varian bentuk dan tampilan tanpa border. |
 | `os-select--multiple` | Select multiple dengan tinggi minimum 80px. |
 | `:disabled`, `os-input--disabled` | State nonaktif. |
@@ -222,4 +226,4 @@ Dipakai untuk konfirmasi hapus, pembatalan opname, dan peringatan mode buta.
 | `os-pagination`, `os-pagination-info` | Area pagination dan keterangan entri. |
 | `os-timeline`, `os-timeline-item`, `os-timeline-dot`, `os-timeline-time` | Linimasa aktivitas. |
 | `os-avatar` | Inisial pengguna. |
-| `os-badge-count` | Badge angka kecil pada notifikasi. |
+| `os-badge-count` | Badge angka 24×24 lingkaran merah `#ff4d49`. |
