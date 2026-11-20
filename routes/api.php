@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\BatchObatController;
+use App\Http\Controllers\Api\V1\LplpoController;
+use App\Http\Controllers\Api\V1\PermintaanController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
 use App\Http\Controllers\Api\V1\StockAdjustmentController;
 use App\Http\Controllers\Api\V1\StockLedgerController;
@@ -33,5 +35,18 @@ Route::prefix('v1')->group(function () {
         Route::put('/opname/{opname}/stok-fisik', [StockOpnameController::class, 'inputFisik']);
         Route::post('/opname/{opname}/verify', [StockOpnameController::class, 'verify']);
         Route::post('/opname/{opname}/approve', [StockOpnameController::class, 'approve']);
+
+        Route::get('/lplpo', [LplpoController::class, 'index']);
+        Route::post('/lplpo', [LplpoController::class, 'store']);
+        Route::get('/lplpo/{lplpo}', [LplpoController::class, 'show']);
+        Route::post('/lplpo/{lplpo}/submit', [LplpoController::class, 'submit']);
+        Route::post('/lplpo/{lplpo}/verify', [LplpoController::class, 'verify']);
+        Route::post('/lplpo/{lplpo}/permintaan', [LplpoController::class, 'createPermintaan']);
+
+        Route::get('/permintaan', [PermintaanController::class, 'index']);
+        Route::post('/permintaan', [PermintaanController::class, 'store']);
+        Route::get('/permintaan/{permintaan}', [PermintaanController::class, 'show']);
+        Route::post('/permintaan/{permintaan}/submit', [PermintaanController::class, 'submit']);
+        Route::post('/permintaan/{permintaan}/verify', [PermintaanController::class, 'verify']);
     });
 });
