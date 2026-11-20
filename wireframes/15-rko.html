@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RKO — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="rko">
+  <main class="page">
+    <h1>RKO — Rencana Kebutuhan Obat</h1>
+    <p class="subtitle">Perhitungan kebutuhan dengan metode historis, AI, atau kombinasi.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Tahun 2026</option><option>Tahun 2025</option></select>
+      <select class="input"><option>Periode: bulan</option><option>Periode: triwulan</option></select>
+      <div class="spacer"></div>
+      <a class="btn accent" href="00-shell.html">+ Susun RKO</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No. RKO</th><th>Tahun / periode</th><th>Tingkat</th><th>Metode</th><th>Versi</th><th class="num">Total estimasi</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>RKO-2026-011</td><td>2026 / November</td><td><span class="badge blue">rs</span></td><td><span class="badge blue">kombinasi</span></td><td>2</td><td class="num">Rp 842.500.000</td><td><span class="badge green">disetujui</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>RKO-2026-010</td><td>2026 / Oktober</td><td><span class="badge blue">rs</span></td><td><span class="badge gray">historis</span></td><td>1</td><td class="num">Rp 780.200.000</td><td><span class="badge gray">draft</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>RKO-2026-009</td><td>2026 / September</td><td><span class="badge blue">gabungan</span></td><td><span class="badge blue">ai</span></td><td>3</td><td class="num">Rp 965.000.000</td><td><span class="badge green">disetujui</span></td><td><button class="btn sm">Buka</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">RKO-2026-011 <span class="meta">versi 2 · snapshot, tidak dihitung ulang</span></div>
+      <div class="form-grid">
+        <div class="field"><label>Metode</label><div class="input placeholder">kombinasi · bobot AI 0,6</div></div>
+        <div class="field"><label>Lead time / faktor pengaman</label><div class="input placeholder">1 bulan · 1,2</div></div>
+        <div class="field"><label>Sumber dana default</label><div class="input placeholder">APBD Kab.</div></div>
+        <div class="field"><label>Prediksi terpilih</label><div class="input placeholder">PRD-2026-118 · MAPE 11,4%</div></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Obat</th><th class="num">Pemakaian rata²</th><th class="num">Estimasi</th><th class="num">Stok akhir</th><th class="num">Dalam pesanan</th><th class="num">Stok pengaman</th><th class="num">Kebutuhan bersih</th><th class="num">Total</th></tr></thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg</td><td class="num">820</td><td class="num">820</td><td class="num">240</td><td class="num">200</td><td class="num">984</td><td class="num">1.364</td><td class="num">Rp 1.705.000</td></tr>
+            <tr><td>Paracetamol 500 mg</td><td class="num">1.400</td><td class="num">1.400</td><td class="num">18</td><td class="num">0</td><td class="num">1.680</td><td class="num">3.062</td><td class="num">Rp 979.840</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <button class="btn primary">Approve RKO</button>
+        <button class="btn accent">Generate Draft PO</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">rumus</span> <code>kebutuhan_bersih = max(0, estimasi + stok_pengaman − stok_akhir − stok_dalam_pesanan)</code>.
+      Permintaan masuk hanya validator, bukan penambah. Revisi dokumen final = versi baru.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

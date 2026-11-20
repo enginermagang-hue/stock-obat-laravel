@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="dashboard">
+  <main class="page">
+    <h1>Dashboard</h1>
+    <p class="subtitle">Ringkasan kondisi stok, anggaran, dan pekerjaan yang menunggu tindakan.</p>
+
+    <div class="grid cols-4" style="margin-bottom: 16px;">
+      <div class="card" data-roles="gudang,apoteker,admin">
+        <div class="kpi">1.248</div><div class="kpi-label">Total jenis obat aktif</div>
+      </div>
+      <div class="card" data-roles="gudang,apoteker,admin">
+        <div class="kpi">37</div><div class="kpi-label">Obat di bawah stok minimum</div>
+      </div>
+      <div class="card" data-roles="gudang,apoteker,admin">
+        <div class="kpi">12</div><div class="kpi-label">Batch expired / mendekati expired</div>
+      </div>
+      <div class="card" data-roles="apoteker,admin">
+        <div class="kpi">72%</div><div class="kpi-label">Penyerapan anggaran 2026</div>
+      </div>
+
+      <div class="card" data-roles="puskesmas">
+        <div class="kpi">2</div><div class="kpi-label">LPLPO belum disubmit</div>
+      </div>
+      <div class="card" data-roles="puskesmas">
+        <div class="kpi">3</div><div class="kpi-label">Permintaan sedang diproses</div>
+      </div>
+      <div class="card" data-roles="puskesmas,distribusi">
+        <div class="kpi">1</div><div class="kpi-label">Distribusi perlu konfirmasi terima</div>
+      </div>
+      <div class="card" data-roles="puskesmas,apoteker,admin">
+        <div class="kpi">11,4%</div><div class="kpi-label">MAPE prediksi bulan ini</div>
+      </div>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-head">Tugas menunggu <span class="meta">klik menuju layar terkait</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jenis</th><th>Nomor</th><th> Role</th></tr></thead>
+            <tbody>
+              <tr data-roles="puskesmas,apoteker,admin"><td>LPLPO perlu verifikasi</td><td>LPL-2026-011</td><td><span class="badge blue">Apoteker</span></td></tr>
+              <tr data-roles="puskesmas,apoteker,admin"><td>Permintaan baru</td><td>PMSK-2026-0012</td><td><span class="badge blue">Apoteker</span></td></tr>
+              <tr data-roles="gudang,apoteker,admin"><td>PO menunggu approve</td><td>PO-2026-0007</td><td><span class="badge amber">Pagu +2,5 jt</span></td></tr>
+              <tr data-roles="gudang,apoteker,admin"><td>Opname perlu verifikasi</td><td>OPN-2026-004</td><td><span class="badge blue">Apoteker</span></td></tr>
+              <tr data-roles="distribusi,apoteker,admin"><td>Surat jalan belum dikirim</td><td>SJ-2026-0031</td><td><span class="badge gray">Distribusi</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">Data ditampilkan sesuai <code>facility_id</code> bila role Puskesmas.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Tren pemakaian obat <span class="meta">input RKO berikutnya</span></div>
+        <div class="chart">[ Grafik garis pemakaian 12 bulan ]</div>
+        <div class="note" data-roles="puskesmas,apoteker,admin">
+          Flag confidence rendah pada prediksi ditampilkan untuk ditinjau apoteker.
+        </div>
+      </div>
+
+      <div class="card" data-roles="apoteker,admin">
+        <div class="card-head">Penyerapan anggaran per sumber dana</div>
+        <div class="stack">
+          <div><div class="row" style="justify-content: space-between;"><span>APBN</span><span>64%</span></div><div class="progress"><span style="width:64%"></span></div></div>
+          <div><div class="row" style="justify-content: space-between;"><span>APBD Kab.</span><span>78%</span></div><div class="progress"><span style="width:78%"></span></div></div>
+          <div><div class="row" style="justify-content: space-between;"><span>BOK</span><span>98%</span></div><div class="progress warn"><span style="width:98%"></span></div></div>
+        </div>
+      </div>
+
+      <div class="card" data-roles="gudang,apoteker,admin">
+        <div class="card-head">Jadwal opname berkala</div>
+        <div class="kv">
+          <dt>Opname berikutnya</dt><dd>30 November 2026</dd>
+          <dt>Tipe / mode</dt><dd>Berkala · buta</dd>
+          <dt>Petugas</dt><dd>[nama petugas gudang]</dd>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Batch Obat — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="stok-batch">
+  <main class="page">
+    <h1>Batch Obat</h1>
+    <p class="subtitle">Unit stok terkecil: obat + nomor batch + tanggal kedaluwarsa.</p>
+
+    <div class="toolbar">
+      <div class="input placeholder" style="min-width: 220px;">Cari obat / no. batch</div>
+      <select class="input"><option>Semua status expiry</option><option>Mendekati expired</option><option>Expired</option></select>
+      <div class="spacer"></div>
+      <button class="btn" data-roles="gudang,apoteker,admin">Export Excel</button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Obat</th><th>No. batch</th><th>Produksi</th><th>Expiry</th><th class="num">Awal</th><th class="num">Sisa</th><th>Lokasi rak</th><th>Sumber dana</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg</td><td>AMX-2601</td><td>05-01-2026</td><td>04-01-2028</td><td class="num">500</td><td class="num">240</td><td>Rak A-03</td><td>APBN</td><td><span class="badge green">aktif</span></td></tr>
+            <tr><td>Paracetamol 500 mg</td><td>PCM-2512</td><td>12-12-2025</td><td>31-12-2027</td><td class="num">1.000</td><td class="num">18</td><td>Rak B-01</td><td>BOK</td><td><span class="badge amber">menipis</span></td></tr>
+            <tr><td>Ceftriaxone 1 g</td><td>CFT-2509</td><td>09-09-2025</td><td>08-09-2026</td><td class="num">200</td><td class="num">64</td><td>Rak C-02</td><td>APBD Kab.</td><td><span class="badge amber">exp. 3 bln</span></td></tr>
+            <tr><td>Ceftriaxone 1 g</td><td>CFT-2404</td><td>04-04-2024</td><td>03-04-2026</td><td class="num">150</td><td class="num">12</td><td>Rak C-02</td><td>DAK</td><td><span class="badge red">expired</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">FEFO</span> Distribusi memilih batch dengan expiry terdekat dan <code>jumlah_sisa &gt; 0</code>.
+      <code>UNIQUE(obat_id, no_batch)</code> dan mutasi sisa wajib memakai transaksi + <code>lockForUpdate()</code>.
+      Tidak ada sub-gudang — cukup <code>lokasi_rak</code> berupa teks bebas.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

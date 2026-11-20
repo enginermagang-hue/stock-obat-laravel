@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stok Opname — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="stok-opname">
+  <main class="page">
+    <h1>Stok Opname</h1>
+    <p class="subtitle">Sesi hitung fisik dengan snapshot stok sistem dan mode buta.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua status</option><option>draft</option><option>proses</option><option>diverifikasi</option><option>disetujui</option><option>selesai</option><option>dibatalkan</option></select>
+      <div class="spacer"></div>
+      <button class="btn">Export PDF</button>
+      <a class="btn accent" href="00-shell.html" data-roles="gudang,apoteker,admin">+ Buat Opname</a>
+    </div>
+
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card-head">OPN-2026-0004 <span class="meta">November 2026 · berkala · mode buta</span></div>
+      <div class="flow">
+        <span class="flow-step done">draft</span><span class="flow-arrow">→</span>
+        <span class="flow-step current">proses</span><span class="flow-arrow">→</span>
+        <span class="flow-step">diverifikasi</span><span class="flow-arrow">→</span>
+        <span class="flow-step">disetujui</span><span class="flow-arrow">→</span>
+        <span class="flow-step">selesai</span>
+      </div>
+      <div class="note warn" data-roles="gudang">
+        Mode buta: kolom <strong>stok sistem disembunyikan</strong> sampai semua stok fisik terisi.
+        Validasi juga dilakukan di <code>InputStokFisik</code>.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Input stok fisik <span class="meta">snapshot stok sistem tidak berubah</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Obat / batch</th><th>Stok sistem</th><th>Stok fisik</th><th class="num">Selisih</th><th class="num">Nilai</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td>Ceftriaxone 1 g<br><span class="badge gray">CFT-2404</span></td>
+              <td><span data-roles="apoteker,admin">20</span><span data-roles="gudang">[disembunyikan]</span></td>
+              <td><div class="input placeholder" style="width:90px;">12</div></td>
+              <td class="num">−8</td>
+              <td class="num">−8 × Rp 18.000</td><td><div class="input placeholder" style="width:150px;">[alasan]</div></td></tr>
+            <tr><td>Paracetamol 500 mg<br><span class="badge gray">PCM-2512</span></td>
+              <td><span data-roles="apoteker,admin">14</span><span data-roles="gudang">[disembunyikan]</span></td>
+              <td><div class="input placeholder" style="width:90px;">18</div></td>
+              <td class="num">+4</td>
+              <td class="num">+4 × Rp 320</td><td><div class="input placeholder" style="width:150px;">[alasan]</div></td></tr>
+            <tr><td>Amoxicillin 500 mg<br><span class="badge gray">AMX-2601</span></td>
+              <td><span data-roles="apoteker,admin">240</span><span data-roles="gudang">[disembunyikan]</span></td>
+              <td><div class="input placeholder" style="width:90px;">240</div></td>
+              <td class="num">0</td>
+              <td class="num">0</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <button class="btn primary" data-roles="gudang,apoteker,admin">Simpan Stok Fisik</button>
+        <button class="btn accent" data-roles="apoteker,admin">Verifikasi</button>
+        <button class="btn accent" data-roles="apoteker,admin">Approve → Adjustment</button>
+        <button class="btn danger" data-roles="apoteker,admin">Batalkan (dengan alasan)</button>
+      </div>
+    </div>
+
+    <div class="note">
+      Hanya item dengan <code>selisih ≠ 0</code> yang masuk <code>stock_adjustment</code>.
+      <code>stok_sistem</code> dan <code>harga_beli</code> disnapshot agar auditabel.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Purchase Order — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="purchase-order">
+  <main class="page">
+    <h1>Purchase Order</h1>
+    <p class="subtitle">Komitmen pembelian dari RKO, dengan validasi pagu berupa peringatan.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua status</option><option>draft</option><option>dikirim</option><option>diterima sebagian</option><option>diterima</option><option>dibatalkan</option></select>
+      <div class="spacer"></div>
+      <a class="btn accent" href="00-shell.html">+ Buat PO</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No. PO</th><th>Supplier</th><th>Sumber dana</th><th>Tanggal</th><th class="num">Total</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>PO-2026-0007</td><td>PT Farma Nusantara</td><td>APBD Kab.</td><td>16-11-2026</td><td class="num">Rp 127.500.000</td><td><span class="badge blue">dikirim</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>PO-2026-0006</td><td>CV Medika Jaya</td><td>APBN</td><td>12-11-2026</td><td class="num">Rp 84.200.000</td><td><span class="badge amber">diterima sebagian</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>PO-2026-0005</td><td>PT Farma Nusantara</td><td>BOK</td><td>05-11-2026</td><td class="num">Rp 45.000.000</td><td><span class="badge green">diterima</span></td><td><button class="btn sm">Buka</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Detail PO-2026-0007 <span class="meta">status dikirim · satu PO = satu sumber dana</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Obat</th><th class="num">Jumlah</th><th class="num">Harga beli</th><th class="num">Diterima</th><th class="num">Subtotal</th></tr></thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg</td><td class="num">50.000</td><td class="num">Rp 1.250</td><td class="num">0</td><td class="num">Rp 62.500.000</td></tr>
+            <tr><td>Paracetamol 500 mg</td><td class="num">150.000</td><td class="num">Rp 320</td><td class="num">0</td><td class="num">Rp 48.000.000</td></tr>
+            <tr><td>Ceftriaxone 1 g</td><td class="num">1.000</td><td class="num">Rp 17.000</td><td class="num">0</td><td class="num">Rp 17.000.000</td></tr>
+            <tr class="total"><td colspan="4">Total</td><td class="num">Rp 127.500.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note warn" style="margin-top: 14px;">
+        <strong>PAGU_TERLAMPAUI</strong> — Sisa pagu APBD Kab. tidak mencukupi untuk PO ini.
+        Lanjutkan dengan <code>alasan_override_pagu</code> (wajib) dan catatan di activity log.
+        <div class="field" style="margin-top: 10px;"><label>Alasan override pagu</label><div class="input placeholder">[alasan — wajib diisi]</div></div>
+      </div>
+
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <button class="btn primary" data-roles="gudang">Kirim PO</button>
+        <button class="btn accent" data-roles="apoteker,admin">Approve PO (ValidatePagu)</button>
+        <a class="btn primary" href="19-goods-receipt.html" data-roles="gudang,apoteker,admin">Terima Barang</a>
+        <button class="btn danger" data-roles="apoteker,admin">Batalkan</button>
+      </div>
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

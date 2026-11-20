@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Distribusi — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="distribusi">
+  <main class="page">
+    <h1>Distribusi</h1>
+    <p class="subtitle">Pemenuhan permintaan dengan FEFO, surat jalan, dan konfirmasi terima.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua status</option><option>draft</option><option>disetujui</option><option>dikirim</option><option>diterima</option><option>dibatalkan</option></select>
+      <select class="input" data-roles="apoteker,admin,gudang,distribusi"><option>Semua puskesmas</option><option>PKM-007 Sukamaju</option><option>PKM-008 Margahayu</option></select>
+      <div class="spacer"></div>
+      <button class="btn" data-roles="apoteker,admin,distribusi,gudang">Export</button>
+      <a class="btn accent" href="00-shell.html" data-roles="distribusi,apoteker,admin">+ Buat Surat Jalan</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No. surat</th><th>Puskesmas tujuan</th><th>Permintaan</th><th>Tanggal</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>SJ-2026-0031</td><td>PKM-007 Sukamaju</td><td>PMSK-2026-0012</td><td>19-11-2026</td><td><span class="badge blue">disetujui</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>SJ-2026-0030</td><td>PKM-008 Margahayu</td><td>PMSK-2026-0011</td><td>17-11-2026</td><td><span class="badge green">diterima</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>SJ-2026-0029</td><td>PKM-007 Sukamaju</td><td>PMSK-2026-0010</td><td>10-11-2026</td><td><span class="badge gray">draft</span></td><td><button class="btn sm">Buka</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Detail SJ-2026-0031 <span class="meta">status disetujui · FEFO</span></div>
+      <div class="flow">
+        <span class="flow-step done">draft</span><span class="flow-arrow">→</span>
+        <span class="flow-step current">disetujui</span><span class="flow-arrow">→</span>
+        <span class="flow-step">dikirim</span><span class="flow-arrow">→</span>
+        <span class="flow-step">diterima</span>
+      </div>
+      <div class="table-wrap" style="margin-top: 12px;">
+        <table>
+          <thead><tr><th>Obat</th><th>Batch (FEFO)</th><th>Expiry</th><th class="num">Jumlah</th><th class="num">Harga satuan</th><th class="num">Subtotal</th><th class="num">Terpenuhi</th></tr></thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg</td><td>AMX-2601</td><td>04-01-2028</td><td class="num">100</td><td class="num">Rp 1.250</td><td class="num">Rp 125.000</td><td class="num">100 / 100</td></tr>
+            <tr><td>Paracetamol 500 mg</td><td>PCM-2512</td><td>31-12-2027</td><td class="num">80</td><td class="num">Rp 320</td><td class="num">Rp 25.600</td><td class="num">80 / 150</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <a class="btn" href="00-shell.html" data-roles="apoteker,admin,distribusi">Unduh Surat Jalan (PDF)</a>
+        <button class="btn accent" data-roles="apoteker,admin">Approve</button>
+        <button class="btn accent" data-roles="distribusi,apoteker,admin">Kirim</button>
+        <button class="btn primary" data-roles="puskesmas,admin">Konfirmasi Terima</button>
+        <button class="btn danger" data-roles="apoteker,admin">Batalkan</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">DistributeDrugs</span> Memilih batch expiry terdekat dengan sisa cukup, menulis
+      <code>stock_ledger</code> bertipe <code>keluar</code>, dan menyimpan <code>harga_satuan</code> sebagai snapshot.
+      Konfirmasi terima oleh puskesmas mengubah status menjadi <code>selesai</code> dan membuat notifikasi.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

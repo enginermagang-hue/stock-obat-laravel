@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prediksi Kebutuhan Obat — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="prediksi">
+  <main class="page">
+    <h1>Prediksi Kebutuhan Obat</h1>
+    <p class="subtitle">Rekomendasi prediksi — apoteker yang memilih metode dan menyetujui RKO.</p>
+
+    <div class="toolbar">
+      <select class="input" data-roles="apoteker,admin"><option>Semua fasilitas</option><option>PKM-007 Sukamaju</option><option>PKM-008 Margahayu</option></select>
+      <span class="badge gray" data-roles="puskesmas">Scoping: PKM-007 Sukamaju</span>
+      <select class="input"><option>Periode: November 2026</option><option>Periode: Desember 2026</option></select>
+      <div class="spacer"></div>
+      <button class="btn accent" data-roles="apoteker,admin">Jalankan Prediksi</button>
+    </div>
+
+    <div class="grid cols-4" style="margin-bottom: 16px;">
+      <div class="card"><div class="kpi">11,4%</div><div class="kpi-label">MAPE metode terbaik</div></div>
+      <div class="card"><div class="kpi">prophet</div><div class="kpi-label">Metode terpilih (champion)</div></div>
+      <div class="card"><div class="kpi">24 bln</div><div class="kpi-label">Data historis agregat</div></div>
+      <div class="card"><div class="kpi">3</div><div class="kpi-label">Prediksi confidence rendah</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Hasil prediksi <span class="meta">champion–challenger</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Obat / fasilitas</th><th class="num">Prediksi</th><th>Interval</th><th class="num">Confidence</th><th>Metode</th><th class="num">MAPE</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg · PKM-007</td><td class="num">1.285</td><td>1.120 – 1.450</td><td class="num">0,82</td><td><span class="badge blue">prophet</span></td><td class="num">11,4%</td><td><span class="badge green">divalidasi</span></td><td><button class="btn sm" data-roles="apoteker,admin">Pakai di RKO</button></td></tr>
+            <tr><td>Paracetamol 500 mg · PKM-007</td><td class="num">2.140</td><td>1.780 – 2.500</td><td class="num">0,64</td><td><span class="badge blue">holt_winters</span></td><td class="num">18,2%</td><td><span class="badge amber">confidence rendah</span></td><td><button class="btn sm" data-roles="apoteker,admin">Tinjau</button></td></tr>
+            <tr><td>Ceftriaxone 1 g · PKM-008</td><td class="num">96</td><td>70 – 130</td><td class="num">0,71</td><td><span class="badge gray">historis</span></td><td class="num">—</td><td><span class="badge gray">fallback &lt; 12 bln</span></td><td><button class="btn sm" data-roles="apoteker,admin">Pakai di RKO</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <button class="btn" data-roles="apoteker,admin">Validasi</button>
+        <button class="btn accent" data-roles="apoteker,admin">Jelaskan dengan LLM</button>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Evaluasi akurasi <span class="meta">backtest holdout 3–6 bulan</span></div>
+      <div class="chart">[ Grafik prediksi vs realisasi pemakaian — placeholder ]</div>
+      <div class="kv" style="margin-top: 12px;">
+        <dt>Metode terbaik</dt><dd>prophet (MAPE 11,4%)</dd>
+        <dt>Challenger</dt><dd>xgboost 13,1% · holt_winters 15,8%</dd>
+        <dt>Versi model</dt><dd>prophet-1.1.5 | 2026-11-19</dd>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">privasi</span> Hanya angka agregat dikirim ke FastAPI Cloud; tanpa identitas pasien,
+      nama fasilitas diganti kode pseudonym. Jika cloud gagal/cold start → fallback <code>HoltWinters.php</code>,
+      RKO tidak diblokir. Tidak ada auto-approve.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

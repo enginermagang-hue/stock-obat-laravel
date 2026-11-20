@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LPLPO — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="lplpo">
+  <main class="page">
+    <h1>LPLPO</h1>
+    <p class="subtitle">Laporan pemakaian dan stok obat per puskesmas, dasar permintaan berikutnya.</p>
+
+    <div class="toolbar">
+      <select class="input" data-roles="apoteker,admin"><option>Semua puskesmas</option><option>PKM-007 Sukamaju</option><option>PKM-008 Margahayu</option></select>
+      <span class="badge gray" data-roles="puskesmas">Scoping: PKM-007 Sukamaju</span>
+      <select class="input"><option>Bulan</option><option>November 2026</option><option>Oktober 2026</option></select>
+      <select class="input"><option>Tahun</option><option>2026</option><option>2025</option></select>
+      <div class="spacer"></div>
+      <button class="btn">Export Excel</button>
+      <a class="btn accent" href="00-shell.html" data-roles="puskesmas,admin">+ Buat LPLPO</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No. LPLPO</th><th>Puskesmas</th><th>Periode</th><th>Versi</th><th class="num">Item</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>LPL-2026-011</td><td>PKM-007 Sukamaju</td><td>11 / 2026</td><td>1</td><td class="num">42</td><td><span class="badge blue">dikirim</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>LPL-2026-010</td><td>PKM-008 Margahayu</td><td>11 / 2026</td><td>2</td><td class="num">38</td><td><span class="badge red">ditolak</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>LPL-2026-009</td><td>PKM-007 Sukamaju</td><td>10 / 2026</td><td>1</td><td class="num">40</td><td><span class="badge green">diverifikasi</span></td><td><button class="btn sm">Buka</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Detail LPL-2026-011 <span class="meta">versi 1 · status dikirim</span></div>
+      <div class="flow">
+        <span class="flow-step done">draft</span><span class="flow-arrow">→</span>
+        <span class="flow-step current">dikirim</span><span class="flow-arrow">→</span>
+        <span class="flow-step">diverifikasi</span><span class="flow-arrow">→</span>
+        <span class="flow-step">immutable</span>
+      </div>
+      <div class="table-wrap" style="margin-top: 12px;">
+        <table>
+          <thead><tr><th>Obat</th><th class="num">Stok awal</th><th class="num">Pemasukan</th><th class="num">Pemakaian</th><th class="num">Stok akhir</th><th class="num">Stok sistem</th><th class="num">Stok min</th><th class="num">Diminta</th></tr></thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg</td><td class="num">120</td><td class="num">200</td><td class="num">80</td><td class="num">240</td><td class="num">240</td><td class="num">50</td><td class="num">100</td></tr>
+            <tr><td>Paracetamol 500 mg</td><td class="num">90</td><td class="num">0</td><td class="num">72</td><td class="num">18</td><td class="num">18</td><td class="num">100</td><td class="num">150</td></tr>
+            <tr><td>Ceftriaxone 1 g</td><td class="num">60</td><td class="num">0</td><td class="num">48</td><td class="num">12</td><td class="num">14</td><td class="num">20</td><td class="num">30</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <button class="btn accent" data-roles="apoteker,admin">Verifikasi</button>
+        <button class="btn danger" data-roles="apoteker,admin">Tolak (revisi → versi baru)</button>
+        <button class="btn primary" data-roles="puskesmas,apoteker,admin">Buat Permintaan dari LPLPO</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">auto-fill</span> <code>GenerateLplpo</code> mengisi stok awal / pemasukan / pemakaian dari ledger.
+      <code>VerifyLplpo</code> mencocokkan <code>stok_akhir</code> vs <code>stok_akhir_sistem</code> (deteksi selisih).
+      Setelah diverifikasi bersifat immutable.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Permintaan Obat — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="permintaan">
+  <main class="page">
+    <h1>Permintaan Obat</h1>
+    <p class="subtitle">Permintaan dari LPLPO atau mandiri, diverifikasi apoteker per item.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua status</option><option>draft</option><option>dikirim</option><option>diverifikasi</option><option>disetujui</option><option>sebagian</option><option>selesai</option></select>
+      <select class="input" data-roles="apoteker,admin"><option>Semua puskesmas</option><option>PKM-007 Sukamaju</option><option>PKM-008 Margahayu</option></select>
+      <div class="spacer"></div>
+      <a class="btn accent" href="00-shell.html" data-roles="puskesmas,admin">+ Permintaan Mandiri</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No. permintaan</th><th>Puskesmas</th><th>Sumber</th><th>Periode</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>PMSK-2026-0012</td><td>PKM-007 Sukamaju</td><td><span class="badge blue">lplpo</span></td><td>11 / 2026</td><td><span class="badge blue">diverifikasi</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>PMSK-2026-0011</td><td>PKM-008 Margahayu</td><td><span class="badge gray">mandiri</span></td><td>11 / 2026</td><td><span class="badge amber">sebagian</span></td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>PMSK-2026-0010</td><td>PKM-007 Sukamaju</td><td><span class="badge blue">lplpo</span></td><td>10 / 2026</td><td><span class="badge green">selesai</span></td><td><button class="btn sm">Buka</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Detail PMSK-2026-0012 <span class="meta">dari LPL-2026-011 · diverifikasi</span></div>
+      <div class="flow">
+        <span class="flow-step done">draft</span><span class="flow-arrow">→</span>
+        <span class="flow-step done">dikirim</span><span class="flow-arrow">→</span>
+        <span class="flow-step done">diterima</span><span class="flow-arrow">→</span>
+        <span class="flow-step current">diverifikasi</span><span class="flow-arrow">→</span>
+        <span class="flow-step">disetujui / sebagian</span><span class="flow-arrow">→</span>
+        <span class="flow-step">diproses → selesai</span>
+      </div>
+      <div class="table-wrap" style="margin-top: 12px;">
+        <table>
+          <thead><tr><th>Obat</th><th class="num">Diminta</th><th class="num">Disetujui</th><th>Status item</th><th>Keterangan</th></tr></thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg</td><td class="num">100</td><td><div class="input placeholder" style="width:80px;">100</div></td><td><span class="badge green">disetujui</span></td><td>[alasan]</td></tr>
+            <tr><td>Paracetamol 500 mg</td><td class="num">150</td><td><div class="input placeholder" style="width:80px;">80</div></td><td><span class="badge amber">sebagian</span></td><td>stok terbatas</td></tr>
+            <tr><td>Ceftriaxone 1 g</td><td class="num">30</td><td><div class="input placeholder" style="width:80px;">0</div></td><td><span class="badge red">ditolak</span></td><td>stok tak tersedia</td></tr>
+            <tr><td>Metformin 500 mg</td><td class="num">60</td><td><div class="input placeholder" style="width:80px;">0</div></td><td><span class="badge amber">backorder</span></td><td>menunggu penerimaan</td></tr>
+            <tr><td>Amlodipine 5 mg</td><td class="num">40</td><td><div class="input placeholder" style="width:80px;">40</div></td><td><span class="badge green">selesai</span></td><td>distribusi diterima</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <button class="btn accent" data-roles="apoteker,admin">Simpan Verifikasi</button>
+        <button class="btn primary" data-roles="apoteker,admin">Proses ke Distribusi</button>
+        <span class="badge gray" data-roles="puskesmas">Menunggu verifikasi apoteker RS</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">pemenuhan bertahap</span> Satu permintaan bisa dipenuhi beberapa distribusi;
+      <code>distribution_item.permintaan_item_id</code> melacak pemenuhan per item.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

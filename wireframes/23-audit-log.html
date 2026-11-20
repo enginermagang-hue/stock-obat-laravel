@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Audit Log — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="audit-log">
+  <main class="page">
+    <h1>Audit Log</h1>
+    <p class="subtitle">Riwayat perubahan angka dan status — bersifat read-only (krusial untuk CDOB).</p>
+
+    <div class="toolbar">
+      <div class="input placeholder">Cari subjek / nomor dokumen</div>
+      <select class="input"><option>Semua event</option><option>created</option><option>updated</option><option>deleted</option></select>
+      <div class="input placeholder">Dari tanggal</div>
+      <div class="input placeholder">Sampai tanggal</div>
+      <div class="spacer"></div>
+      <button class="btn">Export</button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Waktu</th><th>Causer</th><th>Subject</th><th>Event</th><th>Properties (old → new)</th></tr></thead>
+          <tbody>
+            <tr><td>19-11 10:24</td><td>[apoteker]</td><td>Permintaan #12</td><td><span class="badge blue">updated</span></td><td><code>status: diverifikasi → disetujui</code></td></tr>
+            <tr><td>19-11 09:58</td><td>[gudang]</td><td>Batch #21</td><td><span class="badge blue">updated</span></td><td><code>jumlah_sisa: 340 → 240</code></td></tr>
+            <tr><td>18-11 15:12</td><td>[apoteker]</td><td>PurchaseOrder #7</td><td><span class="badge blue">updated</span></td><td><code>alasan_override_pagu: null → "stok kritis"</code></td></tr>
+            <tr><td>18-11 14:03</td><td>[admin]</td><td>Anggaran #9</td><td><span class="badge green">created</span></td><td><code>jumlah_anggaran: 0 → 400.000.000</code></td></tr>
+            <tr><td>17-11 08:11</td><td>[gudang]</td><td>StockLedger #1040</td><td><span class="badge green">created</span></td><td><code>jumlah: −6 · referensi: penyesuaian #7</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note warn">
+      Tabel <code>activity_log</code> (Spatie) tidak boleh diedit atau dihapus dari UI.
+      Akses hanya untuk Apoteker dan Admin (role <code>read</code>).
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock Ledger — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="stok-ledger">
+  <main class="page">
+    <h1>Stock Ledger</h1>
+    <p class="subtitle">Jurnal permanen seluruh mutasi stok. Stok saat ini adalah turunan ledger.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua tipe</option><option>masuk</option><option>keluar</option></select>
+      <select class="input"><option>Semua referensi</option><option>penerimaan</option><option>distribusi</option><option>penyesuaian</option><option>opname</option></select>
+      <div class="input placeholder">Dari tanggal</div>
+      <div class="input placeholder">Sampai tanggal</div>
+      <div class="spacer"></div>
+      <button class="btn">Export</button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Tanggal</th><th>Batch</th><th>Tipe</th><th>Referensi</th><th class="num">Sebelum</th><th class="num">Jumlah</th><th class="num">Sesudah</th><th>User</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>LED-1042</td><td>18-11-2026</td><td>AMX-2601</td><td><span class="badge green">masuk</span></td><td>penerimaan #GR-0012</td><td class="num">40</td><td class="num">+200</td><td class="num">240</td><td>[gudang]</td></tr>
+            <tr><td>LED-1041</td><td>17-11-2026</td><td>PCM-2512</td><td><span class="badge red">keluar</span></td><td>distribusi #SJ-0031</td><td class="num">118</td><td class="num">−100</td><td class="num">18</td><td>[distribusi]</td></tr>
+            <tr><td>LED-1040</td><td>15-11-2026</td><td>CFT-2509</td><td><span class="badge red">keluar</span></td><td>penyesuaian #ADJ-0007</td><td class="num">70</td><td class="num">−6</td><td class="num">64</td><td>[apoteker]</td></tr>
+            <tr><td>LED-1039</td><td>14-11-2026</td><td>CFT-2404</td><td><span class="badge red">keluar</span></td><td>opname #OPN-0004</td><td class="num">20</td><td class="num">−8</td><td class="num">12</td><td>[gudang]</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <span class="annot">immutable</span> Tabel ini <strong>append-only</strong>: tanpa <code>updated_at</code>, tanpa hard delete.
+      Koreksi = tulis entry reversal baru. Semua perubahan stok wajib lewat sini.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

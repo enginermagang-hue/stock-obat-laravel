@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pengaturan — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="pengaturan">
+  <main class="page">
+    <h1>Pengaturan</h1>
+    <p class="subtitle">Kelola user, role, permission, dan pengaturan aplikasi.</p>
+
+    <div class="tabs">
+      <span class="tab active">User</span><span class="tab">Role & Permission</span><span class="tab">Notifikasi</span><span class="tab">API Token</span>
+    </div>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-head">Daftar user <span class="meta">multi-user + role</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nama</th><th>Email</th><th>Facility</th><th>Role</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>[Nama admin]</td><td>admin@rs.go.id</td><td>RS (null)</td><td><span class="badge blue">admin</span></td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Edit</button></td></tr>
+              <tr><td>[Nama apoteker]</td><td>apoteker@rs.go.id</td><td>RS (null)</td><td><span class="badge blue">apoteker</span></td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Edit</button></td></tr>
+              <tr><td>[Nama gudang]</td><td>gudang@rs.go.id</td><td>RS (null)</td><td><span class="badge blue">gudang</span></td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Edit</button></td></tr>
+              <tr><td>[Nama puskesmas]</td><td>admin@pkm007.go.id</td><td>PKM-007</td><td><span class="badge blue">puskesmas</span></td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Edit</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Role & permission <span class="meta">Spatie</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Role</th><th>Akses utama</th><th>Scope</th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge blue">puskesmas</span></td><td>LPLPO, permintaan, konfirmasi terima</td><td>own <code>facility_id</code></td></tr>
+              <tr><td><span class="badge blue">gudang</span></td><td>Penerimaan, stok, opname</td><td>gudang pusat</td></tr>
+              <tr><td><span class="badge blue">distribusi</span></td><td>Surat jalan & pengiriman</td><td>semua puskesmas</td></tr>
+              <tr><td><span class="badge blue">apoteker</span></td><td>Verifikasi & approve seluruh modul</td><td>semua</td></tr>
+              <tr><td><span class="badge blue">admin</span></td><td>Semua + pengaturan</td><td>semua</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="note">
+          Otorisasi divalidasi ulang di Action layer; API memakai role & scope identik dengan UI.
+          Uji 403 untuk akses lintas <code>facility_id</code>.
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

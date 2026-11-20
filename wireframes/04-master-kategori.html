@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kategori Obat — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="master-kategori">
+  <main class="page">
+    <h1>Kategori Obat</h1>
+    <p class="subtitle">Pengelompokan obat untuk pelaporan dan analisis pemakaian.</p>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-head">Daftar kategori <span class="meta">4 data</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Kode</th><th>Nama</th><th class="num">Jumlah obat</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>KAT-01</td><td>Antibiotik</td><td class="num">86</td><td><button class="btn sm">Edit</button></td></tr>
+              <tr><td>KAT-02</td><td>Analgesik & antipiretik</td><td class="num">42</td><td><button class="btn sm">Edit</button></td></tr>
+              <tr><td>KAT-03</td><td>Antihipertensi</td><td class="num">37</td><td><button class="btn sm">Edit</button></td></tr>
+              <tr><td>KAT-04</td><td>Obat luar</td><td class="num">61</td><td><button class="btn sm">Edit</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Form kategori <span class="meta">create / edit</span></div>
+        <div class="field"><label>Kode</label><div class="input placeholder">KAT-05</div></div>
+        <div class="field"><label>Nama kategori</label><div class="input placeholder">[nama kategori]</div></div>
+        <div class="field"><label>Keterangan</label><textarea class="input placeholder" rows="3">[opsional]</textarea></div>
+        <div class="row"><button class="btn primary">Simpan</button><button class="btn">Batal</button></div>
+      </div>
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

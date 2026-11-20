@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notifikasi — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="notifikasi">
+  <main class="page">
+    <h1>Notifikasi</h1>
+    <p class="subtitle">Notifikasi database dari event domain; sebagian juga dikirim via mail.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua</option><option>Belum dibaca</option><option>Sudah dibaca</option></select>
+      <div class="spacer"></div>
+      <button class="btn">Tandai semua dibaca</button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Status</th><th>Event</th><th>Pesan</th><th>Penerima</th><th>Channel</th><th>Waktu</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><span class="badge blue">baru</span></td><td><code>PermintaanBaru</code></td><td>Permintaan PMSK-2026-0012 menunggu verifikasi.</td><td>Apoteker</td><td>Database</td><td>19-11 09:12</td><td><button class="btn sm">Baca</button></td></tr>
+            <tr><td><span class="badge blue">baru</span></td><td><code>PaguHampirTerlampaui</code></td><td>BOK PKM-007 telah terpakai 93%.</td><td>Apoteker</td><td>Database</td><td>18-11 16:40</td><td><button class="btn sm">Baca</button></td></tr>
+            <tr><td><span class="badge gray">dibaca</span></td><td><code>DrugDistributed</code></td><td>Surat jalan SJ-2026-0030 telah dikirim.</td><td>PKM-008</td><td>Database</td><td>17-11 11:05</td><td><button class="btn sm disabled">Baca</button></td></tr>
+            <tr><td><span class="badge blue">baru</span></td><td><code>StokMenipis</code></td><td>Paracetamol 500 mg (PCM-2512) sisa 18.</td><td>Apoteker</td><td>Database + Mail</td><td>17-11 08:00</td><td><button class="btn sm">Baca</button></td></tr>
+            <tr><td><span class="badge gray">dibaca</span></td><td><code>PrediksiSelesai</code></td><td>Prediksi November 2026 siap ditinjau.</td><td>Apoteker</td><td>Database</td><td>15-11 07:30</td><td><button class="btn sm disabled">Baca</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note">
+      Scheduler harian: cek expiry & stok minimum. Scheduler bulanan: pengingat LPLPO & opname.
+      Semua perubahan status/angka juga ditulis ke <code>activity_log</code> via listener.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

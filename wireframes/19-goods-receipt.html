@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Goods Receipt — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="goods-receipt">
+  <main class="page">
+    <h1>Goods Receipt — Penerimaan Barang</h1>
+    <p class="subtitle">Penerimaan PO → batch obat + ledger masuk + realisasi anggaran.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua PO</option><option>PO-2026-0007</option><option>PO-2026-0006</option></select>
+      <div class="input placeholder">Dari tanggal</div>
+      <div class="spacer"></div>
+      <button class="btn">Export</button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>No. penerimaan</th><th>PO</th><th>Supplier</th><th>Tanggal terima</th><th class="num">Total</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>GR-2026-0012</td><td>PO-2026-0006</td><td>CV Medika Jaya</td><td>18-11-2026</td><td class="num">Rp 42.100.000</td><td><button class="btn sm">Buka</button></td></tr>
+            <tr><td>GR-2026-0011</td><td>PO-2026-0005</td><td>PT Farma Nusantara</td><td>10-11-2026</td><td class="num">Rp 45.000.000</td><td><button class="btn sm">Buka</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Form penerimaan dari PO-2026-0007 <span class="meta">baru disimpan</span></div>
+      <div class="form-grid">
+        <div class="field"><label>No. penerimaan</label><div class="input placeholder">GR-2026-0013</div></div>
+        <div class="field"><label>Tanggal terima</label><div class="input placeholder">20-11-2026</div></div>
+        <div class="field"><label>Supplier (dari PO)</label><div class="input placeholder">PT Farma Nusantara</div></div>
+        <div class="field"><label>Sumber dana (snapshot dari PO)</label><div class="input placeholder">APBD Kab.</div></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Obat</th><th>No. batch</th><th>Produksi</th><th>Expiry</th><th class="num">Jumlah</th><th class="num">Harga beli</th><th>Lokasi rak</th><th class="num">Subtotal</th></tr></thead>
+          <tbody>
+            <tr><td>Amoxicillin 500 mg</td><td><div class="input placeholder" style="width:110px;">AMX-2601</div></td><td><div class="input placeholder" style="width:100px;">05-01-2026</div></td><td><div class="input placeholder" style="width:100px;">04-01-2028</div></td><td><div class="input placeholder" style="width:70px;">50.000</div></td><td class="num">Rp 1.250</td><td><div class="input placeholder" style="width:90px;">Rak A-03</div></td><td class="num">Rp 62.500.000</td></tr>
+            <tr><td>Ceftriaxone 1 g</td><td><div class="input placeholder" style="width:110px;">CFT-2611</div></td><td><div class="input placeholder" style="width:100px;">01-11-2026</div></td><td><div class="input placeholder" style="width:100px;">31-10-2028</div></td><td><div class="input placeholder" style="width:70px;">1.000</div></td><td class="num">Rp 17.000</td><td><div class="input placeholder" style="width:90px;">Rak C-02</div></td><td class="num">Rp 17.000.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="toolbar" style="margin-top: 14px; margin-bottom: 0;">
+        <button class="btn primary">Simpan Penerimaan</button>
+        <button class="btn">Batal</button>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">ReceivePurchaseOrder</span> Membuat <code>goods_receipt</code> + <code>batch_obat</code> +
+      entri <code>stock_ledger</code> bertipe <code>masuk</code> dalam satu transaksi.
+      <code>sumber_dana_id</code> disalin ke receipt dan batch (snapshot), realisasi anggaran diakui di sini.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

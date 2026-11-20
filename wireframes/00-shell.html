@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shell & Komponen — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="shell">
+  <main class="page">
+    <h1>Shell & Komponen</h1>
+    <p class="subtitle">Layout dasar dan pustaka elemen yang dipakai di seluruh wireframe.</p>
+
+    <div class="grid cols-2">
+      <div class="card">
+        <div class="card-head">Tombol <span class="meta">actions</span></div>
+        <div class="row">
+          <button class="btn">Default</button>
+          <button class="btn primary">Primary</button>
+          <button class="btn accent">Accent</button>
+          <button class="btn danger">Danger</button>
+          <button class="btn sm">Small</button>
+          <button class="btn disabled" disabled>Disabled</button>
+        </div>
+        <div class="note">Tombol verifikasi / approve hanya muncul untuk role Apoteker & Admin.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Status badge <span class="meta">state machine</span></div>
+        <div class="row">
+          <span class="badge gray">draft</span>
+          <span class="badge blue">dikirim</span>
+          <span class="badge blue">diverifikasi</span>
+          <span class="badge green">disetujui</span>
+          <span class="badge green">selesai</span>
+          <span class="badge amber">sebagian</span>
+          <span class="badge red">ditolak</span>
+          <span class="badge red">expired</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Form field <span class="meta">FormRequest bersama</span></div>
+        <div class="field">
+          <label>Nama obat</label>
+          <div class="input placeholder">Amoxicillin 500 mg</div>
+          <div class="hint">Contoh teks placeholder, bukan input sungguhan.</div>
+        </div>
+        <div class="form-grid">
+          <div class="field"><label>Satuan</label><div class="input placeholder">tablet</div></div>
+          <div class="field"><label>Stok minimum</label><div class="input placeholder">50</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Alur status <span class="meta">contoh LPLPO</span></div>
+        <div class="flow">
+          <span class="flow-step done">draft</span><span class="flow-arrow">→</span>
+          <span class="flow-step done">dikirim</span><span class="flow-arrow">→</span>
+          <span class="flow-step current">diverifikasi</span><span class="flow-arrow">→</span>
+          <span class="flow-step">immutable</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Progress <span class="meta">penyerapan anggaran</span></div>
+        <div class="row" style="justify-content: space-between;">
+          <span>APBD Kab. 2026</span><strong>72%</strong>
+        </div>
+        <div class="progress" style="margin-top: 8px;"><span style="width: 72%;"></span></div>
+        <div class="row" style="justify-content: space-between; margin-top: 12px;">
+          <span>BOK 2026</span><strong class="badge amber">98% · hampir overrun</strong>
+        </div>
+        <div class="progress warn" style="margin-top: 8px;"><span style="width: 98%;"></span></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">Tabel <span class="meta">data dummy</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Obat</th><th>Batch</th><th class="num">Sisa</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Amoxicillin 500 mg</td><td>AMX-2601</td><td class="num">240</td><td><span class="badge green">aktif</span></td></tr>
+              <tr><td>Paracetamol 500 mg</td><td>PCM-2512</td><td class="num">18</td><td><span class="badge amber">menipis</span></td></tr>
+              <tr><td>Ceftriaxone 1 g</td><td>CFT-2509</td><td class="num">0</td><td><span class="badge red">expired</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Area grafik <span class="meta">chart placeholder</span></div>
+      <div class="chart">[ Tren pemakaian 12 bulan — placeholder grafik ]</div>
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

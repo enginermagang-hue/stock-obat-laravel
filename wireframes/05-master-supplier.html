@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supplier — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="master-supplier">
+  <main class="page">
+    <h1>Supplier</h1>
+    <p class="subtitle">Data pemasok yang dipakai pada PO dan penerimaan barang.</p>
+
+    <div class="toolbar">
+      <div class="input placeholder" style="min-width: 240px;">Cari nama / kode supplier</div>
+      <div class="spacer"></div>
+      <a class="btn accent" href="00-shell.html">+ Tambah Supplier</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kode</th><th>Nama</th><th>Kontak</th><th>NPWP</th><th>Izin usaha</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>SUP-001</td><td>PT Farma Nusantara</td><td>[telepon / email]</td><td>01.234.567.8-901</td><td><span class="badge green">valid</span></td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td></tr>
+            <tr><td>SUP-002</td><td>CV Medika Jaya</td><td>[telepon / email]</td><td>02.345.678.9-012</td><td><span class="badge green">valid</span></td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td></tr>
+            <tr><td>SUP-003</td><td>PT Sehat Bersama</td><td>[telepon / email]</td><td>—</td><td><span class="badge amber">akan terbit</span></td><td><span class="badge gray">nonaktif</span></td><td><button class="btn sm">Detail</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">snapshot</span> Nama supplier disalin ke <code>goods_receipt</code> dan <code>batch_obat</code>,
+      sehingga riwayat tetap auditabel bila data master berubah.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

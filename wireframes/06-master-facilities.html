@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Puskesmas / Fasilitas — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="master-facilities">
+  <main class="page">
+    <h1>Puskesmas / Fasilitas</h1>
+    <p class="subtitle">Daftar puskesmas tujuan distribusi beserta akun login dan scoping data.</p>
+
+    <div class="toolbar">
+      <div class="input placeholder" style="min-width: 240px;">Cari kode / nama puskesmas</div>
+      <div class="spacer"></div>
+      <button class="btn">Import dari Excel</button>
+      <a class="btn accent" href="00-shell.html">+ Tambah Puskesmas</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Kode</th><th>Nama fasilitas</th><th>Jenis</th><th>Akun login</th><th>Alamat / kontak</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>RS-000</td><td>Rumah Sakit Umum Pusat</td><td><span class="badge blue">rs</span></td><td>—</td><td>[alamat RS]</td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td></tr>
+            <tr><td>PKM-007</td><td>Puskesmas Sukamaju</td><td><span class="badge gray">puskesmas</span></td><td>admin@pkm007.go.id</td><td>[alamat / kontak]</td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td></tr>
+            <tr><td>PKM-008</td><td>Puskesmas Margahayu</td><td><span class="badge gray">puskesmas</span></td><td>admin@pkm008.go.id</td><td>[alamat / kontak]</td><td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td></tr>
+            <tr><td>PKM-009</td><td>Puskesmas Cibeureum</td><td><span class="badge gray">puskesmas</span></td><td>[belum dibuat]</td><td>[alamat / kontak]</td><td><span class="badge amber">nonaktif</span></td><td><button class="btn sm">Detail</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <span class="annot">sentinel</span> Baris <code>RS-000</code> dipakai sebagai <code>facility_id = 0</code> di tabel
+      <code>anggaran</code> agar constraint unik tetap bekerja. <code>FacilityScope</code> membatasi
+      puskesmas hanya pada datanya sendiri.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

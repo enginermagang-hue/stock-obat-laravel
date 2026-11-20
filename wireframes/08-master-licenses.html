@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Izin & CDOB — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="master-licenses">
+  <main class="page">
+    <h1>Izin & CDOB</h1>
+    <p class="subtitle">Kelola izin apotek, izin edar obat, dan sertifikat CDOB beserta lampiran.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Semua jenis</option><option>Izin apotek</option><option>Izin edar</option><option>CDOB</option><option>Lainnya</option></select>
+      <div class="spacer"></div>
+      <a class="btn accent" href="00-shell.html">+ Tambah Izin</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Jenis</th><th>Nomor</th><th>Terbit</th><th>Kedaluwarsa</th><th>File</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Izin apotek</td><td>IA-2024/0182</td><td>12-03-2024</td><td>11-03-2029</td><td><a href="#" style="color:var(--accent)">PDF ⤓</a></td><td><span class="badge green">valid</span></td><td><button class="btn sm">Edit</button></td></tr>
+            <tr><td>CDOB</td><td>CDOB-2023/0451</td><td>04-08-2023</td><td>03-08-2028</td><td><a href="#" style="color:var(--accent)">PDF ⤓</a></td><td><span class="badge green">valid</span></td><td><button class="btn sm">Edit</button></td></tr>
+            <tr><td>Izin edar</td><td>DE-800-2021</td><td>20-01-2021</td><td>30-11-2026</td><td><a href="#" style="color:var(--accent)">PDF ⤓</a></td><td><span class="badge amber">segera terbit</span></td><td><button class="btn sm">Edit</button></td></tr>
+            <tr><td>Izin edar</td><td>DE-712-2019</td><td>02-05-2019</td><td>01-05-2024</td><td><a href="#" style="color:var(--accent)">PDF ⤓</a></td><td><span class="badge red">kedaluwarsa</span></td><td><button class="btn sm">Edit</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">kepatuhan</span> Job harian memeriksa kedaluwarsa izin dan mengirim notifikasi
+      <code>ObatExpiring</code> / pengingat CDOB ke apoteker. File disimpan di Laravel <code>storage</code>.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

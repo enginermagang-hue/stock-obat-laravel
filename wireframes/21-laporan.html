@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laporan — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="laporan">
+  <main class="page">
+    <h1>Laporan</h1>
+    <p class="subtitle">16 laporan untuk monitoring stok, anggaran, kepatuhan, dan akurasi prediksi.</p>
+
+    <div class="grid cols-4" style="margin-bottom: 18px;">
+      <div class="hub-card"><div class="g">stok</div><div class="t">1 · Kartu stok per obat/batch</div><div class="d">Mutasi ledger per batch.</div></div>
+      <div class="hub-card"><div class="g">stok</div><div class="t">2 · Stok akhir per periode</div><div class="d">Rekap nilai & jumlah.</div></div>
+      <div class="hub-card"><div class="g">stok</div><div class="t">3 · Obat kadaluarsa</div><div class="d">Expired & mendekati expired.</div></div>
+      <div class="hub-card"><div class="g">stok</div><div class="t">4 · Obat stok minimum</div><div class="d">Di bawah ambang batas.</div></div>
+      <div class="hub-card"><div class="g">lplpo</div><div class="t">5 · Rekap LPLPO</div><div class="d">Per puskesmas & periode + selisih.</div></div>
+      <div class="hub-card"><div class="g">distribusi</div><div class="t">6 · Permintaan vs realisasi</div><div class="d">Fulfillment rate per item.</div></div>
+      <div class="hub-card"><div class="g">rko</div><div class="t">7 · RKO vs realisasi pembelian</div><div class="d">Deviasi rencana dan aktual.</div></div>
+      <div class="hub-card"><div class="g">anggaran</div><div class="t">8 · Anggaran–Realisasi</div><div class="d">Pagu, komitmen, realisasi, sisa, %.</div></div>
+      <div class="hub-card"><div class="g">anggaran</div><div class="t">9 · Realisasi per obat/kategori</div><div class="d">Dana apa membeli obat apa.</div></div>
+      <div class="hub-card"><div class="g">anggaran</div><div class="t">10 · Nilai distribusi per dana</div><div class="d">Trace sumber_dana_id batch.</div></div>
+      <div class="hub-card"><div class="g">tren</div><div class="t">11 · Tren pemakaian obat</div><div class="d">Input RKO berikutnya.</div></div>
+      <div class="hub-card"><div class="g">opname</div><div class="t">12 · Hasil stok opname</div><div class="d">Sistem vs fisik, selisih, nilai.</div></div>
+      <div class="hub-card"><div class="g">opname</div><div class="t">13 · Riwayat selisih opname</div><div class="d">Tren per obat.</div></div>
+      <div class="hub-card"><div class="g">audit</div><div class="t">14 · Audit trail</div><div class="d">Read-only.</div></div>
+      <div class="hub-card"><div class="g">prediksi</div><div class="t">15 · Prediksi vs realisasi</div><div class="d">Akurasi per obat/periode.</div></div>
+      <div class="hub-card"><div class="g">prediksi</div><div class="t">16 · Evaluasi akurasi model</div><div class="d">MAPE, metode terbaik, versi.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Contoh layout — Anggaran–Realisasi per sumber dana <span class="meta">laporan #8</span></div>
+      <div class="toolbar">
+        <select class="input"><option>Tahun 2026</option><option>Tahun 2025</option></select>
+        <select class="input" data-roles="apoteker,admin"><option>Semua unit</option><option>RS (0)</option><option>PKM-007</option></select>
+        <div class="spacer"></div>
+        <button class="btn">Excel</button><button class="btn">PDF</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sumber dana</th><th>Unit</th><th class="num">Pagu</th><th class="num">Komitmen bersih</th><th class="num">Realisasi</th><th class="num">Sisa pagu</th><th class="num">% Realisasi</th></tr></thead>
+          <tbody>
+            <tr><td>APBN</td><td>RS (0)</td><td class="num">2.000.000.000</td><td class="num">320.000.000</td><td class="num">960.000.000</td><td class="num">720.000.000</td><td class="num">48%</td></tr>
+            <tr><td>APBD Kab.</td><td>RS (0)</td><td class="num">1.500.000.000</td><td class="num">210.000.000</td><td class="num">960.000.000</td><td class="num">330.000.000</td><td class="num">64%</td></tr>
+            <tr class="total"><td colspan="2">Total</td><td class="num">3.500.000.000</td><td class="num">530.000.000</td><td class="num">1.920.000.000</td><td class="num">1.050.000.000</td><td class="num">55%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top: 16px;">
+      <div class="card-head">Contoh layout — Kartu stok per batch <span class="meta">laporan #1</span></div>
+      <div class="chart">[ Grafik batang mutasi masuk/keluar per bulan untuk batch AMX-2601 ]</div>
+      <div class="table-wrap" style="margin-top: 12px;">
+        <table>
+          <thead><tr><th>Tanggal</th><th>Referensi</th><th class="num">Masuk</th><th class="num">Keluar</th><th class="num">Saldo</th></tr></thead>
+          <tbody>
+            <tr><td>18-11-2026</td><td>penerimaan #GR-0012</td><td class="num">+200</td><td class="num">—</td><td class="num">240</td></tr>
+            <tr><td>19-11-2026</td><td>distribusi #SJ-0031</td><td class="num">—</td><td class="num">−100</td><td class="num">140</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note">Puskesmas hanya melihat laporan untuk <code>facility_id</code>-nya sendiri.</div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

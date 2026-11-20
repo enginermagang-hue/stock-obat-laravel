@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="login">
+  <div class="bare-wrap">
+    <div class="login-card">
+      <div class="login-logo">OS</div>
+      <h1>Manajemen Stok Obat</h1>
+      <p class="subtitle">Gudang farmasi pusat & distribusi puskesmas.</p>
+
+      <div class="field">
+        <label>Email</label>
+        <div class="input placeholder">nama@rs.go.id</div>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="input placeholder">••••••••</div>
+      </div>
+      <div class="row" style="justify-content: space-between; margin-bottom: 16px;">
+        <label class="row" style="font-size: 11.5px;"><input type="checkbox"> Ingat saya</label>
+        <a href="#" style="font-size: 11.5px; color: var(--accent);">Lupa password?</a>
+      </div>
+      <a class="btn primary" href="index.html" style="width: 100%; justify-content: center;">Masuk</a>
+
+      <div class="role-hint">
+        Setelah masuk, pilih role di header (Puskesmas / Gudang / Distribusi / Apoteker / Admin).
+        API memakai Sanctum: token untuk mobile, cookie untuk SPA.
+      </div>
+    </div>
+  </div>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

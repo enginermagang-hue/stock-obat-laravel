@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anggaran — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="anggaran">
+  <main class="page">
+    <h1>Anggaran</h1>
+    <p class="subtitle">Pagu tahunan per sumber dana dan unit, komitmen, serta realisasi.</p>
+
+    <div class="toolbar">
+      <select class="input"><option>Tahun 2026</option><option>Tahun 2025</option></select>
+      <select class="input"><option>Semua sumber dana</option><option>APBN</option><option>APBD Kab.</option><option>BOK</option></select>
+      <div class="spacer"></div>
+      <a class="btn accent" href="00-shell.html">+ Tambah Pagu</a>
+    </div>
+
+    <div class="card">
+      <div class="card-head">Rekap pagu, komitmen & realisasi <span class="meta">realisasi diakui saat penerimaan barang</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sumber dana</th><th>Unit</th><th class="num">Pagu</th><th class="num">Komitmen</th><th class="num">Realisasi</th><th class="num">Sisa</th><th class="num">% Realisasi</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>APBN</td><td>RS (0)</td><td class="num">Rp 2.000.000.000</td><td class="num">Rp 320.000.000</td><td class="num">Rp 960.000.000</td><td class="num">Rp 720.000.000</td><td class="num">48%</td><td><span class="badge green">aman</span></td></tr>
+            <tr><td>APBD Kab.</td><td>RS (0)</td><td class="num">Rp 1.500.000.000</td><td class="num">Rp 210.000.000</td><td class="num">Rp 960.000.000</td><td class="num">Rp 330.000.000</td><td class="num">64%</td><td><span class="badge green">aman</span></td></tr>
+            <tr><td>BOK</td><td>PKM-007</td><td class="num">Rp 400.000.000</td><td class="num">Rp 20.000.000</td><td class="num">Rp 372.000.000</td><td class="num">Rp 8.000.000</td><td class="num">93%</td><td><span class="badge amber">hampir overrun</span></td></tr>
+            <tr><td>DAK</td><td>PKM-008</td><td class="num">Rp 300.000.000</td><td class="num">Rp 45.000.000</td><td class="num">Rp 120.000.000</td><td class="num">Rp 135.000.000</td><td class="num">40%</td><td><span class="badge green">aman</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="grid cols-2" style="margin-top: 16px;">
+      <div class="card">
+        <div class="card-head">Form pagu <span class="meta">versi baru untuk revisi</span></div>
+        <div class="form-grid">
+          <div class="field"><label>Sumber dana</label><div class="input placeholder">BOK</div></div>
+          <div class="field"><label>Tahun</label><div class="input placeholder">2026</div></div>
+          <div class="field"><label>Unit (facility_id)</label><div class="input placeholder">PKM-007</div></div>
+          <div class="field"><label>Jumlah anggaran</label><div class="input placeholder">Rp 400.000.000</div></div>
+        </div>
+        <div class="row"><button class="btn primary">Simpan</button><button class="btn">Batal</button></div>
+      </div>
+      <div class="card">
+        <div class="card-head">Penyerapan <span class="meta">progress bar</span></div>
+        <div class="stack">
+          <div><div class="row" style="justify-content: space-between;"><span>APBN · RS</span><span>48%</span></div><div class="progress"><span style="width:48%"></span></div></div>
+          <div><div class="row" style="justify-content: space-between;"><span>APBD Kab. · RS</span><span>64%</span></div><div class="progress"><span style="width:64%"></span></div></div>
+          <div><div class="row" style="justify-content: space-between;"><span>BOK · PKM-007</span><span>93%</span></div><div class="progress warn"><span style="width:93%"></span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note warn">
+      <span class="annot">peringatan saja</span> <code>ValidatePagu</code> mengembalikan warning
+      <code>PAGU_TERLAMPAUI</code> + <code>alasan_override_pagu</code> + activity log — bukan pemblokiran.
+      Saat barang diterima, nilai berpindah dari komitmen ke realisasi (tidak dihitung dua kali).
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>

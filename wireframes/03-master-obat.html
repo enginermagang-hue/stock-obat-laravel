@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Master Obat — Wireframe</title>
+  <link rel="stylesheet" href="assets/wireframe.css">
+</head>
+<body data-page="master-obat">
+  <main class="page">
+    <h1>Master Obat</h1>
+    <p class="subtitle">Data obat, golongan, izin edar, dan ambang stok minimum.</p>
+
+    <div class="toolbar">
+      <div class="input placeholder" style="min-width: 220px;">Cari nama / kode obat</div>
+      <select class="input"><option>Semua kategori</option><option>Antibiotik</option><option>Analgesik</option></select>
+      <select class="input"><option>Semua golongan</option><option>Bebas</option><option>Bebas terbatas</option><option>Keras</option></select>
+      <div class="spacer"></div>
+      <button class="btn" data-roles="gudang,apoteker,admin">Import Excel</button>
+      <a class="btn accent" href="00-shell.html" data-roles="gudang,apoteker,admin">+ Tambah Obat</a>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Kode</th><th>Nama obat</th><th>Bentuk</th><th>Kekuatan</th>
+              <th>Golongan</th><th class="num">Stok min</th><th class="num">Harga terakhir</th><th>Status</th><th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OBT-0001</td><td>Amoxicillin</td><td>tablet</td><td>500 mg</td>
+              <td><span class="badge amber">bebas terbatas</span></td><td class="num">50</td><td class="num">Rp 1.250</td>
+              <td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td>
+            </tr>
+            <tr>
+              <td>OBT-0002</td><td>Paracetamol</td><td>tablet</td><td>500 mg</td>
+              <td><span class="badge gray">bebas</span></td><td class="num">100</td><td class="num">Rp 320</td>
+              <td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td>
+            </tr>
+            <tr>
+              <td>OBT-0003</td><td>Ceftriaxone</td><td>injeksi</td><td>1 g</td>
+              <td><span class="badge red">keras</span></td><td class="num">20</td><td class="num">Rp 18.000</td>
+              <td><span class="badge green">aktif</span></td><td><button class="btn sm">Detail</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="justify-content: space-between; margin-top: 12px;">
+        <span class="badge gray">Menampilkan 1–3 dari 1.248 obat</span>
+        <div class="row"><button class="btn sm disabled">‹</button><button class="btn sm">1</button><button class="btn sm">2</button><button class="btn sm">3</button><button class="btn sm">›</button></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="annot">validasi tunggal</span> FormRequest yang sama dipakai Livewire dan API <code>/api/v1/obat</code>.
+      Field <code>butuh_cold_chain</code> dan <code>no_izin_edar</code> wajib untuk pelaporan CDOB.
+    </div>
+  </main>
+  <script src="assets/wireframe.js"></script>
+</body>
+</html>
