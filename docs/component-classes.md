@@ -184,32 +184,41 @@ Untuk Fase 2, komponen ini dipakai sebagai “Komposisi stok per status batch”
 | `os-form-grid` | Grid dua kolom. |
 | `os-field`, `os-field--inline` | Field dan variasi sejajar. |
 | `os-label`, `os-help`, `os-error` | Label, bantuan, dan pesan error. |
-| `os-input`, `os-select`, `os-textarea` | Kontrol dasar 48px / radius 8px; fokus hanya mengubah border, tanpa ring/shadow. |
-| `os-input--lg`, `os-select--lg`, `os-input--sm`, `os-select--sm` | Varian ukuran 54px / 38px. |
+| `os-input`, `os-select`, `os-textarea` | Kontrol dasar 48px / radius 8px / font 15px; fokus border 2px primary. |
+| `os-input--lg`, `os-select--lg` | Ukuran 56px / radius 10px / font 17px. |
+| `os-input--sm`, `os-select--sm` | Ukuran 40px / radius 6px / font 13px. |
 | `os-input--rounded`, `os-input--plaintext`, `os-select--plaintext` | Varian bentuk dan tampilan tanpa border. |
-| `os-select--multiple` | Select multiple dengan tinggi minimum 80px. |
+| `os-input--invalid`, `os-input--valid` | State validasi dengan warna danger/success. |
+| `os-select--multiple` | Select multiple tanpa chevron, tinggi minimum 80px. |
 | `:disabled`, `os-input--disabled` | State nonaktif. |
-| `os-checkbox`, `os-radio`, `os-switch`, `os-toggle` | Kontrol pilihan. |
-| `os-floating`, `os-floating-input`, `os-floating-label` | Varian floating label (bukan default). |
+| `os-checkbox`, `os-radio` | Kontrol 18px border 2px dengan centang/titik putih. |
+| `os-switch`, `os-toggle`, `os-range` | Switch 30×18px dan slider. |
 
-Default memakai label 13px di atas input:
+Tiga varian sesuai demo Materialize:
 
 ```blade
+{{-- Default: label 13px di atas input --}}
 <div class="os-field">
     <label for="email" class="os-label">Email</label>
     <input id="email" type="email" class="os-input" wire:model="email">
     <span class="os-help">Kami tidak akan membagikan detail Anda.</span>
 </div>
-```
 
-Floating label dipakai hanya jika diinginkan:
-
-```blade
+{{-- Floating outline: label di atas border --}}
 <div class="os-floating">
     <input type="email" placeholder=" " class="os-floating-input" wire:model="email">
     <label class="os-floating-label" for="email">Email</label>
 </div>
+
+{{-- Floating filled: latar abu dengan garis bawah --}}
+<div class="os-floating os-floating--filled">
+    <input type="email" placeholder=" " class="os-floating-input" wire:model="email">
+    <label class="os-floating-label" for="email">Email</label>
+    <span class="os-floating-focused"></span>
+</div>
 ```
+
+Form master dan login memakai varian **floating outline**.
 
 ## Feedback
 

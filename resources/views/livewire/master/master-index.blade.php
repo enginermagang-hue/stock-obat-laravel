@@ -65,27 +65,31 @@
                             <input type="checkbox" id="field-{{ $key }}" wire:model="form.{{ $key }}"
                                    class="os-checkbox">
                             <label for="field-{{ $key }}" class="os-label">{{ $field['label'] }}</label>
+                            @error('form.'.$key) <span class="os-error">{{ $message }}</span> @enderror
                         </div>
                     @elseif ($type === 'select')
-                        <div class="os-field">
-                            <label for="field-{{ $key }}" class="os-label">{{ $field['label'] }}</label>
-                            <select id="field-{{ $key }}" wire:model="form.{{ $key }}" class="os-select">
+                        <div class="os-floating">
+                            <select id="field-{{ $key }}" wire:model="form.{{ $key }}"
+                                    class="os-floating-input os-select">
                                 <option value="">— pilih —</option>
                                 @foreach ($field['options'] as $value => $label)
                                     <option value="{{ $value }}">{{ $label }}</option>
                                 @endforeach
                             </select>
+                            <label class="os-floating-label" for="field-{{ $key }}">{{ $field['label'] }}</label>
+                            @error('form.'.$key) <span class="os-error">{{ $message }}</span> @enderror
                         </div>
                     @else
-                        <div class="os-field">
-                            <label for="field-{{ $key }}" class="os-label">{{ $field['label'] }}</label>
+                        <div class="os-floating">
                             <input id="field-{{ $key }}"
                                    type="{{ $type === 'number' ? 'number' : 'text' }}"
+                                   placeholder=" "
                                    wire:model="form.{{ $key }}"
-                                   class="os-input">
+                                   class="os-floating-input">
+                            <label class="os-floating-label" for="field-{{ $key }}">{{ $field['label'] }}</label>
+                            @error('form.'.$key) <span class="os-error">{{ $message }}</span> @enderror
                         </div>
                     @endif
-                    @error('form.'.$key) <span class="os-error">{{ $message }}</span> @enderror
                 @endforeach
             </div>
             <div class="os-section os-toolbar">
