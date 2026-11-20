@@ -13,6 +13,36 @@
         <div class="os-alert os-alert--success os-section-tight">{{ session('status') }}</div>
     @endif
 
+    @error('status')
+        <div class="os-alert os-alert--danger os-section-tight">{{ $message }}</div>
+    @enderror
+
+    @if ($paguWarningPoId)
+        <div class="os-section os-alert os-alert--warning">
+            <div class="os-card-title">Pagu sumber dana terlampaui</div>
+            <div class="os-help os-section-tight">
+                Pagu: Rp {{ number_format((float) ($paguWarning['pagu'] ?? 0), 0, ',', '.') }}
+                · Komitmen bersih: Rp {{ number_format((float) ($paguWarning['komitmen_bersih'] ?? 0), 0, ',', '.') }}
+                · Realisasi: Rp {{ number_format((float) ($paguWarning['realisasi'] ?? 0), 0, ',', '.') }}
+                · Sisa: Rp {{ number_format((float) ($paguWarning['sisa'] ?? 0), 0, ',', '.') }}
+            </div>
+            <div class="os-field os-section-tight">
+                <label class="os-label">Alasan override pagu</label>
+                <input type="text" wire:model="alasan_override_pagu" class="os-input @error('alasan_override_pagu') os-input--invalid @enderror"
+                       placeholder="Contoh: kebutuhan outbreak, disetujui direktur">
+                @error('alasan_override_pagu')
+                    <div class="os-error">{{ $message }}</div>
+                @enderror
+            </div>
+            <div class="os-toolbar os-section-tight">
+                <button wire:click="approve({{ $paguWarningPoId }})" class="os-btn os-btn--primary">
+                    <x-icon name="check-line" :size="16" /> Setujui dengan override
+                </button>
+                <button wire:click="$set('paguWarningPoId', null)" class="os-btn os-btn--secondary">Batal</button>
+            </div>
+        </div>
+    @endif
+
     @if ($showForm)
         <div class="os-section os-card os-card-body">
             <h2 class="os-card-title">PO baru</h2>
@@ -102,7 +132,7 @@
                         </td>
                         <td class="os-td-right">
                             <div class="os-table-actions">
-                                @if ($order->status === \App\Enums\StatusPurchaseOrder::Draft)
+                                @if ($order->status === \App\Enums\StatusPurchaseOrder::Draft && $order->approved_by)
                                     <button wire:click="send({{ $order->id }})" class="os-btn os-btn--sm os-btn--secondary">Kirim</button>
                                 @endif
                                 @can('approve-po')

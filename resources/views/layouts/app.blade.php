@@ -19,6 +19,7 @@
         'Stok' => 'archive-2-line',
         'Pembelian' => 'shopping-cart-2-line',
         'Perencanaan' => 'file-list-3-line',
+        'Keuangan' => 'wallet-3-line',
     ];
     $menu = [
         'Utama' => [
@@ -45,6 +46,9 @@
             ['label' => 'Permintaan', 'route' => 'permintaan.index', 'permission' => 'view-permintaan'],
             ['label' => 'RKO', 'route' => 'rko.index', 'permission' => 'manage-rko'],
             ['label' => 'Prediksi', 'route' => 'prediksi.index', 'permission' => 'manage-prediksi'],
+        ],
+        'Keuangan' => [
+            ['label' => 'Anggaran & Realisasi', 'route' => 'anggaran.index', 'permission' => 'manage-anggaran'],
         ],
     ];
 @endphp

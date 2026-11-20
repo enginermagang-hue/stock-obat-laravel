@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\AnggaranController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\BatchObatController;
 use App\Http\Controllers\Api\V1\LplpoController;
@@ -43,6 +44,13 @@ Route::prefix('v1')->group(function () {
         Route::get('/prediksi/akurasi', [PrediksiController::class, 'akurasi']);
         Route::get('/prediksi/{prediksi}', [PrediksiController::class, 'show']);
         Route::post('/prediksi/{prediksi}/validasi', [PrediksiController::class, 'validatePrediction']);
+
+        Route::get('/anggaran', [AnggaranController::class, 'index']);
+        Route::post('/anggaran', [AnggaranController::class, 'store']);
+        Route::get('/anggaran/rekap', [AnggaranController::class, 'rekap']);
+        Route::get('/anggaran/{anggaran}', [AnggaranController::class, 'show']);
+        Route::put('/anggaran/{anggaran}', [AnggaranController::class, 'update']);
+        Route::delete('/anggaran/{anggaran}', [AnggaranController::class, 'destroy']);
 
         Route::get('/rko', [RkoController::class, 'index']);
         Route::post('/rko', [RkoController::class, 'store']);

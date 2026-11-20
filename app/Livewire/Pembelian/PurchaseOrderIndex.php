@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Pembelian;
 
+use App\Actions\Anggaran\ValidatePagu;
+use App\Actions\Pembelian\ApprovePurchaseOrder;
 use App\Enums\StatusPurchaseOrder;
 use App\Models\Obat;
 use App\Models\PurchaseOrder;
 use App\Models\SumberDana;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,11 +19,22 @@ class PurchaseOrderIndex extends Component
     use WithPagination;
 
     public bool $showForm = false;
+
     public ?int $supplier_id = null;
+
     public ?int $sumber_dana_id = null;
+
     public string $tanggal_po = '';
+
     public string $catatan = '';
+
     public array $items = [];
+
+    public ?int $paguWarningPoId = null;
+
+    public array $paguWarning = [];
+
+    public string $alasan_override_pagu = '';
 
     public function mount(): void
     {
@@ -87,20 +101,48 @@ class PurchaseOrderIndex extends Component
     public function send(int $id): void
     {
         abort_unless(auth()->user()->can('receive-goods'), 403);
+
         $po = PurchaseOrder::findOrFail($id);
-        if ($po->status === StatusPurchaseOrder::Draft) {
-            $po->update(['status' => StatusPurchaseOrder::Dikirim]);
+
+        if ($po->status !== StatusPurchaseOrder::Draft) {
+            return;
         }
+
+        if (! $po->approved_by) {
+            $this->addError('status', 'PO harus disetujui apoteker sebelum dikirim.');
+
+            return;
+        }
+
+        $po->update(['status' => StatusPurchaseOrder::Dikirim]);
     }
 
     public function approve(int $id): void
     {
         abort_unless(auth()->user()->can('approve-po'), 403);
+
         $po = PurchaseOrder::findOrFail($id);
-        $po->update([
-            'approved_by' => auth()->id(),
-            'status' => $po->status === StatusPurchaseOrder::Draft ? StatusPurchaseOrder::Dikirim : $po->status,
-        ]);
+
+        try {
+            app(ApprovePurchaseOrder::class)->handle(
+                $po,
+                auth()->id(),
+                $this->alasan_override_pagu ?: null,
+            );
+
+            $this->reset(['paguWarningPoId', 'paguWarning', 'alasan_override_pagu']);
+            session()->flash('status', 'PO disetujui dan siap dikirim.');
+        } catch (ValidationException $exception) {
+            $this->paguWarningPoId = $id;
+            $this->paguWarning = app(ValidatePagu::class)->handle(
+                (int) $po->tanggal_po->year,
+                $po->sumber_dana_id,
+                0,
+                (float) $po->total,
+                $po->id,
+            );
+            $this->addError('alasan_override_pagu', $exception->validator->errors()->first());
+        }
     }
 
     public function cancel(int $id): void

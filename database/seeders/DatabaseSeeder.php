@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             RolePermissionSeeder::class,
             UserSeeder::class,
             MasterSeeder::class,
+            AnggaranSeeder::class,
         ]);
     }
 }

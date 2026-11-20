@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LogoutController;
+use App\Livewire\Anggaran\AnggaranIndex;
 use App\Livewire\Dashboard;
 use App\Livewire\Login;
 use App\Livewire\Master\FacilityIndex;
@@ -44,4 +45,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/permintaan', PermintaanIndex::class)->middleware('can:view-permintaan')->name('permintaan.index');
     Route::get('/rko', RkoIndex::class)->middleware('can:manage-rko')->name('rko.index');
     Route::get('/prediksi', PrediksiIndex::class)->middleware('can:manage-prediksi')->name('prediksi.index');
+    Route::get('/anggaran', AnggaranIndex::class)->middleware('can:manage-anggaran')->name('anggaran.index');
 });

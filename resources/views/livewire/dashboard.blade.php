@@ -110,16 +110,33 @@
             <div class="os-kpi-label">Sumber dana</div>
             <span class="os-kpi-chip">Aktif</span>
         </div>
-        <div class="os-col-3 os-card os-card-body">
-            <h2 class="os-card-title">Penyerapan anggaran</h2>
-            <p class="os-card-subtitle">Contoh distribusi per sumber dana</p>
-            @foreach (['APBN' => 64, 'BOK' => 93, 'DAK' => 40] as $nama => $persen)
-                <div class="os-section-tight">
-                    <div class="os-metric-label flex justify-between"><span>{{ $nama }}</span><span>{{ $persen }}%</span></div>
-                    <div class="os-progress"><span style="width:{{ $persen }}%"></span></div>
-                </div>
-            @endforeach
-        </div>
+        @can('manage-anggaran')
+            <div class="os-col-3 os-card os-card-body">
+                <h2 class="os-card-title">Penyerapan anggaran</h2>
+                <p class="os-card-subtitle">Komitmen + realisasi · RS {{ now()->year }}</p>
+                @forelse ($penyerapan as $row)
+                    <div class="os-section-tight">
+                        <div class="os-metric-label flex justify-between">
+                            <span>{{ $row['nama'] }}</span>
+                            <span>{{ number_format($row['serapan'], 1, ',', '.') }}%</span>
+                        </div>
+                        <div class="os-progress">
+                            <span style="width:{{ max(0, min(100, $row['serapan'])) }}%"></span>
+                        </div>
+                    </div>
+                @empty
+                    <p class="os-help os-section-tight">Belum ada pagu anggaran.</p>
+                @endforelse
+                @if ($anggaran)
+                    <div class="os-help os-section-tight">
+                        Sisa pagu RS: Rp {{ number_format($anggaran['sisa'], 0, ',', '.') }}
+                    </div>
+                @endif
+                <a href="{{ route('anggaran.index') }}" wire:navigate class="os-btn os-btn--sm os-btn--ghost os-section-tight">
+                    Kelola anggaran
+                </a>
+            </div>
+        @endcan
 
         {{-- Baris keempat --}}
         <div class="os-col-4 os-card os-card-body">

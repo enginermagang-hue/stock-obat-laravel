@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\Pembelian\ApprovePurchaseOrder;
 use App\Actions\Stock\ReceivePurchaseOrder;
 use App\Enums\StatusPurchaseOrder;
 use App\Http\Controllers\Controller;
@@ -64,16 +65,19 @@ class PurchaseOrderController extends Controller
         return (new PurchaseOrderResource($po->load('items')))->response()->setStatusCode(201);
     }
 
-    public function approve(Request $request, PurchaseOrder $purchaseOrder)
+    public function approve(Request $request, PurchaseOrder $purchaseOrder, ApprovePurchaseOrder $action)
     {
         abort_unless($request->user()->can('approve-po'), 403);
 
-        $purchaseOrder->update([
-            'approved_by' => $request->user()->id,
-            'status' => $purchaseOrder->status === StatusPurchaseOrder::Draft
-                ? StatusPurchaseOrder::Dikirim
-                : $purchaseOrder->status,
+        $data = $request->validate([
+            'alasan_override_pagu' => 'nullable|string|max:1000',
         ]);
+
+        $purchaseOrder = $action->handle(
+            $purchaseOrder,
+            $request->user()->id,
+            $data['alasan_override_pagu'] ?? null,
+        );
 
         return new PurchaseOrderResource($purchaseOrder->load('items'));
     }
