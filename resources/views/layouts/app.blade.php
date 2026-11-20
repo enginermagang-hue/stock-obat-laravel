@@ -33,10 +33,13 @@
                 $visible = array_filter($items, fn ($item) => $item['permission'] === null || $user->can($item['permission']));
             @endphp
             @if (count($visible) > 0)
-                <div class="os-nav-group">{{ $group }}</div>
+                <div class="os-nav-parent">
+                    {{ $group }}
+                    <span class="os-nav-caret">▾</span>
+                </div>
                 @foreach ($visible as $item)
                     <a href="{{ route($item['route']) }}"
-                       class="os-nav-link {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
+                       class="os-nav-link os-nav-link--sub {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
                         {{ $item['label'] }}
                     </a>
                 @endforeach
@@ -49,6 +52,7 @@
             <div class="os-topbar-crumb">Wireframe → <strong>{{ $title ?? 'Dashboard' }}</strong></div>
             <div class="os-topbar-spacer"></div>
             <span class="os-role-badge">{{ $user->getRoleNames()->first() ?? 'tanpa role' }}</span>
+            <div class="os-avatar">OS</div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="os-btn--ghost">Keluar</button>

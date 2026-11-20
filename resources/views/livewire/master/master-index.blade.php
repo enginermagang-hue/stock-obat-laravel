@@ -52,28 +52,34 @@
             <h2 class="os-card-title">{{ $editingId ? 'Ubah data' : 'Tambah data' }}</h2>
             <div class="os-section-tight os-form-grid">
                 @foreach ($fields as $key => $field)
-                    <div class="{{ ($field['type'] ?? 'text') === 'checkbox' ? 'os-field os-field--inline' : 'os-field' }}">
-                        @if (($field['type'] ?? 'text') === 'checkbox')
+                    @php $type = $field['type'] ?? 'text'; @endphp
+                    @if ($type === 'checkbox')
+                        <div class="os-field os-field--inline">
                             <input type="checkbox" id="field-{{ $key }}" wire:model="form.{{ $key }}"
                                    class="os-checkbox">
                             <label for="field-{{ $key }}" class="os-label">{{ $field['label'] }}</label>
-                        @else
+                        </div>
+                    @elseif ($type === 'select')
+                        <div class="os-field">
                             <label for="field-{{ $key }}" class="os-label">{{ $field['label'] }}</label>
-                            @if (($field['type'] ?? 'text') === 'select')
-                                <select id="field-{{ $key }}" wire:model="form.{{ $key }}" class="os-select">
-                                    <option value="">— pilih —</option>
-                                    @foreach ($field['options'] as $value => $label)
-                                        <option value="{{ $value }}">{{ $label }}</option>
-                                    @endforeach
-                                </select>
-                            @else
-                                <input id="field-{{ $key }}"
-                                       type="{{ ($field['type'] ?? 'text') === 'number' ? 'number' : 'text' }}"
-                                       wire:model="form.{{ $key }}" class="os-input">
-                            @endif
-                        @endif
-                        @error('form.'.$key) <span class="os-error">{{ $message }}</span> @enderror
-                    </div>
+                            <select id="field-{{ $key }}" wire:model="form.{{ $key }}" class="os-select">
+                                <option value="">— pilih —</option>
+                                @foreach ($field['options'] as $value => $label)
+                                    <option value="{{ $value }}">{{ $label }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @else
+                        <div class="os-floating">
+                            <input id="field-{{ $key }}"
+                                   type="{{ $type === 'number' ? 'number' : 'text' }}"
+                                   placeholder=" "
+                                   wire:model="form.{{ $key }}"
+                                   class="os-floating-input">
+                            <label class="os-floating-label" for="field-{{ $key }}">{{ $field['label'] }}</label>
+                        </div>
+                    @endif
+                    @error('form.'.$key) <span class="os-error">{{ $message }}</span> @enderror
                 @endforeach
             </div>
             <div class="os-section os-toolbar">

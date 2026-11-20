@@ -4,16 +4,16 @@
     <p class="os-page-subtitle">Gudang farmasi pusat & distribusi puskesmas.</p>
 
     <form wire:submit="login" class="os-login-form">
-        <div class="os-login-row os-field">
-            <label class="os-label" for="email">Email</label>
+        <div class="os-login-row os-floating">
             <input id="email" type="email" wire:model="email" autocomplete="username"
-                   class="os-input" placeholder="nama@rs.go.id">
+                   placeholder=" " class="os-floating-input">
+            <label class="os-floating-label" for="email">Email</label>
             @error('email') <span class="os-error">{{ $message }}</span> @enderror
         </div>
-        <div class="os-login-row os-field">
-            <label class="os-label" for="password">Password</label>
+        <div class="os-login-row os-floating">
             <input id="password" type="password" wire:model="password" autocomplete="current-password"
-                   class="os-input">
+                   placeholder=" " class="os-floating-input">
+            <label class="os-floating-label" for="password">Password</label>
         </div>
         <label class="os-login-remember">
             <input type="checkbox" wire:model="remember" class="os-checkbox"> Ingat saya

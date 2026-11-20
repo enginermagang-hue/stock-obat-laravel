@@ -4,6 +4,20 @@ Katalog class UI di `resources/css/app.css`. Semua class didefinisikan di dalam
 `@layer components` dengan `@apply`, sehingga halaman Blade cukup memakai class `os-*`
 tanpa mengulang utilitas Tailwind.
 
+## Design token
+
+| Token | Nilai |
+| --- | --- |
+| Font | Inter, fallback ke font sistem lewat `--font-sans` |
+| Ukuran teks dasar | 15px |
+| Primary | `#666cff` (`--color-primary`), varian gelap `#585ce5`, lembut `#e7e8ff` |
+| Surface | `#f7f7f9` (`--color-surface`) |
+| Teks | `#3b4055` (`--color-ink`), sekunder `#676a7b`, lemah `#a8aab4` |
+| Radius | Card `10px` (`--radius-card`), kontrol `8px` (`--radius-control`) |
+
+Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
+`rounded-card` tersedia untuk `@apply`.
+
 ## Konvensi
 
 - Prefix `os-` menghindari bentrok dengan utilitas Tailwind dan tema pihak ketiga.
@@ -11,6 +25,9 @@ tanpa mengulang utilitas Tailwind.
   `os-status-pill--danger`.
 - Class dikelompokkan per fungsi: shell, card, KPI, filter, tabel, form, feedback, dan
   modal.
+- Visual mengikuti pola Materialize admin: Inter 15px, primary `#666cff`, kartu radius
+  10px, kontrol radius 8px, dan padding lega.
+  Aset serta kode template pihak ketiga tidak disalin.
 
 ## Shell
 
@@ -20,9 +37,12 @@ tanpa mengulang utilitas Tailwind.
 | `os-sidebar` | Panel navigasi kiri. |
 | `os-sidebar-brand` | Area logo di atas sidebar. |
 | `os-sidebar-brand-name`, `os-sidebar-brand-caption` | Nama aplikasi dan deskripsi kecil. |
-| `os-nav-group` | Judul grup menu. |
-| `os-nav-link` | Item menu. |
-| `os-nav-link--active` | Item menu aktif. |
+| `os-nav-parent` | Menu tingkat pertama beserta caret. |
+| `os-nav-caret` | Panah pada menu induk. |
+| `os-nav-group` | Judul grup menu (opsional). |
+| `os-nav-link` | Item menu tingkat kedua. |
+| `os-nav-link--sub` | Indentasi item menu 40px. |
+| `os-nav-link--active` | Item menu aktif dengan latar primary dan teks putih. |
 | `os-topbar` | Header kanan atas. |
 | `os-topbar-crumb` | Breadcrumb; elemen `strong` di dalamnya ditebalkan. |
 | `os-topbar-spacer` | Mengisi ruang kosong di topbar. |
@@ -40,7 +60,8 @@ tanpa mengulang utilitas Tailwind.
             <div class="os-sidebar-brand-name">ObatStock</div>
             <div class="os-sidebar-brand-caption">Manajemen stok obat</div>
         </div>
-        <a class="os-nav-link os-nav-link--active" href="{{ route('dashboard') }}">Dashboard</a>
+        <div class="os-nav-parent">Utama <span class="os-nav-caret">▾</span></div>
+        <a class="os-nav-link os-nav-link--sub os-nav-link--active" href="{{ route('dashboard') }}">Dashboard</a>
     </aside>
     <div class="os-content">
         <header class="os-topbar">...</header>
@@ -62,9 +83,9 @@ tanpa mengulang utilitas Tailwind.
 
 | Class | Fungsi |
 | --- | --- |
-| `os-kpi-grid` | Grid empat kartu ringkasan. |
-| `os-kpi-card` | Kartu KPI dengan garis atas. |
-| `os-kpi-card--primary`, `--warning`, `--danger`, `--info` | Warna garis atas. |
+| `os-kpi-grid` | Grid kartu ringkasan. |
+| `os-kpi-card` | Kartu KPI dengan garis bawah berwarna. |
+| `os-kpi-card--primary`, `--warning`, `--danger`, `--info` | Warna garis bawah. |
 | `os-kpi-value`, `os-kpi-label` | Angka dan label. |
 | `os-kpi-trend`, `os-kpi-trend--up`, `os-kpi-trend--down` | Indikator tren. |
 
@@ -148,6 +169,16 @@ Untuk Fase 2, komponen ini dipakai sebagai “Komposisi stok per status batch”
 | `os-label`, `os-help`, `os-error` | Label, bantuan, dan pesan error. |
 | `os-input`, `os-select`, `os-textarea` | Kontrol input. |
 | `os-checkbox`, `os-toggle` | Kontrol pilihan. |
+| `os-floating` | Pembungkus input dengan floating label. |
+| `os-floating-input` | Input dengan placeholder kosong agar label bisa naik. |
+| `os-floating-label` | Label yang naik saat fokus atau field berisi. |
+
+```blade
+<div class="os-floating">
+    <input type="email" placeholder=" " class="os-floating-input" wire:model="email">
+    <label class="os-floating-label" for="email">Email</label>
+</div>
+```
 
 ## Feedback
 
