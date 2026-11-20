@@ -19,8 +19,12 @@ use App\Models\PurchaseOrder;
 use App\Models\StockAdjustment;
 use App\Models\SumberDana;
 use App\Models\Supplier;
+use App\Models\User;
 use App\Services\Stock\StockLedgerService;
+use Database\Seeders\RolePermissionSeeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\PermissionRegistrar;
 
 function makeBatch(int $stok = 0): BatchObat
 {
@@ -125,6 +129,30 @@ test('stock adjustment processing writes ledger', function () {
     expect($adjustment->refresh()->status)->toBe(StatusPenyesuaian::Diproses)
         ->and($batch->refresh()->jumlah_sisa)->toBe(35)
         ->and($batch->ledger()->count())->toBe(2);
+});
+
+test('stock alert command creates database notifications', function () {
+    Artisan::call('db:seed', ['--class' => RolePermissionSeeder::class, '--force' => true]);
+    app(PermissionRegistrar::class)->forgetCachedPermissions();
+
+    $admin = User::factory()->create();
+    $admin->assignRole('admin');
+
+    $obat = Obat::factory()->create(['stok_minimum' => 100]);
+
+    BatchObat::create([
+        'obat_id' => $obat->id,
+        'no_batch' => 'EXP-001',
+        'tanggal_kedaluwarsa' => now()->addDays(10),
+        'jumlah_awal' => 1,
+        'jumlah_sisa' => 1,
+        'harga_beli' => 1000,
+        'aktif' => true,
+    ]);
+
+    Artisan::call('stock:check-alerts');
+
+    expect($admin->notifications()->count())->toBeGreaterThan(0);
 });
 
 test('blind opname requires all physical stock and creates adjustment', function () {
