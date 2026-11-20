@@ -62,7 +62,6 @@
                     @foreach ($visible as $item)
                         <a href="{{ route($item['route']) }}"
                            class="os-nav-link os-nav-link--sub {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
-                            <span class="os-menu-dot"></span>
                             {{ $item['label'] }}
                         </a>
                     @endforeach
@@ -73,32 +72,30 @@
 
     <div class="os-content">
         <header class="os-topbar">
-            <div class="os-container flex items-center gap-4">
-                <livewire:global-search />
-                <div class="os-topbar-spacer"></div>
-                <button type="button" class="os-icon-btn" aria-label="Notifikasi">
-                    <span class="relative">
-                        <x-icon name="notification-3-line" :size="18" />
-                        <span class="os-menu-badge absolute -right-2 -top-2">3</span>
-                    </span>
+            <livewire:global-search />
+            <div class="os-topbar-spacer"></div>
+            <button type="button" class="os-icon-btn" aria-label="Notifikasi">
+                <span class="relative">
+                    <x-icon name="notification-3-line" :size="18" />
+                    <span class="os-menu-badge absolute -right-2 -top-2">3</span>
+                </span>
+            </button>
+            <button type="button" class="os-icon-btn" aria-label="Tema">
+                <x-icon name="sun-line" :size="18" />
+            </button>
+            <div class="relative" x-data="{ open: false }">
+                <button type="button" class="os-avatar-online" @click="open = !open" aria-label="Menu pengguna">
+                    {{ strtoupper(substr($user->name, 0, 2)) }}
                 </button>
-                <button type="button" class="os-icon-btn" aria-label="Tema">
-                    <x-icon name="sun-line" :size="18" />
-                </button>
-                <div class="relative" x-data="{ open: false }">
-                    <button type="button" class="os-avatar-online" @click="open = !open" aria-label="Menu pengguna">
-                        {{ strtoupper(substr($user->name, 0, 2)) }}
-                    </button>
-                    <div x-show="open" @click.outside="open = false" class="os-dropdown absolute right-0 top-12 z-40 w-44">
-                        <div class="border-b border-line px-4 py-2">
-                            <div class="text-[13px] font-medium text-heading">{{ $user->name }}</div>
-                            <div class="text-[11px] text-faint">{{ $user->email }}</div>
-                        </div>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="os-dropdown-item w-full">Keluar</button>
-                        </form>
+                <div x-show="open" @click.outside="open = false" class="os-dropdown absolute right-0 top-12 z-40 w-44">
+                    <div class="border-b border-line px-4 py-2">
+                        <div class="text-[13px] font-medium text-heading">{{ $user->name }}</div>
+                        <div class="text-[11px] text-faint">{{ $user->email }}</div>
                     </div>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="os-dropdown-item w-full">Keluar</button>
+                    </form>
                 </div>
             </div>
         </header>

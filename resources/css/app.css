@@ -138,11 +138,38 @@
     }
 
     .os-nav-link {
-        @apply mt-1 flex items-center gap-2 rounded-control px-3 py-[7px] text-[15px] text-muted hover:bg-slate-200/70 hover:text-ink;
+        @apply relative mt-1 flex h-[38px] items-center gap-2 rounded-control px-3 py-[7px] text-[15px] text-muted hover:bg-slate-200/70 hover:text-ink;
     }
 
     .os-nav-link--sub {
         @apply pl-[40.8px];
+    }
+
+    .os-nav-link--sub2 {
+        @apply pl-[49.6px];
+    }
+
+    .os-nav-link--sub3 {
+        @apply pl-[65.6px];
+    }
+
+    .os-nav-link--sub::before,
+    .os-nav-link--sub2::before,
+    .os-nav-link--sub3::before {
+        content: '';
+        @apply absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-faint;
+    }
+
+    .os-nav-link--sub::before {
+        left: 19px;
+    }
+
+    .os-nav-link--sub2::before {
+        left: 26.4px;
+    }
+
+    .os-nav-link--sub3::before {
+        left: 42.4px;
     }
 
     .os-nav-parent--open {
@@ -154,7 +181,12 @@
     }
 
     .os-topbar {
-        @apply fixed left-[260px] right-0 top-0 z-[1075] flex h-16 items-center rounded-b-card bg-page;
+        @apply fixed left-[260px] right-0 top-0 z-[1075] mx-auto flex h-16 max-w-[1392px] items-center gap-4 rounded-b-card bg-page;
+    }
+
+    .os-topbar--scrolled {
+        @apply border-b border-l border-r border-line;
+        padding: 0 24px;
     }
 
     .os-topbar-crumb {
