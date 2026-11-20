@@ -32,6 +32,7 @@ class Rko extends Model
         'disusun_oleh',
         'disetujui_oleh',
         'catatan',
+        'total',
     ];
 
     protected function casts(): array
@@ -46,6 +47,7 @@ class Rko extends Model
             'lead_time_bulan' => 'integer',
             'faktor_pengaman' => 'decimal:2',
             'bobot_ai' => 'decimal:3',
+            'total' => 'decimal:2',
         ];
     }
 

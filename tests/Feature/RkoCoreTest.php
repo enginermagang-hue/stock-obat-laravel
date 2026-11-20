@@ -92,7 +92,8 @@ test('build rko calculates requirement and new version', function () {
         ->and($item->stok_akhir)->toBe(20)
         ->and($item->stok_dalam_pesanan)->toBe(10)
         ->and($item->kebutuhan_bersih)->toBe('250.00')
-        ->and($rko->versi)->toBe(1);
+        ->and($rko->versi)->toBe(1)
+        ->and((float) $rko->total)->toBe(312_500.0);
 
     $second = app(BuildRko::class)->handle(2026, 2, [
         'sumber_dana_id' => $sumberDana->id,
