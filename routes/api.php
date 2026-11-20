@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\BatchObatController;
 use App\Http\Controllers\Api\V1\LplpoController;
 use App\Http\Controllers\Api\V1\PermintaanController;
 use App\Http\Controllers\Api\V1\PurchaseOrderController;
+use App\Http\Controllers\Api\V1\RkoController;
 use App\Http\Controllers\Api\V1\StockAdjustmentController;
 use App\Http\Controllers\Api\V1\StockLedgerController;
 use App\Http\Controllers\Api\V1\StockOpnameController;
@@ -35,6 +36,12 @@ Route::prefix('v1')->group(function () {
         Route::put('/opname/{opname}/stok-fisik', [StockOpnameController::class, 'inputFisik']);
         Route::post('/opname/{opname}/verify', [StockOpnameController::class, 'verify']);
         Route::post('/opname/{opname}/approve', [StockOpnameController::class, 'approve']);
+
+        Route::get('/rko', [RkoController::class, 'index']);
+        Route::post('/rko', [RkoController::class, 'store']);
+        Route::get('/rko/{rko}', [RkoController::class, 'show']);
+        Route::post('/rko/{rko}/approve', [RkoController::class, 'approve']);
+        Route::post('/rko/{rko}/purchase-order', [RkoController::class, 'purchaseOrder']);
 
         Route::get('/lplpo', [LplpoController::class, 'index']);
         Route::post('/lplpo', [LplpoController::class, 'store']);
