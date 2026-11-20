@@ -9,3 +9,498 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* -------------------------------------------------------------------------
+   ObatStock component classes.
+   Semua class memakai prefix `os-` agar tidak bentrok dengan utilitas Tailwind.
+   Contoh pemakaian ada di docs/component-classes.md.
+   ------------------------------------------------------------------------- */
+@layer components {
+    /* Shell ------------------------------------------------------------- */
+    .os-shell {
+        @apply flex min-h-screen bg-slate-50 font-sans text-slate-800;
+    }
+
+    .os-section {
+        @apply mt-5;
+    }
+
+    .os-section-tight {
+        @apply mt-4;
+    }
+
+    .os-grid-2 {
+        @apply grid gap-4 md:grid-cols-2;
+    }
+
+    .os-guest-page {
+        @apply flex min-h-screen items-center justify-center bg-slate-100 p-6 font-sans text-slate-800;
+    }
+
+    .os-sidebar {
+        @apply w-60 shrink-0 border-r border-slate-200 bg-slate-100 px-3 py-4;
+    }
+
+    .os-sidebar-brand {
+        @apply border-b border-slate-200 px-3 pb-4;
+    }
+
+    .os-sidebar-brand-name {
+        @apply font-bold;
+    }
+
+    .os-sidebar-brand-caption {
+        @apply text-xs text-slate-500;
+    }
+
+    .os-nav-group {
+        @apply mt-5 px-3 text-[10px] font-semibold uppercase tracking-wider text-slate-500;
+    }
+
+    .os-nav-link {
+        @apply mt-1 block rounded px-3 py-2 text-sm hover:bg-slate-200;
+    }
+
+    .os-nav-link--active {
+        @apply bg-slate-800 text-white hover:bg-slate-800;
+    }
+
+    .os-topbar {
+        @apply flex h-16 items-center gap-4 border-b border-slate-200 bg-white px-6;
+    }
+
+    .os-topbar-crumb {
+        @apply text-sm text-slate-500;
+    }
+
+    .os-topbar-crumb strong {
+        @apply text-slate-800;
+    }
+
+    .os-topbar-spacer {
+        @apply flex-1;
+    }
+
+    .os-role-badge {
+        @apply rounded-full bg-sky-100 px-3 py-1 text-xs text-sky-800;
+    }
+
+    .os-content {
+        @apply min-w-0 flex-1;
+    }
+
+    .os-main {
+        @apply p-6;
+    }
+
+    .os-page-title {
+        @apply text-xl font-semibold;
+    }
+
+    .os-page-subtitle {
+        @apply mt-1 text-sm text-slate-500;
+    }
+
+    /* Card --------------------------------------------------------------- */
+    .os-card {
+        @apply rounded-lg border border-slate-200 bg-white;
+    }
+
+    .os-card--flush {
+        @apply overflow-hidden;
+    }
+
+    .os-card-head {
+        @apply flex items-center justify-between gap-3 border-b border-slate-200 p-4;
+    }
+
+    .os-card-title {
+        @apply text-sm font-semibold;
+    }
+
+    .os-card-subtitle {
+        @apply text-xs text-slate-500;
+    }
+
+    .os-card-body {
+        @apply p-5;
+    }
+
+    .os-card-footer {
+        @apply border-t border-slate-200 p-4;
+    }
+
+    /* KPI ---------------------------------------------------------------- */
+    .os-kpi-grid {
+        @apply grid gap-4 sm:grid-cols-3;
+    }
+
+    .os-kpi-card {
+        @apply rounded-lg border border-slate-200 border-t-2 border-t-indigo-500 bg-white p-5;
+    }
+
+    .os-kpi-card--primary {
+        @apply border-t-indigo-500;
+    }
+
+    .os-kpi-card--warning {
+        @apply border-t-amber-500;
+    }
+
+    .os-kpi-card--danger {
+        @apply border-t-red-500;
+    }
+
+    .os-kpi-card--info {
+        @apply border-t-sky-500;
+    }
+
+    .os-kpi-value {
+        @apply text-2xl font-bold;
+    }
+
+    .os-kpi-label {
+        @apply mt-1 text-xs text-slate-500;
+    }
+
+    .os-kpi-trend {
+        @apply mt-1 text-xs font-medium;
+    }
+
+    .os-kpi-trend--up {
+        @apply text-emerald-600;
+    }
+
+    .os-kpi-trend--down {
+        @apply text-red-600;
+    }
+
+    /* Filter & tombol ---------------------------------------------------- */
+    .os-filter-bar {
+        @apply flex flex-wrap items-center gap-3 border-b border-slate-200 p-4;
+    }
+
+    .os-filter {
+        @apply w-64;
+    }
+
+    .os-filter-select {
+        @apply rounded-md border border-slate-300 px-3 py-2 text-sm;
+    }
+
+    .os-search {
+        @apply w-64 rounded-md border border-slate-300 px-3 py-2 text-sm;
+    }
+
+    .os-per-page {
+        @apply w-20 rounded-md border border-slate-300 px-2 py-2 text-sm;
+    }
+
+    .os-btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium;
+    }
+
+    .os-btn--primary {
+        @apply bg-indigo-600 text-white hover:bg-indigo-700;
+    }
+
+    .os-btn--secondary {
+        @apply border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
+    }
+
+    .os-btn--danger {
+        @apply border border-red-300 bg-white text-red-600 hover:bg-red-50;
+    }
+
+    .os-btn--ghost {
+        @apply text-slate-500 hover:text-slate-900;
+    }
+
+    .os-btn--sm {
+        @apply px-2 py-1 text-xs;
+    }
+
+    .os-btn-icon {
+        @apply text-slate-500 hover:text-slate-900;
+    }
+
+    .os-toolbar {
+        @apply flex flex-wrap items-center gap-2;
+    }
+
+    /* Progress stack ----------------------------------------------------- */
+    .os-progress-stack {
+        @apply flex h-6 w-full overflow-hidden rounded bg-slate-100;
+    }
+
+    .os-progress-segment {
+        @apply flex items-center justify-center bg-indigo-500 text-[10px] font-medium text-white;
+    }
+
+    .os-progress-legend {
+        @apply mt-4 grid gap-2 sm:grid-cols-2;
+    }
+
+    .os-progress-legend-item {
+        @apply flex items-center gap-2 border-b border-slate-100 py-2 text-sm last:border-0;
+    }
+
+    .os-progress-legend-dot {
+        @apply h-2 w-2 shrink-0 rounded-full bg-indigo-500;
+    }
+
+    /* Tabel -------------------------------------------------------------- */
+    .os-table-wrap {
+        @apply overflow-x-auto;
+    }
+
+    .os-table {
+        @apply w-full text-left text-sm;
+    }
+
+    .os-table thead {
+        @apply bg-slate-100 text-xs uppercase text-slate-500;
+    }
+
+    .os-table th {
+        @apply px-4 py-2 font-semibold;
+    }
+
+    .os-table td {
+        @apply px-4 py-2;
+    }
+
+    .os-table tbody tr {
+        @apply border-t border-slate-100;
+    }
+
+    .os-table--striped tbody tr:nth-child(even) {
+        @apply bg-slate-50;
+    }
+
+    .os-table--hover tbody tr:hover {
+        @apply bg-indigo-50;
+    }
+
+    .os-tr--selected {
+        @apply bg-indigo-50;
+    }
+
+    .os-td-right {
+        @apply text-right;
+    }
+
+    .os-table-actions {
+        @apply flex items-center justify-end gap-2;
+    }
+
+    /* Login -------------------------------------------------------------- */
+    .os-login-card {
+        @apply w-full max-w-sm rounded-xl border border-slate-200 bg-white p-8 shadow-sm;
+    }
+
+    .os-login-logo {
+        @apply mb-5 grid h-11 w-11 place-items-center rounded-lg bg-slate-800 font-bold text-white;
+    }
+
+    .os-login-title {
+        @apply text-xl font-semibold;
+    }
+
+    .os-login-form {
+        @apply mt-6;
+    }
+
+    .os-login-row {
+        @apply mb-4;
+    }
+
+    .os-login-remember {
+        @apply mb-5 flex items-center gap-2 text-xs text-slate-500;
+    }
+
+    .os-login-submit {
+        @apply w-full rounded-md bg-slate-800 px-4 py-2 text-sm font-medium text-white hover:bg-slate-700;
+    }
+
+    .os-login-hint {
+        @apply mt-5 text-xs text-slate-400;
+    }
+
+    /* Status pill -------------------------------------------------------- */
+    .os-status-pill {
+        @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
+    }
+
+    .os-status-pill--draft {
+        @apply bg-slate-100 text-slate-600;
+    }
+
+    .os-status-pill--process {
+        @apply bg-indigo-100 text-indigo-700;
+    }
+
+    .os-status-pill--verified {
+        @apply bg-sky-100 text-sky-800;
+    }
+
+    .os-status-pill--approved {
+        @apply bg-emerald-100 text-emerald-700;
+    }
+
+    .os-status-pill--success {
+        @apply bg-emerald-100 text-emerald-700;
+    }
+
+    .os-status-pill--warning {
+        @apply bg-amber-100 text-amber-800;
+    }
+
+    .os-status-pill--danger {
+        @apply bg-red-100 text-red-700;
+    }
+
+    .os-status-pill--info {
+        @apply bg-sky-100 text-sky-800;
+    }
+
+    /* Form --------------------------------------------------------------- */
+    .os-form-grid {
+        @apply grid gap-4 sm:grid-cols-2;
+    }
+
+    .os-field {
+        @apply grid gap-1;
+    }
+
+    .os-field--inline {
+        @apply flex items-center gap-2;
+    }
+
+    .os-label {
+        @apply text-xs font-semibold;
+    }
+
+    .os-input {
+        @apply w-full rounded-md border border-slate-300 px-3 py-2 text-sm;
+    }
+
+    .os-select {
+        @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm;
+    }
+
+    .os-textarea {
+        @apply w-full rounded-md border border-slate-300 px-3 py-2 text-sm;
+    }
+
+    .os-checkbox {
+        @apply rounded border-slate-300 text-indigo-600;
+    }
+
+    .os-toggle {
+        @apply h-5 w-9 cursor-pointer appearance-none rounded-full bg-slate-300 transition-colors checked:bg-indigo-600;
+    }
+
+    .os-help {
+        @apply text-xs text-slate-400;
+    }
+
+    .os-error {
+        @apply mt-1 block text-xs text-red-600;
+    }
+
+    /* Alert, tab, empty -------------------------------------------------- */
+    .os-alert {
+        @apply rounded border px-4 py-2 text-sm;
+    }
+
+    .os-alert--info {
+        @apply border-sky-200 bg-sky-50 text-sky-800;
+    }
+
+    .os-alert--warning {
+        @apply border-amber-200 bg-amber-50 text-amber-800;
+    }
+
+    .os-alert--danger {
+        @apply border-red-200 bg-red-50 text-red-700;
+    }
+
+    .os-alert--success {
+        @apply border-emerald-200 bg-emerald-50 text-emerald-700;
+    }
+
+    .os-tabs {
+        @apply flex gap-1 border-b border-slate-200;
+    }
+
+    .os-tab {
+        @apply px-3 py-2 text-sm text-slate-500;
+    }
+
+    .os-tab--active {
+        @apply border-b-2 border-indigo-600 font-semibold text-indigo-600;
+    }
+
+    .os-empty {
+        @apply px-4 py-6 text-center text-slate-400;
+    }
+
+    .os-placeholder {
+        @apply grid h-32 place-items-center rounded border border-dashed border-slate-300 text-xs text-slate-400;
+    }
+
+    /* Modal -------------------------------------------------------------- */
+    .os-modal-backdrop {
+        @apply fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4;
+    }
+
+    .os-modal-panel {
+        @apply w-full max-w-lg rounded-lg bg-white shadow-lg;
+    }
+
+    .os-modal-head {
+        @apply border-b border-slate-200 p-4;
+    }
+
+    .os-modal-body {
+        @apply p-5;
+    }
+
+    .os-modal-footer {
+        @apply flex justify-end gap-2 border-t border-slate-200 p-4;
+    }
+
+    /* Pagination, timeline, avatar --------------------------------------- */
+    .os-pagination {
+        @apply p-4;
+    }
+
+    .os-pagination-info {
+        @apply text-xs text-slate-500;
+    }
+
+    .os-timeline {
+        @apply grid gap-4;
+    }
+
+    .os-timeline-item {
+        @apply border-l-2 border-slate-200 pl-4;
+    }
+
+    .os-timeline-dot {
+        @apply -ml-[21px] mt-1 h-3 w-3 rounded-full bg-indigo-500;
+    }
+
+    .os-timeline-time {
+        @apply text-xs text-slate-400;
+    }
+
+    .os-avatar {
+        @apply grid h-8 w-8 place-items-center rounded-full bg-slate-200 text-xs text-slate-500;
+    }
+
+    .os-badge-count {
+        @apply rounded-full bg-red-500 px-1.5 text-[10px] font-semibold text-white;
+    }
+}
