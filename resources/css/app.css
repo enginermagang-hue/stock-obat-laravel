@@ -87,11 +87,23 @@
     }
 
     .os-sidebar {
-        @apply fixed inset-y-0 left-0 z-[1080] w-[260px] border-r border-line bg-page px-3;
+        @apply fixed inset-y-0 left-0 z-[1080] w-[260px] border-r border-line bg-page px-3 transition-[width] duration-300;
+    }
+
+    .os-shell--collapsed .os-sidebar {
+        @apply w-[70px] px-0;
+    }
+
+    .os-shell--collapsed .os-content {
+        margin-left: 70px;
+    }
+
+    .os-shell--collapsed .os-topbar {
+        left: 70px;
     }
 
     .os-sidebar-nav {
-        @apply h-[calc(100vh-64px)] overflow-y-auto pb-4;
+        @apply h-[calc(100vh-64px)] overflow-x-hidden overflow-y-auto pb-4;
         scrollbar-width: thin;
         scrollbar-color: #d1d3dc transparent;
     }
@@ -106,7 +118,24 @@
     }
 
     .os-sidebar-brand {
-        @apply flex h-16 items-center gap-2 px-2;
+        @apply relative flex h-16 items-center gap-2 px-2;
+    }
+
+    .os-sidebar-brand-text {
+        @apply min-w-0 flex-1;
+    }
+
+    .os-shell--collapsed .os-sidebar-brand {
+        @apply justify-center px-0;
+    }
+
+    .os-shell--collapsed .os-sidebar-brand-text,
+    .os-shell--collapsed .os-sidebar-brand .os-nav-label {
+        @apply hidden;
+    }
+
+    .os-shell--collapsed .os-sidebar-brand .os-icon-btn {
+        @apply absolute -right-3 top-1/2 grid !h-6 !w-6 -translate-y-1/2 place-items-center rounded-full border border-line bg-white;
     }
 
     .os-sidebar-logo {
@@ -127,6 +156,10 @@
 
     .os-nav-parent:first-of-type {
         @apply mt-1;
+    }
+
+    .os-nav-parent-meta {
+        @apply flex items-center gap-2;
     }
 
     .os-nav-caret {
@@ -170,6 +203,19 @@
 
     .os-nav-link--sub3::before {
         left: 42.4px;
+    }
+
+    .os-shell--collapsed .os-nav-parent {
+        @apply mt-2 justify-center px-0;
+    }
+
+    .os-shell--collapsed .os-nav-parent .os-nav-label,
+    .os-shell--collapsed .os-nav-parent-meta {
+        @apply hidden;
+    }
+
+    .os-shell--collapsed .os-nav-link--sub {
+        display: none;
     }
 
     .os-nav-parent--open {
@@ -895,6 +941,14 @@
         }
 
         .os-topbar {
+            left: 0;
+        }
+
+        .os-shell--collapsed .os-content {
+            margin-left: 0;
+        }
+
+        .os-shell--collapsed .os-topbar {
             left: 0;
         }
     }

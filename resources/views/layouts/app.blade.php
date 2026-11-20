@@ -29,16 +29,22 @@
         ],
     ];
 @endphp
-<div class="os-shell">
+<div class="os-shell"
+     x-data="{ collapsed: localStorage.getItem('os-sidebar-collapsed') === 'true' }"
+     :class="{ 'os-shell--collapsed': collapsed }">
     <aside class="os-sidebar">
         <div class="os-sidebar-brand">
             <div class="os-sidebar-logo">OS</div>
-            <div class="flex-1">
+            <div class="os-sidebar-brand-text">
                 <div class="os-sidebar-brand-name">ObatStock</div>
                 <div class="os-sidebar-brand-caption">Manajemen stok obat</div>
             </div>
-            <button type="button" class="os-icon-btn !h-8 !w-8" aria-label="Perkecil menu">
-                <x-icon name="menu-fold-line" :size="18" />
+            <button type="button" class="os-icon-btn !h-8 !w-8"
+                    @click="collapsed = !collapsed; localStorage.setItem('os-sidebar-collapsed', collapsed)"
+                    :aria-label="collapsed ? 'Perbesar menu' : 'Perkecil menu'"
+                    x-bind:title="collapsed ? 'Perbesar menu' : 'Perkecil menu'">
+                <x-icon x-show="!collapsed" name="menu-fold-line" :size="18" />
+                <x-icon x-show="collapsed" name="menu-unfold-line" :size="18" />
             </button>
         </div>
 
@@ -52,9 +58,9 @@
                     <div class="os-nav-parent {{ $groupActive ? 'os-nav-parent--open' : '' }}">
                         <span class="flex items-center gap-2">
                             <x-icon :name="$groupIcons[$group] ?? 'apps-2-line'" :size="22" />
-                            {{ $group }}
+                            <span class="os-nav-label">{{ $group }}</span>
                         </span>
-                        <span class="flex items-center gap-2">
+                        <span class="os-nav-parent-meta">
                             <span class="os-menu-badge">{{ count($visible) }}</span>
                             <x-icon name="arrow-down-s-line" :size="14" class="os-nav-caret" />
                         </span>
@@ -62,7 +68,7 @@
                     @foreach ($visible as $item)
                         <a href="{{ route($item['route']) }}"
                            class="os-nav-link os-nav-link--sub {{ request()->routeIs($item['route']) ? 'os-nav-link--active' : '' }}">
-                            {{ $item['label'] }}
+                            <span class="os-nav-label">{{ $item['label'] }}</span>
                         </a>
                     @endforeach
                 @endif
