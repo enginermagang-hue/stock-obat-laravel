@@ -46,6 +46,7 @@ Token didefinisikan di `@theme` sehingga utilitas seperti `bg-primary` dan
 | `os-shell` | Kontainer utama satu halaman. |
 | `os-sidebar` | Panel navigasi kiri **fixed 260px** (`z-index 1080`). |
 | `os-sidebar-nav` | Area menu yang scroll, tinggi `calc(100vh - 64px)`. |
+| `os-shell--collapsed` | State sidebar 70px: hanya ikon, child menu dan label disembunyikan; state disimpan di `localStorage`. |
 | `os-sidebar-brand` | Area logo 64px di atas sidebar. |
 | `os-sidebar-brand-name`, `os-sidebar-brand-caption` | Nama aplikasi dan deskripsi kecil. |
 | `os-nav-parent` | Menu tingkat pertama beserta caret. |
@@ -285,7 +286,7 @@ lokal.
 | Class | Fungsi |
 | --- | --- |
 | `os-icon` | Dasar ikon inline. |
-| `os-icon-16`, `os-icon-18`, `os-icon-20`, `os-icon-24` | Ukuran ikon dalam px. |
+| `os-icon-14`, `os-icon-16`, `os-icon-18`, `os-icon-20`, `os-icon-22`, `os-icon-24`, `os-icon-40` | Ukuran ikon dalam px. |
 | `os-search-wrap` | Pembungkus input dengan ikon di dalam. |
 
 Komponen Blade `x-icon` menyederhanakan pemakaian:

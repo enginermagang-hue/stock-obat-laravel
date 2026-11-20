@@ -60,10 +60,13 @@
         @apply inline-flex shrink-0 items-center justify-center leading-none;
     }
 
+    .os-icon-14 { font-size: 14px; }
     .os-icon-16 { font-size: 16px; }
     .os-icon-18 { font-size: 18px; }
     .os-icon-20 { font-size: 20px; }
+    .os-icon-22 { font-size: 22px; }
     .os-icon-24 { font-size: 24px; }
+    .os-icon-40 { font-size: 40px; }
 
     .os-grid-2 {
         @apply grid gap-5 md:grid-cols-2;
@@ -103,7 +106,7 @@
     }
 
     .os-sidebar-nav {
-        @apply h-[calc(100vh-64px)] overflow-x-hidden overflow-y-auto pb-4;
+        @apply h-[calc(100vh-64px)] overflow-x-hidden overflow-y-auto pb-4 pt-1;
         scrollbar-width: thin;
         scrollbar-color: #d1d3dc transparent;
     }
@@ -126,7 +129,7 @@
     }
 
     .os-shell--collapsed .os-sidebar-brand {
-        @apply justify-center px-0;
+        @apply justify-start px-4;
     }
 
     .os-shell--collapsed .os-sidebar-brand-text,
@@ -206,7 +209,11 @@
     }
 
     .os-shell--collapsed .os-nav-parent {
-        @apply mt-2 justify-center px-0;
+        @apply mx-3 mt-2 justify-center px-0;
+    }
+
+    .os-shell--collapsed .os-nav-parent:first-of-type {
+        @apply mt-1;
     }
 
     .os-shell--collapsed .os-nav-parent .os-nav-label,
