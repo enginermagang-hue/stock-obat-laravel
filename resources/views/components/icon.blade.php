@@ -1,6 +1,6 @@
-@props(['name', 'size' => 20])
+@props(['name'])
 
 <i {{ $attributes->merge([
-    'class' => 'ri-'.$name.' os-icon os-icon-'.$size,
+    'class' => 'ri-'.$name.' os-icon',
     'aria-hidden' => 'true',
 ]) }}></i>

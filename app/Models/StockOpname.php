@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\ModeOpname;
 use App\Enums\StatusOpname;
 use App\Enums\TipeOpname;
+use App\Scopes\FacilityScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,6 +43,11 @@ class StockOpname extends Model
             'periode_bulan' => 'integer',
             'periode_tahun' => 'integer',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new FacilityScope);
     }
 
     public function items(): HasMany

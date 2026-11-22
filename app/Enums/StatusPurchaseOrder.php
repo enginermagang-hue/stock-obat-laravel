@@ -8,5 +8,6 @@ enum StatusPurchaseOrder: string
     case Dikirim = 'dikirim';
     case DiterimaSebagian = 'diterima_sebagian';
     case Diterima = 'diterima';
+    case Ditolak = 'ditolak';
     case Dibatalkan = 'dibatalkan';
 }

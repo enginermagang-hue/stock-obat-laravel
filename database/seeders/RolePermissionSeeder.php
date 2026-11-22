@@ -25,6 +25,7 @@ class RolePermissionSeeder extends Seeder
             'create-distribution',
             'approve-distribution',
             'confirm-distribution',
+            'view-distribution',
             'manage-stock',
             'input-opname',
             'verify-opname',
@@ -47,20 +48,20 @@ class RolePermissionSeeder extends Seeder
             'puskesmas' => [
                 'view-own-data', 'view-lplpo', 'create-lplpo',
                 'view-permintaan', 'create-permintaan',
-                'confirm-distribution', 'view-reports', 'manage-prediksi',
+                'confirm-distribution', 'view-distribution', 'view-reports', 'manage-prediksi',
             ],
             'gudang' => [
                 'view-master', 'manage-master', 'receive-goods',
-                'create-distribution', 'manage-stock', 'input-opname', 'view-reports',
+                'create-distribution', 'view-distribution', 'manage-stock', 'input-opname', 'view-reports',
             ],
             'distribusi' => [
-                'view-master', 'create-distribution', 'view-reports',
+                'view-master', 'create-distribution', 'view-distribution', 'view-reports',
             ],
             'apoteker' => [
                 'view-own-data', 'view-master', 'manage-master',
                 'view-lplpo', 'view-permintaan',
                 'verify-lplpo', 'verify-permintaan', 'receive-goods',
-                'create-distribution', 'approve-distribution', 'manage-stock',
+                'create-distribution', 'approve-distribution', 'view-distribution', 'manage-stock',
                 'input-opname', 'verify-opname', 'manage-rko', 'manage-anggaran',
                 'approve-po', 'view-reports', 'view-audit-log', 'manage-prediksi',
             ],

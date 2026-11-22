@@ -7,6 +7,7 @@ use App\Enums\GolonganObat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Obat extends Model
@@ -48,5 +49,10 @@ class Obat extends Model
     public function kategori(): BelongsTo
     {
         return $this->belongsTo(KategoriObat::class, 'kategori_id');
+    }
+
+    public function batches(): HasMany
+    {
+        return $this->hasMany(BatchObat::class);
     }
 }

@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 @import 'remixicon/fonts/remixicon.css';
+@import 'perfect-scrollbar/css/perfect-scrollbar.css';
+@import 'tom-select/dist/css/tom-select.default.css';
+@import './tomselect.css';
+@import 'flatpickr/dist/flatpickr.min.css';
+@import './datepicker.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -33,6 +38,37 @@
     --radius-input: 8px;
 }
 
+[x-cloak] {
+    display: none !important;
+}
+
+/* Keyframes transisi modal global. */
+@keyframes os-modal-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes os-modal-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes os-modal-pop-in {
+    from { opacity: 0; transform: translateY(8px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes os-modal-pop-out {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(8px) scale(0.98); }
+}
+
+/* Kunci scroll halaman utama hanya saat modal benar-benar terbuka. */
+html.os-scroll-locked,
+body.os-scroll-locked {
+    overflow: hidden;
+}
+
 /* -------------------------------------------------------------------------
    ObatStock component classes.
    Semua class memakai prefix `os-` agar tidak bentrok dengan utilitas Tailwind.
@@ -58,15 +94,12 @@
 
     .os-icon {
         @apply inline-flex shrink-0 items-center justify-center leading-none;
+        font-size: 18px;
     }
 
-    .os-icon-14 { font-size: 14px; }
-    .os-icon-16 { font-size: 16px; }
-    .os-icon-18 { font-size: 18px; }
-    .os-icon-20 { font-size: 20px; }
-    .os-icon-22 { font-size: 22px; }
-    .os-icon-24 { font-size: 24px; }
-    .os-icon-40 { font-size: 40px; }
+    /* Opt-in overrides for illustrations and large controls only. */
+    .os-icon--lg { font-size: 24px; }
+    .os-icon--xl { font-size: 40px; }
 
     .os-grid-2 {
         @apply grid gap-5 md:grid-cols-2;
@@ -90,7 +123,7 @@
     }
 
     .os-sidebar {
-        @apply fixed inset-y-0 left-0 z-[1080] w-[260px] border-r border-line bg-page px-3 transition-[width] duration-300;
+        @apply fixed inset-y-0 left-0 z-[1080] w-[260px] bg-page shadow-[0_0_0_1px_#e5e6e8] transition-[width] duration-300;
     }
 
     .os-shell--collapsed .os-sidebar {
@@ -102,13 +135,23 @@
     }
 
     .os-shell--collapsed .os-topbar {
-        left: 70px;
+        left: 94px;
     }
 
     .os-sidebar-nav {
-        @apply h-[calc(100vh-64px)] overflow-x-hidden overflow-y-auto pb-4 pt-1;
+        @apply relative h-[calc(100vh-64px)] overflow-x-hidden overflow-y-auto px-3 pb-4 pt-1;
         scrollbar-width: thin;
         scrollbar-color: #d1d3dc transparent;
+    }
+
+    .os-sidebar-shadow {
+        @apply pointer-events-none absolute inset-x-0 z-[1079] h-12 opacity-0 transition-opacity duration-200;
+        top: 3.5rem;
+        background: linear-gradient(var(--color-page) 41%, rgba(255, 255, 255, 0.11) 95%, rgba(255, 255, 255, 0));
+    }
+
+    .os-sidebar-shadow--visible {
+        @apply opacity-100;
     }
 
     .os-sidebar-nav::-webkit-scrollbar {
@@ -117,11 +160,13 @@
 
     .os-sidebar-nav::-webkit-scrollbar-thumb {
         background: #d1d3dc;
+        border: 1px solid transparent;
         border-radius: 999px;
+        background-clip: content-box;
     }
 
     .os-sidebar-brand {
-        @apply relative flex h-16 items-center gap-2 px-2;
+        @apply relative flex h-16 items-center gap-2 pl-[22px] pr-4;
     }
 
     .os-sidebar-brand-text {
@@ -142,19 +187,15 @@
     }
 
     .os-sidebar-logo {
-        @apply grid h-8 w-8 place-items-center rounded-control bg-primary text-[13px] font-bold text-white;
+        @apply inline-flex h-5 w-[38px] shrink-0 items-center justify-center text-[20px] font-bold leading-none text-primary;
     }
 
     .os-sidebar-brand-name {
-        @apply text-[15px] font-semibold text-heading;
-    }
-
-    .os-sidebar-brand-caption {
-        @apply text-[13px] text-faint;
+        @apply text-[20px] font-semibold leading-5 text-heading;
     }
 
     .os-nav-parent {
-        @apply mt-5 flex h-[38px] items-center justify-between rounded-control px-3 text-[15px] text-ink hover:bg-surface;
+        @apply mt-1 flex h-[38px] w-full cursor-pointer items-center justify-between rounded-control px-3 text-left text-[15px] text-ink hover:bg-[#f4f5f7];
     }
 
     .os-nav-parent:first-of-type {
@@ -166,15 +207,33 @@
     }
 
     .os-nav-caret {
-        @apply text-[11px] text-faint;
+        @apply text-[11px] text-faint transition-transform duration-200;
+    }
+
+    .os-nav-parent:not(.os-nav-parent--open) .os-nav-caret {
+        transform: rotate(-90deg);
     }
 
     .os-nav-group {
         @apply mt-6 px-3 text-[11px] font-semibold uppercase tracking-wider text-faint;
     }
 
+    .os-nav-header {
+        @apply mt-5 flex h-[30px] items-center pl-3 text-[13px] font-normal uppercase tracking-[0.4px] text-faint;
+    }
+
+    .os-nav-header::before {
+        content: '';
+        @apply -ml-3 mr-2 h-px w-2.5 shrink-0 bg-line;
+    }
+
+    .os-nav-header::after {
+        content: '';
+        @apply ml-2 h-px flex-1 bg-line;
+    }
+
     .os-nav-link {
-        @apply relative mt-1 flex h-[38px] items-center gap-2 rounded-control px-3 py-[7px] text-[15px] text-muted hover:bg-slate-200/70 hover:text-ink;
+        @apply relative mt-1 flex h-[38px] items-center gap-2 rounded-control px-3 py-[7px] text-[15px] text-ink hover:bg-[#f4f5f7] hover:text-ink;
     }
 
     .os-nav-link--sub {
@@ -209,7 +268,7 @@
     }
 
     .os-shell--collapsed .os-nav-parent {
-        @apply mx-3 mt-2 justify-center px-0;
+        @apply mx-0 mt-2 justify-center px-0;
     }
 
     .os-shell--collapsed .os-nav-parent:first-of-type {
@@ -221,25 +280,33 @@
         @apply hidden;
     }
 
-    .os-shell--collapsed .os-nav-link--sub {
+    .os-shell--collapsed .os-nav-link--sub,
+    .os-shell--collapsed .os-nav-header {
         display: none;
     }
 
     .os-nav-parent--open {
-        @apply bg-slate-200/70;
+        @apply bg-[#edeff0] text-[#3c4056];
     }
 
     .os-nav-link--active {
-        @apply bg-primary text-white shadow-md shadow-primary/30 hover:bg-primary hover:text-white;
+        @apply bg-primary text-white hover:bg-primary hover:text-white;
+    }
+
+    .os-nav-link--active::before {
+        @apply bg-white;
     }
 
     .os-topbar {
-        @apply fixed left-[260px] right-0 top-0 z-[1075] mx-auto flex h-16 max-w-[1392px] items-center gap-4 rounded-b-card bg-page;
+        @apply fixed left-[284px] right-6 top-0 z-[1075] flex h-16 items-center gap-4 rounded-b-card bg-page px-6;
     }
 
     .os-topbar--scrolled {
         @apply border-b border-l border-r border-line;
-        padding: 0 24px;
+    }
+
+    .os-topbar-actions {
+        @apply flex items-center;
     }
 
     .os-topbar-crumb {
@@ -463,10 +530,6 @@
 
     .os-table tbody tr {
         @apply border-t border-line;
-    }
-
-    .os-table--striped tbody tr:nth-child(even) {
-        @apply bg-surface;
     }
 
     .os-table--hover tbody tr:hover {
@@ -759,23 +822,53 @@
 
     /* Modal -------------------------------------------------------------- */
     .os-modal-backdrop {
-        @apply fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4;
+        @apply fixed inset-0 z-[1300] flex items-start justify-center overflow-y-auto overscroll-contain bg-slate-900/50 p-4 sm:items-center;
     }
 
     .os-modal-panel {
-        @apply w-full max-w-lg rounded-card bg-white shadow-lg;
+        @apply my-auto flex max-h-[calc(100vh-2rem)] w-full max-w-lg flex-col overflow-hidden rounded-card bg-white shadow-lg;
+    }
+
+    .os-modal-panel--2xl {
+        max-width: 42rem;
     }
 
     .os-modal-head {
-        @apply border-b border-line p-5;
+        @apply shrink-0 border-b border-line p-5;
     }
 
     .os-modal-body {
-        @apply p-5;
+        @apply flex-1 overflow-y-auto p-5;
     }
 
     .os-modal-footer {
-        @apply flex justify-end gap-2 border-t border-line p-5;
+        @apply flex shrink-0 justify-end gap-2 border-t border-line p-5;
+    }
+
+    /* Transisi modal global (dipakai <x-modal>) --------------------------- */
+    .os-modal-fade-in {
+        animation: os-modal-fade-in 180ms ease-out both;
+    }
+
+    .os-modal-fade-out {
+        animation: os-modal-fade-out 140ms ease-in both;
+    }
+
+    .os-modal-pop-in {
+        animation: os-modal-pop-in 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .os-modal-pop-out {
+        animation: os-modal-pop-out 140ms ease-in both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .os-modal-fade-in,
+        .os-modal-fade-out,
+        .os-modal-pop-in,
+        .os-modal-pop-out {
+            animation-duration: 1ms;
+        }
     }
 
     /* Login -------------------------------------------------------------- */
@@ -845,12 +938,12 @@
     }
 
     /* Topbar ------------------------------------------------------------- */
-    .os-search-field {
-        @apply flex h-10 w-[320px] items-center gap-2 rounded-control border border-line bg-page px-3 text-[15px] text-faint;
+    .os-topbar-search {
+        @apply flex h-10 items-center gap-2 text-[15px] text-faint;
     }
 
-    .os-search-field input {
-        @apply w-full border-0 bg-transparent text-[15px] text-ink outline-none placeholder:text-faint;
+    .os-topbar-search input {
+        @apply w-[240px] border-0 bg-transparent text-[15px] text-ink outline-none placeholder:text-faint;
     }
 
     .os-search-wrap {
@@ -865,12 +958,12 @@
         @apply pl-10;
     }
 
-    .os-search-shortcut {
-        @apply rounded border border-line px-1.5 py-0.5 text-[11px] text-faint;
+    .os-icon-btn {
+        @apply grid h-[38px] w-[38px] place-items-center rounded-full text-[22px] text-heading hover:bg-surface;
     }
 
-    .os-icon-btn {
-        @apply grid h-[38px] w-[38px] place-items-center rounded-full text-[18px] text-heading hover:bg-surface;
+    .os-notif-dot {
+        @apply absolute right-[8px] top-[6px] h-2 w-2 rounded-full border-2 border-page bg-danger;
     }
 
     .os-avatar-online {
@@ -897,6 +990,18 @@
 
     .os-dropdown-item {
         @apply block w-full px-4 py-2 text-left text-[15px] text-muted hover:bg-surface hover:text-heading;
+    }
+
+    .os-dropdown-item--icon {
+        @apply flex items-center gap-2;
+    }
+
+    .os-dropdown-item--danger {
+        @apply text-danger hover:bg-danger/10 hover:text-danger;
+    }
+
+    .os-action-trigger {
+        @apply grid h-8 w-8 place-items-center rounded-full text-[18px] text-muted hover:bg-surface hover:text-heading disabled:cursor-not-allowed disabled:opacity-60;
     }
 
     /* Dashboard ---------------------------------------------------------- */
@@ -956,7 +1061,8 @@
         }
 
         .os-topbar {
-            left: 0;
+            left: 24px;
+            right: 24px;
         }
 
         .os-shell--collapsed .os-content {
@@ -964,7 +1070,36 @@
         }
 
         .os-shell--collapsed .os-topbar {
-            left: 0;
+            left: 24px;
         }
     }
+}
+
+/* Scrollbar sidebar — selaraskan Perfect Scrollbar dengan contoh Materialize. */
+.os-sidebar-nav .ps__rail-y {
+    width: 4px;
+    right: 4px;
+    background: transparent;
+}
+
+.os-sidebar-nav .ps__thumb-y {
+    width: 2px;
+    right: 1px;
+    border-radius: 999px;
+    background-color: #a8aab4;
+    opacity: 0.3;
+}
+
+.os-sidebar-nav .ps__rail-y:hover,
+.os-sidebar-nav .ps__rail-y:focus,
+.os-sidebar-nav .ps__rail-y.ps--clicking {
+    background: transparent;
+}
+
+.os-sidebar-nav .ps__rail-y:hover > .ps__thumb-y,
+.os-sidebar-nav .ps__rail-y:focus > .ps__thumb-y,
+.os-sidebar-nav .ps__rail-y.ps--clicking > .ps__thumb-y {
+    width: 6px;
+    right: 0;
+    background-color: #a8aab4;
 }

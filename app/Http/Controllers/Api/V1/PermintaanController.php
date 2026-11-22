@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Actions\Permintaan\CreatePermintaanMandiri;
+use App\Actions\Permintaan\FulfillPermintaan;
 use App\Actions\Permintaan\SubmitPermintaan;
 use App\Actions\Permintaan\VerifyPermintaan;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DistributionResource;
 use App\Http\Resources\PermintaanResource;
 use App\Models\PermintaanObat;
 use Illuminate\Http\Request;
@@ -82,5 +84,27 @@ class PermintaanController extends Controller
             $request->user()->id,
             $data['catatan'] ?? null,
         )->load('items'));
+    }
+
+    public function distribute(Request $request, PermintaanObat $permintaan, FulfillPermintaan $action)
+    {
+        abort_unless($request->user()->can('create-distribution'), 403);
+
+        $data = $request->validate([
+            'tanggal' => 'nullable|date',
+            'catatan' => 'nullable|string',
+        ]);
+
+        $distribution = $action->handle(
+            $permintaan,
+            null,
+            $request->user()->id,
+            $data['tanggal'] ?? null,
+            $data['catatan'] ?? null,
+        );
+
+        return (new DistributionResource(
+            $distribution->load(['facility', 'permintaan', 'items.obat', 'items.batch'])
+        ))->response()->setStatusCode(201);
     }
 }

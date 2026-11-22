@@ -6,10 +6,13 @@ use App\Enums\StatusLplpo;
 use App\Models\Lplpo;
 use App\Models\Obat;
 use App\Scopes\FacilityScope;
+use App\Services\Lplpo\LplpoItemLookup;
 use Illuminate\Support\Facades\DB;
 
 class GenerateLplpo
 {
+    public function __construct(private readonly LplpoItemLookup $lookup) {}
+
     /**
      * @param  array<int, array{obat_id:int,pemasukan?:int,pemakaian?:int,stok_akhir?:int,jumlah_diminta?:int,keterangan?:?string}>  $items
      */
@@ -21,7 +24,7 @@ class GenerateLplpo
         ?int $userId = null,
         ?string $catatan = null,
     ): Lplpo {
-        return DB::transaction(function () use ($facilityId, $bulan, $tahun, $items, $userId, $catatan) {
+        return DB::transaction(function () use ($facilityId, $bulan, $tahun, $items, $catatan) {
             $draft = Lplpo::withoutGlobalScope(FacilityScope::class)
                 ->where('facility_id', $facilityId)
                 ->where('bulan', $bulan)
@@ -52,7 +55,7 @@ class GenerateLplpo
 
             foreach ($items as $row) {
                 $obat = Obat::findOrFail($row['obat_id']);
-                $stokAwal = $this->previousStock($facilityId, $obat->id, $bulan, $tahun);
+                $stokAwal = $this->lookup->previousStock($facilityId, $obat->id, $bulan, $tahun);
                 $pemasukan = (int) ($row['pemasukan'] ?? 0);
                 $pemakaian = (int) ($row['pemakaian'] ?? 0);
 
@@ -71,23 +74,6 @@ class GenerateLplpo
 
             return $lplpo->load('items.obat');
         });
-    }
-
-    private function previousStock(int $facilityId, int $obatId, int $bulan, int $tahun): int
-    {
-        return (int) DB::table('lplpo_item')
-            ->join('lplpo', 'lplpo.id', '=', 'lplpo_item.lplpo_id')
-            ->where('lplpo.facility_id', $facilityId)
-            ->where('lplpo.status', StatusLplpo::Diverifikasi->value)
-            ->where('lplpo_item.obat_id', $obatId)
-            ->where(function ($query) use ($bulan, $tahun) {
-                $query->where('lplpo.tahun', '<', $tahun)
-                    ->orWhere(fn ($q) => $q->where('lplpo.tahun', $tahun)->where('lplpo.bulan', '<', $bulan));
-            })
-            ->orderByDesc('lplpo.tahun')
-            ->orderByDesc('lplpo.bulan')
-            ->orderByDesc('lplpo.versi')
-            ->value('lplpo_item.stok_akhir');
     }
 
     private function nextNumber(int $tahun): string

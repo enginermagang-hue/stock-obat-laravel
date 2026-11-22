@@ -16,6 +16,7 @@ class Facility extends Model
         'jenis',
         'alamat',
         'kontak',
+        'logo_path',
         'aktif',
     ];
 
